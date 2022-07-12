@@ -54,10 +54,10 @@
     <ClCompile Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Button.cpp">
+    <ClCompile Include="Code\GUI\ImGuiWrappers\PWW_Button.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Div.cpp">
+    <ClCompile Include="Code\GUI\ImGuiWrappers\PWW_Div.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\GUI\BorderedObject.cpp">
@@ -134,10 +134,10 @@
     <ClInclude Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Button.h">
+    <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Button.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Div.h">
+    <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Div.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GUI\BorderedObject.h">

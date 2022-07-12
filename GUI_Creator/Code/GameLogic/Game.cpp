@@ -13,8 +13,8 @@ void Game::initVariables()
 }
 void Game::initWindow()
 {	
-	this->videoMode.width  = 800;
-	this->videoMode.height = 600;
+	this->videoMode.width  = WINDOW_WIDTH;
+	this->videoMode.height = WINDOW_HEIGHT;
 
 	this->m_window = new sf::RenderWindow(this->videoMode, "S.E.N.A.T", sf::Style::Titlebar | sf::Style::Close);
 

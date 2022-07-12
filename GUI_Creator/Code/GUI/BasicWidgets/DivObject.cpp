@@ -180,16 +180,22 @@ bool DivObject::removeObject(std::string & ID,int depth)
 	return true;
 }
 
-void DivObject::setPosition(const sf::Vector2f& position)
+void DivObject::setPosition(const sf::Vector2i& position)
 {
-	
+	setPosition(position.x,position.y);
+}
 
+void DivObject::setPosition(int x, int y)
+{
 	for (auto object : m_renderableObjects) {
-		object->move(sf::Vector2f(position.x - m_frame.getPosition().x, position.y - m_frame.getPosition().y));
+		object->move(sf::Vector2f(x - m_frame.getPosition().x, y - m_frame.getPosition().y));
 	}
 
-	m_frame.setPosition(position);
+	float thick = m_frame.getOutlineThickness();
+	m_frame.setPosition(x + thick, y + thick);
+
 }
+
 
 void DivObject::move(const sf::Vector2f& offset)
 {

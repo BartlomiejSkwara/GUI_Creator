@@ -165,8 +165,8 @@
     <ClCompile Include="Code\GUI\ContainerObject.cpp" />
     <ClCompile Include="Code\GUI\IdentifiableObject.cpp" />
     <ClCompile Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper.cpp" />
-    <ClCompile Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Button.cpp" />
-    <ClCompile Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Div.cpp" />
+    <ClCompile Include="Code\GUI\ImGuiWrappers\PWW_Button.cpp" />
+    <ClCompile Include="Code\GUI\ImGuiWrappers\PWW_Div.cpp" />
     <ClCompile Include="Code\GUI\RenderableObject.cpp" />
     <ClCompile Include="Code\Scenes\DesignerStuff\Generator.cpp" />
     <ClCompile Include="Code\Scenes\DesignerStuff\SelectionManager.cpp" />
@@ -191,8 +191,8 @@
     <ClInclude Include="Code\GUI\ContainerObject.h" />
     <ClInclude Include="Code\GUI\IdentifiableObject.h" />
     <ClInclude Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper.h" />
-    <ClInclude Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Button.h" />
-    <ClInclude Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper_Div.h" />
+    <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Button.h" />
+    <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Div.h" />
     <ClInclude Include="Code\GUI\RenderableObject.h" />
     <ClInclude Include="Code\MouseInfo.h" />
     <ClInclude Include="Code\Scenes\DesignerStuff\Generator.h" />

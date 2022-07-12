@@ -6,7 +6,6 @@ GameScene::GameScene(sf::Font* font, MouseInfo* mouseInfo, sf::RenderWindow* win
 {
 	m_gameScene = new DivObject("", sf::Color(0,0,0,0), 0, 0, window->getSize().x, window->getSize().y);
 
-	//std::cout << window->getSize().x << " "<< window->getSize().y;
 }
 
 GameScene::~GameScene()

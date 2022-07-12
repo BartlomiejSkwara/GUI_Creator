@@ -20,11 +20,16 @@ public:
 	//Inicjalizacja
 	void initText(sf::Font& font, const std::string& label);
 	void initText(const std::string& label);
+	
+
 
 	//Inicjalizacja - pozycja
 
-	virtual void setPosition(const sf::Vector2f& position) override;
+	virtual void setPosition(const sf::Vector2i& position) override;
+	virtual void setPosition(int x, int y) override;
 	virtual void move(const sf::Vector2f& offset) override;
+	void centerText();
+
 
 	// Inherited via RenderableObject
 

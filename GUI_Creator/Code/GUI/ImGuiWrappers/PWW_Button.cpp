@@ -1,13 +1,13 @@
-#include "ParamWindowWrapper_Button.h"
+#include "PWW_Button.h"
 
-float ParamWindowWrapper_Button::s_outlineColor[] = {0,0,0,0};
-float ParamWindowWrapper_Button::s_fillColor[] = { 0,0,0,0 };
-float ParamWindowWrapper_Button::s_textColor[] = { 0,0,0,0 };
-float ParamWindowWrapper_Button::s_selectionIndicatorSize = 1.f;
-float ParamWindowWrapper_Button::s_signifierColor[] = { 0,0,0,0 };
+float PWW_Button::s_outlineColor[] = {0,0,0,0};
+float PWW_Button::s_fillColor[] = { 0,0,0,0 };
+float PWW_Button::s_textColor[] = { 0,0,0,0 };
+float PWW_Button::s_selectionIndicatorSize = 1.f;
+float PWW_Button::s_signifierColor[] = { 0,0,0,0 };
 
 
-ParamWindowWrapper_Button::ParamWindowWrapper_Button(std::string ID, sf::Font& font, std::string label, float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
+PWW_Button::PWW_Button(std::string ID, sf::Font& font, std::string label, float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
     :ButtonObject(ID, font, label, positionX, positionY, func, sizeX, sizeY, charSize, scale)
     
 {
@@ -18,19 +18,18 @@ ParamWindowWrapper_Button::ParamWindowWrapper_Button(std::string ID, sf::Font& f
    
 }
 
-ParamWindowWrapper_Button::~ParamWindowWrapper_Button()
+PWW_Button::~PWW_Button()
 {
     delete[]s_buttonLabel;
 }
 
-void ParamWindowWrapper_Button::initColors()
+void PWW_Button::initColors()
 {
     std::string temp = getText()->getString().toAnsiString();
     for (int i = 0; 
         i < (MAX_LABEL_LENGTH>temp.size()? MAX_LABEL_LENGTH : temp.size()); 
         i++) {
         if (temp[i] != '\0') {
-            std::cout << temp.at(i);
             s_buttonLabel[i] = temp.at(i);
         }
         else {
@@ -38,6 +37,8 @@ void ParamWindowWrapper_Button::initColors()
         }
     }
 
+    m_position[0] = this->getGlobalBounds().left;
+    m_position[1] = this->getGlobalBounds().top;
 
     s_outlineColor[0] = (float)getColorBorder()->r/255;
     s_outlineColor[1] = (float)getColorBorder()->g/255;
@@ -64,7 +65,7 @@ void ParamWindowWrapper_Button::initColors()
     s_selectionIndicatorSize = SelectionManager::getSelectionManager()->getFocusSignifier()->getRadius()/5;
 }
 
-void ParamWindowWrapper_Button::updateDearIMGUIParamWindow()
+void PWW_Button::updateDearIMGUIParamWindow()
 {
 
     ImGui::SetWindowSize(sf::Vector2f(200, 400));
@@ -81,6 +82,16 @@ void ParamWindowWrapper_Button::updateDearIMGUIParamWindow()
     {
         initText(std::string(s_buttonLabel));
     }
+   
+    ImGui::Separator();
+
+    ImGui::Text("Pozycja w osiach: ");
+    if (ImGui::InputInt2("X/Y", m_position)) {
+        setPosition(m_position[0], m_position[1]);
+        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+    }
+    
+    
     ImGui::Separator();
 
 
@@ -89,7 +100,7 @@ void ParamWindowWrapper_Button::updateDearIMGUIParamWindow()
     if (ImGui::SliderFloat("Promien",&s_selectionIndicatorSize, 0.f, 10.f)) {
         SelectionManager* selMan = SelectionManager::getSelectionManager();
         selMan->getFocusSignifier()->setRadius(5*s_selectionIndicatorSize);
-        selMan->addSelectionSignifier(selMan->getFocusedElement());
+        selMan->addSelectionSignifier(this);
        
     }
 

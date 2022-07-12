@@ -5,7 +5,7 @@
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
-    ParamWindowWrapper_Button* button = new ParamWindowWrapper_Button(IdentifiableObject::generateID(), *m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
+    PWW_Button* button = new PWW_Button(IdentifiableObject::generateID(), *m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
     button->setEvent([&,button]() {
         button->initColors();
         selectManager->changeFocus(button,button);
@@ -17,7 +17,7 @@ void GameSceneUIDesigner::toolbarAddButton()
 
 void GameSceneUIDesigner::toolbarAddDiv()
 {   
-    ParamWindowWrapper_Div* div = new ParamWindowWrapper_Div(IdentifiableObject::generateID(), sf::Color(150, 150, 150), floor(m_window->getSize().x / 2 + 100), floor(m_window->getSize().y / 2 - 50), 100, 100);
+    PWW_Div* div = new PWW_Div(IdentifiableObject::generateID(), sf::Color(150, 150, 150), floor(m_window->getSize().x / 2 + 100), floor(m_window->getSize().y / 2 - 50), 100, 100);
     div->setEvent([&, div]() {
         selectManager->changeFocus(div,div);
         });
@@ -38,9 +38,7 @@ GameSceneUIDesigner::GameSceneUIDesigner(sf::Font* font, MouseInfo* mouseInfo, s
 GameScene(font,mouseInfo,window), m_objectIsCurentlyDragged(false), 
 selectManager(SelectionManager::getSelectionManager())
 {
-    std::cout << "Epicki moment";
-
-    std::cout << "Epicki moment2";
+   
     m_editableObjects = new DivObject("main", sf::Color(), 0, 0, window->getSize().x, window->getSize().y);
     m_currentDESIGN_STATE = this->D_MOVE;
     
@@ -62,8 +60,7 @@ void GameSceneUIDesigner::initGameObjects(sf::Font* font)
 
 void GameSceneUIDesigner::initManagers()
 {
-    std::cout << "Ale jajca";
-   
+
     
 }
 

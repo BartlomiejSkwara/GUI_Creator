@@ -2,8 +2,8 @@
 #include "GameScene.h"
 #include <SFML/Graphics/CircleShape.hpp>
 #include "DesignerStuff/Generator.h"
-#include "../GUI/ImGuiWrappers/ParamWindowWrapper_Button.h"
-#include "../GUI/ImGuiWrappers/ParamWindowWrapper_Div.h"
+#include "../GUI/ImGuiWrappers/PWW_Button.h"
+#include "../GUI/ImGuiWrappers/PWW_Div.h"
 #include "DesignerStuff/SelectionManager.h"
 
 typedef int DESIGN_STATE;

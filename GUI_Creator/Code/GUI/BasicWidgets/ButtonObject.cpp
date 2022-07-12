@@ -13,7 +13,7 @@ ButtonObject::ButtonObject(std::string ID, sf::Font& font,std::string label ,flo
 	m_text.setCharacterSize((unsigned int)(charSize * scale));
 
 	initText(font, label);
-	setPosition(sf::Vector2f(positionX,positionY));
+	setPosition(positionX,positionY);
 }
 
 ButtonObject::~ButtonObject()
@@ -92,10 +92,16 @@ void ButtonObject::setColorText(int r, int g, int b, int a)
 /// Funkcja ustawia pozycjê obiektu na inn¹
 /// </summary>
 /// <param name="position"></param>
-void ButtonObject::setPosition(const sf::Vector2f& position)
+void ButtonObject::setPosition(const sf::Vector2i& position)
 {
-	m_frame.setPosition(position);
-	m_text.setPosition(sf::Vector2f(position.x + m_text.getPosition().x, position.y + m_text.getPosition().y));
+	setPosition(position.x, position.y);
+}
+
+void ButtonObject::setPosition(int x, int y)
+{
+	float thick = m_frame.getOutlineThickness();
+	m_frame.setPosition(x+thick,y+thick);
+	centerText();
 }
 
 /// <summary>
@@ -107,6 +113,21 @@ void ButtonObject::move(const sf::Vector2f& offset)
 	m_frame.move(offset);
 	m_text.move(offset);
 
+}
+
+void ButtonObject::centerText()
+{
+	sf::Vector2f center(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f);
+	sf::Vector2f localBounds(trunc(center.x + m_text.getLocalBounds().left), trunc(center.y + m_text.getLocalBounds().top));
+
+	m_text.setOrigin(localBounds);
+
+	m_text.setPosition(sf::Vector2f(m_frame.getSize().x / 2,
+		m_frame.getSize().y / 2));
+
+	m_text.setPosition(sf::Vector2f(
+		trunc(m_frame.getOrigin().x + m_frame.getGlobalBounds().left + m_frame.getGlobalBounds().width / 2),
+		trunc(m_frame.getOrigin().y + m_frame.getGlobalBounds().top + m_frame.getGlobalBounds().height / 2)));
 }
 
 /// <summary>
@@ -125,18 +146,8 @@ void ButtonObject::initText(const std::string& label)
 {
 	
 	m_text.setString(label);
+	centerText();
 
-	sf::Vector2f center(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f);
-	sf::Vector2f localBounds(trunc(center.x + m_text.getLocalBounds().left), trunc(center.y + m_text.getLocalBounds().top));
-
-	m_text.setOrigin(localBounds);
-
-	m_text.setPosition(sf::Vector2f( m_frame.getSize().x / 2,
-		m_frame.getSize().y / 2));
-	
-	m_text.setPosition(sf::Vector2f(
-		trunc(m_frame.getOrigin().x+m_frame.getGlobalBounds().left+ m_frame.getGlobalBounds().width/2),
-		trunc(m_frame.getOrigin().y+m_frame.getGlobalBounds().top + m_frame.getGlobalBounds().height/2)));
 }
 
 

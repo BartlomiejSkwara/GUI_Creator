@@ -16,7 +16,9 @@ public:
     //Funkcja sprawdza czy kursor lub punkt jest wewn¹trz obiektu;
     virtual bool checkIfObjectContainsPoint(sf::Vector2f& point) = 0;
 
-    virtual void setPosition(const sf::Vector2f& position) = 0;
+    virtual void setPosition(const sf::Vector2i& position) = 0;
+    virtual void setPosition(int x, int y) = 0;
+
     virtual void move(const sf::Vector2f& offset) = 0;
 };
 
