@@ -45,15 +45,16 @@ public:
 
 
 	//Gettery
-	const sf::Color* getColorBorder() const;
-	const sf::Color* getColorFill() const;
+	virtual const sf::Color* getColorBorder() const override;
+	virtual const sf::Color* getColorFill() const override;
+
 	const sf::Color* getColorText() const;
 	std::string getLabel();
 	sf::Text* getText();
 	
 	//Settery
-	void setColorBorder(int r,int g, int b, int a) ;
-	void setColorFill(int r, int g, int b, int a);
+	virtual void setColorBorder(int r,int g, int b, int a) override;
+	virtual void setColorFill(int r, int g, int b, int a) override;
 	void setColorText(int r, int g, int b, int a);
 
 

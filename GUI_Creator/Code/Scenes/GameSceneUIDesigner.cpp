@@ -9,7 +9,6 @@ void GameSceneUIDesigner::toolbarAddButton()
     button->setEvent([&,button]() {
         button->initVariables();
         selectManager->changeFocus(button,button);
-        selectManager->addSelectionSignifier(button);
         });
 
     m_editableObjects->addButtonObject(button);
@@ -19,6 +18,7 @@ void GameSceneUIDesigner::toolbarAddDiv()
 {   
     PWW_Div* div = new PWW_Div(IdentifiableObject::generateID(), sf::Color(150, 150, 150), floor(m_window->getSize().x / 2 + 100), floor(m_window->getSize().y / 2 - 50), 100, 100);
     div->setEvent([&, div]() {
+        div->initVariables();
         selectManager->changeFocus(div,div);
         });
     m_editableObjects->addDivObject(div);
@@ -233,7 +233,7 @@ void GameSceneUIDesigner::updateDearIMGUIMainMenuBar()
             {
                 toolbarAddButton();
             }
-            if (ImGui::MenuItem("DIV"))
+            if (ImGui::MenuItem("Kontener"))
             {
                 toolbarAddDiv();
             }

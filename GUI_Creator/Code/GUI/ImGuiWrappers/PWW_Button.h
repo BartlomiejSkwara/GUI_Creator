@@ -1,8 +1,8 @@
 #pragma once
 #include "../BasicWidgets/ButtonObject.h"
 #include "../ImGuiWrappers/ParamWindowWrapper.h"
-#include "../GUI_Creator/Code/Scenes/DesignerStuff/SelectionManager.h"
 #include "../GUI_Creator/values.h"
+#include "../GUI_Creator/Code/Scenes/DesignerStuff/SelectionManager.h"
 
 #define MAX_LABEL_LENGTH 15
 class PWW_Button :
@@ -10,15 +10,11 @@ class PWW_Button :
 {
 private:
 
-
-
-
     ///Imgui stuff
    
     static char *s_buttonLabel;
   
     static float s_textColor[4];
-
 
 public:
 

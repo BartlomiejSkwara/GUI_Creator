@@ -36,6 +36,8 @@ void PWW_Button::initVariables()
         }
     }
 
+    s_outline_size = this->getBorderThickness();
+
     s_position[0] = this->getGlobalBounds().left;
     s_position[1] = this->getGlobalBounds().top;
 
@@ -83,7 +85,7 @@ void PWW_Button::updateDearIMGUIParamWindow()
     ImGui::Separator();
     ///
 
-    ImGui::Text("Pozycja w osiach i Wypelnienie: ");
+    ImGui::Text("Pozycja i Wypelnienie: ");
     if (ImGui::InputInt2("X/Y", s_position)) {
         setPosition(s_position[0], s_position[1]);
         SelectionManager::getSelectionManager()->addSelectionSignifier(this);

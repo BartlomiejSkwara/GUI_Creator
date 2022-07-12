@@ -1,6 +1,8 @@
 #pragma once
 #include "../BasicWidgets/DivObject.h"
 #include "../ImGuiWrappers/ParamWindowWrapper.h"
+#include "../GUI_Creator/Code/Scenes/DesignerStuff/SelectionManager.h"
+
 class PWW_Div :
     public DivObject, public ParamWindowWrapper
 {

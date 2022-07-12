@@ -216,6 +216,26 @@ void DivObject::setBorderThickness(int v)
 	m_frame.setOutlineThickness((float)v);
 }
 
+const sf::Color* DivObject::getColorBorder() const
+{
+	return &(m_frame.getOutlineColor());;
+}
+
+const sf::Color* DivObject::getColorFill() const
+{
+	return &(m_frame.getFillColor());;
+}
+
+void DivObject::setColorBorder(int r, int g, int b, int a)
+{
+	m_frame.setOutlineColor(sf::Color(r, g, b, a));
+}
+
+void DivObject::setColorFill(int r, int g, int b, int a)
+{
+	m_frame.setFillColor(sf::Color(r, g, b, a));
+}
+
 /// <summary>
 /// Funkcja pomaga w szybszysm dodaniu diva
 /// </summary>

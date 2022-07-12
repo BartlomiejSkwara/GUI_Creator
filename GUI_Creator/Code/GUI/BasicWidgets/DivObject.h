@@ -62,5 +62,15 @@ public:
 
 	virtual void setBorderThickness(int v) override;
 
+
+	// Inherited via RenderableObject
+	virtual const sf::Color* getColorBorder() const override;
+
+	virtual const sf::Color* getColorFill() const override;
+
+	virtual void setColorBorder(int r, int g, int b, int a) override;
+
+	virtual void setColorFill(int r, int g, int b, int a) override;
+
 };
 
