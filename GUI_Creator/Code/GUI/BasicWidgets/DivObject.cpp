@@ -206,6 +206,16 @@ void DivObject::move(const sf::Vector2f& offset)
 	}
 }
 
+int DivObject::getBorderThickness()
+{
+	return m_frame.getOutlineThickness();
+}
+
+void DivObject::setBorderThickness(int v)
+{
+	m_frame.setOutlineThickness((float)v);
+}
+
 /// <summary>
 /// Funkcja pomaga w szybszysm dodaniu diva
 /// </summary>

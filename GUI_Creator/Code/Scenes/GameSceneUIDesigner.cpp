@@ -7,7 +7,7 @@ void GameSceneUIDesigner::toolbarAddButton()
 
     PWW_Button* button = new PWW_Button(IdentifiableObject::generateID(), *m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
     button->setEvent([&,button]() {
-        button->initColors();
+        button->initVariables();
         selectManager->changeFocus(button,button);
         selectManager->addSelectionSignifier(button);
         });
@@ -47,8 +47,10 @@ selectManager(SelectionManager::getSelectionManager())
 
 GameSceneUIDesigner::~GameSceneUIDesigner()
 {
+    PWW_Button::deleteStaticPointers();
     delete selectManager;
     delete m_editableObjects;
+    
 }
 
 

@@ -10,5 +10,9 @@ public:
     // Inherited via ParamWindowWrapper
     virtual void updateDearIMGUIParamWindow() override;
    
+
+    // Inherited via ParamWindowWrapper
+    virtual void initVariables() override;
+
 };
 

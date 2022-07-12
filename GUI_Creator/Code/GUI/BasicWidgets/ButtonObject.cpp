@@ -87,6 +87,18 @@ void ButtonObject::setColorText(int r, int g, int b, int a)
 	m_text.setFillColor(sf::Color(r, g, b, a));
 }
 
+int ButtonObject::getBorderThickness()
+{
+	return m_frame.getOutlineThickness();
+}
+
+void ButtonObject::setBorderThickness(int v)
+{
+	m_frame.setOutlineThickness((float)v);
+}
+
+
+
 
 /// <summary>
 /// Funkcja ustawia pozycjê obiektu na inn¹

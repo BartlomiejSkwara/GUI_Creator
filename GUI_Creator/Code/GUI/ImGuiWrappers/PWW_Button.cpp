@@ -1,10 +1,9 @@
 #include "PWW_Button.h"
 
-float PWW_Button::s_outlineColor[] = {0,0,0,0};
-float PWW_Button::s_fillColor[] = { 0,0,0,0 };
+
 float PWW_Button::s_textColor[] = { 0,0,0,0 };
-float PWW_Button::s_selectionIndicatorSize = 1.f;
-float PWW_Button::s_signifierColor[] = { 0,0,0,0 };
+char* PWW_Button::s_buttonLabel = new char[15];
+
 
 
 PWW_Button::PWW_Button(std::string ID, sf::Font& font, std::string label, float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
@@ -20,10 +19,10 @@ PWW_Button::PWW_Button(std::string ID, sf::Font& font, std::string label, float 
 
 PWW_Button::~PWW_Button()
 {
-    delete[]s_buttonLabel;
+    
 }
 
-void PWW_Button::initColors()
+void PWW_Button::initVariables()
 {
     std::string temp = getText()->getString().toAnsiString();
     for (int i = 0; 
@@ -37,8 +36,8 @@ void PWW_Button::initColors()
         }
     }
 
-    m_position[0] = this->getGlobalBounds().left;
-    m_position[1] = this->getGlobalBounds().top;
+    s_position[0] = this->getGlobalBounds().left;
+    s_position[1] = this->getGlobalBounds().top;
 
     s_outlineColor[0] = (float)getColorBorder()->r/255;
     s_outlineColor[1] = (float)getColorBorder()->g/255;
@@ -78,50 +77,38 @@ void PWW_Button::updateDearIMGUIParamWindow()
     ImGui::TextColored(sf::Color(100, 100, 100), (this->getID()).c_str());
     
 
-    if (ImGui::InputText("Napis", s_buttonLabel, MAX_LABEL_LENGTH))
-    {
-        initText(std::string(s_buttonLabel));
-    }
-   
-    ImGui::Separator();
 
-    ImGui::Text("Pozycja w osiach: ");
-    if (ImGui::InputInt2("X/Y", m_position)) {
-        setPosition(m_position[0], m_position[1]);
+   
+    ///
+    ImGui::Separator();
+    ///
+
+    ImGui::Text("Pozycja w osiach i Wypelnienie: ");
+    if (ImGui::InputInt2("X/Y", s_position)) {
+        setPosition(s_position[0], s_position[1]);
         SelectionManager::getSelectionManager()->addSelectionSignifier(this);
     }
     
-    
-    ImGui::Separator();
-
-
-
-    ImGui::Text("Zaznaczenie");
-    if (ImGui::SliderFloat("Promien",&s_selectionIndicatorSize, 0.f, 10.f)) {
-        SelectionManager* selMan = SelectionManager::getSelectionManager();
-        selMan->getFocusSignifier()->setRadius(5*s_selectionIndicatorSize);
-        selMan->addSelectionSignifier(this);
-       
-    }
-
-    if (ImGui::SliderFloat("Alfa", &s_signifierColor[3], 0.f, 1.f)) {
-        SelectionManager::getSelectionManager()->getFocusSignifier()->setFillColor(sf::Color((int)(s_signifierColor[0] * 255), (int)(s_signifierColor[1] * 255), (int)(s_signifierColor[2] * 255), (int)(s_signifierColor[3] * 255)));
-    }
-
-    ImGui::Separator();
-
-
-
-    ImGui::Text("Kolor");
-    ImGui::ColorEdit4("Ramka", s_outlineColor);
-    if (ImGui::IsItemEdited())
-    {
-        setColorBorder((int)(s_outlineColor[0]*255), (int)(s_outlineColor[1]*255), (int)(s_outlineColor[2]*255), (int)(s_outlineColor[3]*255));
-    }
-    ImGui::ColorEdit4("Wypelnienie",s_fillColor);
+    ImGui::ColorEdit4("Kolor", s_fillColor);
     if (ImGui::IsItemEdited())
     {
         setColorFill((int)(s_fillColor[0] * 255), (int)(s_fillColor[1] * 255), (int)(s_fillColor[2] * 255), (int)(s_fillColor[3] * 255));
+    }
+    
+
+
+    ///
+    ImGui::Separator();
+    ///
+    
+
+
+    ImGui::Text("Napis:");
+   
+
+    if (ImGui::InputText("Napis", s_buttonLabel, MAX_LABEL_LENGTH))
+    {
+        initText(std::string(s_buttonLabel));
     }
     ImGui::ColorEdit4("Tekst",s_textColor);
     if (ImGui::IsItemEdited())
@@ -130,6 +117,43 @@ void PWW_Button::updateDearIMGUIParamWindow()
     }
 
 
+    ///
+    ImGui::Separator();
+    ///
+
+    ImGui::Text("Ramka:");
+ 
+    ImGui::ColorEdit4("Ramka", s_outlineColor);
+    if (ImGui::IsItemEdited())
+    {
+        setColorBorder((int)(s_outlineColor[0] * 255), (int)(s_outlineColor[1] * 255), (int)(s_outlineColor[2] * 255), (int)(s_outlineColor[3] * 255));
+    }
+
+    if (ImGui::InputInt("Grubosc", &s_outline_size)) {
+        setBorderThickness(s_outline_size);
+
+    }
+
+    ///
+    ImGui::Separator();
+    ///
+    ImGui::Text("Zaznaczenie");
+    if (ImGui::SliderFloat("Promien", &s_selectionIndicatorSize, 0.f, 10.f)) {
+        SelectionManager* selMan = SelectionManager::getSelectionManager();
+        selMan->getFocusSignifier()->setRadius(5 * s_selectionIndicatorSize);
+        selMan->addSelectionSignifier(this);
+
+    }
+
+    if (ImGui::SliderFloat("Alfa", &s_signifierColor[3], 0.f, 1.f)) {
+        SelectionManager::getSelectionManager()->getFocusSignifier()->setFillColor(sf::Color((int)(s_signifierColor[0] * 255), (int)(s_signifierColor[1] * 255), (int)(s_signifierColor[2] * 255), (int)(s_signifierColor[3] * 255)));
+    }
 
 
 }
+
+void PWW_Button::deleteStaticPointers()
+{
+    delete s_buttonLabel;
+}
+

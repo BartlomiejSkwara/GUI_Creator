@@ -19,6 +19,9 @@ public:
     virtual void setPosition(const sf::Vector2i& position) = 0;
     virtual void setPosition(int x, int y) = 0;
 
+    virtual int  getBorderThickness() = 0;
+    virtual void setBorderThickness(int v) = 0;
+
     virtual void move(const sf::Vector2f& offset) = 0;
 };
 

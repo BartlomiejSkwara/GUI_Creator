@@ -56,4 +56,13 @@ public:
 	void setColorFill(int r, int g, int b, int a);
 	void setColorText(int r, int g, int b, int a);
 
+
+
+
+
+	// Inherited via RenderableObject
+	virtual int getBorderThickness() override;
+
+	virtual void setBorderThickness(int v) override;
+
 };

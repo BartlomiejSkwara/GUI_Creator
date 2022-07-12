@@ -9,3 +9,7 @@ void PWW_Div::updateDearIMGUIParamWindow()
 {
 	std::cout << "TODO: ImGui param window for Div\n";
 }
+
+void PWW_Div::initVariables()
+{
+}

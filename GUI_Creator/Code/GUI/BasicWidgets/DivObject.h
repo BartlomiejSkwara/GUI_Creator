@@ -56,5 +56,11 @@ public:
 	virtual void setPosition(int x, int y) override;
 	virtual void move(const sf::Vector2f& offset) override;
 
+
+	// Inherited via RenderableObject
+	virtual int getBorderThickness() override;
+
+	virtual void setBorderThickness(int v) override;
+
 };
 
