@@ -1,5 +1,6 @@
 #include "PWW_Div.h"
 int PWW_Div::s_size[] = { 0,0 };
+SelectionManager* PWW_Div::s_selectManager = SelectionManager::getSelectionManager();
 
 PWW_Div::PWW_Div(std::string ID, sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func)
 	:DivObject(ID,  color,  posX,  posY,  sizeX,  sizeY, func)
@@ -20,7 +21,7 @@ void PWW_Div::updateDearIMGUIParamWindow()
 
     if (ImGui::SliderFloat("Skala", &s_scale, 0.f, 5.f)) {
         this->setScale(s_scale);
-        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+        s_selectManager->changeFocus(this,this);
     }
 
     ///
@@ -30,8 +31,9 @@ void PWW_Div::updateDearIMGUIParamWindow()
     ImGui::Text("Pozycja i Wypelnienie: ");
     if (ImGui::InputInt2("X/Y", s_position)) {
         setPosition(s_position[0], s_position[1]);
-        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+        s_selectManager->changeFocus(this, this);
     }
+
 
     ImGui::ColorEdit4("Kolor", s_fillColor);
     if (ImGui::IsItemEdited())
@@ -48,13 +50,13 @@ void PWW_Div::updateDearIMGUIParamWindow()
 
     if (ImGui::InputInt("X", &s_size[0])) {
         this->setSize(s_size[0], s_size[1]);
-        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+        s_selectManager->changeFocus(this, this);
 
     }
 
     if (ImGui::InputInt("Y", &s_size[1])) {
         this->setSize(s_size[0], s_size[1]);
-        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+        s_selectManager->changeFocus(this, this);
     }
 
 
@@ -82,20 +84,23 @@ void PWW_Div::updateDearIMGUIParamWindow()
     ///
     ImGui::Text("Zaznaczenie");
     if (ImGui::SliderFloat("Promien", &s_selectionIndicatorSize, 0.f, 10.f)) {
-        SelectionManager* selMan = SelectionManager::getSelectionManager();
-        selMan->getFocusSignifier()->setRadius(5 * s_selectionIndicatorSize);
-        selMan->addSelectionSignifier(this);
+        s_selectManager->getFocusSignifier()->setRadius(5 * s_selectionIndicatorSize);
+        s_selectManager->changeFocus(this, this);
 
     }
 
     if (ImGui::SliderFloat("Alfa", &s_signifierColor[3], 0.f, 1.f)) {
-        SelectionManager::getSelectionManager()->getFocusSignifier()->setFillColor(sf::Color((int)(s_signifierColor[0] * 255), (int)(s_signifierColor[1] * 255), (int)(s_signifierColor[2] * 255), (int)(s_signifierColor[3] * 255)));
+        s_selectManager->getFocusSignifier()->setFillColor(sf::Color((int)(s_signifierColor[0] * 255), (int)(s_signifierColor[1] * 255), (int)(s_signifierColor[2] * 255), (int)(s_signifierColor[3] * 255)));
     }
 }
 
 void PWW_Div::initVariables()
 {
- 
+    s_selectManager->setShowChildSelection(true);
+    for (RenderableObject* child : m_renderableObjects) {
+        s_selectManager->addChildSelectionSignifier(child);
+    }
+
     s_size[0] = this->getGlobalBounds().width;
     s_size[1] = this->getGlobalBounds().height;
 
@@ -116,11 +121,11 @@ void PWW_Div::initVariables()
 
 
 
-    sf::Color ca = SelectionManager::getSelectionManager()->getFocusSignifier()->getFillColor();
+    sf::Color ca = s_selectManager->getFocusSignifier()->getFillColor();
     s_signifierColor[0] = (float)ca.r / 255;
     s_signifierColor[1] = (float)ca.g / 255;
     s_signifierColor[2] = (float)ca.b / 255;
     s_signifierColor[3] = (float)ca.a / 255;
 
-    s_selectionIndicatorSize = SelectionManager::getSelectionManager()->getFocusSignifier()->getRadius() / 5;
+    s_selectionIndicatorSize = s_selectManager->getFocusSignifier()->getRadius() / 5;
 }

@@ -2,6 +2,35 @@
 
 
 
+void GameSceneUIDesigner::modeMOVE()
+{
+    if (m_mouseInfo->mouseHeld)
+    {
+        if (selectManager->isObjectFocused()&& !(ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow)))
+        {
+            if (m_objectIsCurrentlyDragged)
+            {
+                sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
+                selectManager->getFocusedElement()->move(moveDistance);
+                selectManager->getFocusSignifier()->move(moveDistance);
+
+            }
+            else if (selectManager->getFocusedElement()->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
+            {
+                sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
+                selectManager->getFocusedElement()->move(moveDistance);
+                selectManager->getFocusSignifier()->move(moveDistance);
+                m_objectIsCurrentlyDragged = true;
+            }
+
+        }
+    }
+    else
+    {
+        m_objectIsCurrentlyDragged = false;
+    }
+}
+
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
@@ -35,7 +64,7 @@ void GameSceneUIDesigner::toolbarAddDiv()
 
 
 GameSceneUIDesigner::GameSceneUIDesigner(sf::Font* font, MouseInfo* mouseInfo, sf::RenderWindow* window):
-GameScene(font,mouseInfo,window), m_objectIsCurentlyDragged(false), 
+GameScene(font,mouseInfo,window), m_objectIsCurrentlyDragged(false), m_objectIsCurrentlyPicked(false),
 selectManager(SelectionManager::getSelectionManager())
 {
    
@@ -113,32 +142,44 @@ void GameSceneUIDesigner::updateClickables()
 {
     
    
-
+  
+    /// Sprawdza czy kliknieto i czy zrobiono to w scenie
     if (m_mouseInfo->mouseClicked && m_gameScene->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
     {
 
-           
         
-        if (m_gameScene->updateClickables(m_mouseInfo->mousePositionView)>1)
+        //int temp = m_gameScene->updateClickables(m_mouseInfo->mousePositionView);
+        // std::cout << temp;
+        //int temp1 = m_editableObjects->updateClickables(m_mouseInfo->mousePositionView);
+
+        //Dzieje siê gdy klikniety obiekt jest podobiektem innego obiektu
+        /*if (temp>1)
         {
-            
-        }
-        else if(m_editableObjects->updateClickables(m_mouseInfo->mousePositionView) == 1)
+
+        }*/
+        
+        if(m_editableObjects->updateClickables(m_mouseInfo->mousePositionView) == 1) // Klik w t³o
         { 
+
                 
-                if (selectManager->isObjectFocused()) //Obiekt odznaczany przez klikniêcie poza nim
+                if (selectManager->isObjectFocused()) //odznaczanie
                 {
+                    if (!(ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow)))
+                    {
+                        selectManager->loseFocus();
+                    }
                     
-                    //loseFocus();
 
                 }
-                else //Cos klikniete ale nic nie zostaje zaznaczone ani nic wczesniej nie bylo zaznaczone
+                else //nic
                 {
-                
+         
                 }
                     
         }
         else { //Obiekt zaznaczony 
+            ///Przetransportowane z draggable w celu nie przesuwania w z³ym momencie 
+            
         }
         
         
@@ -151,7 +192,7 @@ void GameSceneUIDesigner::render()
     m_gameScene->render(m_window);
     if (selectManager->isObjectFocused())
     {
-        selectManager->renderFocusSignifier(m_window);
+        selectManager->renderFocusSignifiers(m_window);
     }
 
 }
@@ -159,46 +200,22 @@ void GameSceneUIDesigner::render()
 void GameSceneUIDesigner::updateMouseRelated()
 {
     updateClickables();
-    updateDragging();
+    updateMode();
 }
 
-void GameSceneUIDesigner::updateDragging()
+void GameSceneUIDesigner::updateMode()
 {
-    
+  
+    switch (m_currentDESIGN_STATE)
+    {
+    case D_MOVE:
+        modeMOVE();
+        break;
+    default:
+        break;
+    }
  
-    if (m_mouseInfo->mouseHeld)
-    {
-        switch (m_currentDESIGN_STATE)
-        {
-        case D_MOVE:
-            if (selectManager->isObjectFocused())
-            {   
-                if (m_objectIsCurentlyDragged) 
-                {
-                    sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
-                    selectManager->getFocusedElement()->move(moveDistance);
-                    selectManager->getFocusSignifier()->move(moveDistance);
-                }
-                else if (selectManager->getFocusedElement()->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
-                {
-                    sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
-                    selectManager->getFocusedElement()->move(moveDistance);
-                    selectManager->getFocusSignifier()->move(moveDistance);
-                    m_objectIsCurentlyDragged = true;
-                }
-
-               
-            }
-            
-            break;
-        default:
-            break;
-        }
-    }
-    else
-    {
-        m_objectIsCurentlyDragged = false;
-    }
+    
 }
 
 void GameSceneUIDesigner::updateDearIMGUI()

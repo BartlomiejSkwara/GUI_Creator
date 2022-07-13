@@ -6,7 +6,7 @@
 #include <iostream>
 class DivObject : public RenderableObject, public ClickableObject, public ContainerObject
 {
-private:
+protected:
 	//Obiekty które zostan¹ renderowane na ekranie 
 	std::vector<RenderableObject*> m_renderableObjects;
 	//Obiekty które uczestnicz¹ w teœcie na bycie klikniêtym

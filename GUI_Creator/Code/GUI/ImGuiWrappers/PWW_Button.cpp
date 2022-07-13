@@ -82,7 +82,7 @@ void PWW_Button::updateDearIMGUIParamWindow()
     if (ImGui::SliderFloat("Skala", &s_scale, 0.f, 2.f)) {
         this->setScale(s_scale);
        
-        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+        SelectionManager::getSelectionManager()->changeFocus(this,this);
     }
    
     ///
@@ -92,7 +92,7 @@ void PWW_Button::updateDearIMGUIParamWindow()
     ImGui::Text("Pozycja i Wypelnienie: ");
     if (ImGui::InputInt2("X/Y", s_position)) {
         setPosition(s_position[0], s_position[1]);
-        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+        SelectionManager::getSelectionManager()->changeFocus(this,this);
     }
     
     ImGui::ColorEdit4("Kolor", s_fillColor);
@@ -147,7 +147,7 @@ void PWW_Button::updateDearIMGUIParamWindow()
     if (ImGui::SliderFloat("Promien", &s_selectionIndicatorSize, 0.f, 10.f)) {
         SelectionManager* selMan = SelectionManager::getSelectionManager();
         selMan->getFocusSignifier()->setRadius(5 * s_selectionIndicatorSize);
-        selMan->addSelectionSignifier(this);
+        selMan->changeFocus(this,this);
 
     }
 

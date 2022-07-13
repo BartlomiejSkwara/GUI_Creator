@@ -8,7 +8,7 @@ class PWW_Div :
 {
 private:
     static int s_size[2];
-
+    static SelectionManager* s_selectManager;
 public:
     PWW_Div(std::string ID, sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = []() {});
 

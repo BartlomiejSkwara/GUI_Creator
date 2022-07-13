@@ -66,40 +66,51 @@ void SelectionManager::setShowChildSelection(bool val)
 }
 
 SelectionManager::SelectionManager():
-m_focusedElement(nullptr), m_objectIsFocused(false), m_focusSignifier(10)
+m_focusedElement(nullptr), m_objectIsFocused(false), m_focusSignifier(10), im_selectedElement (nullptr)
 {
     m_focusSignifier.setFillColor(sf::Color(255, 0, 0));
 }
 
 
 //TODO: In future it has to support multiple signifiers
-void SelectionManager::addSelectionSignifier(RenderableObject* focalElement)
+void SelectionManager::addChildSelectionSignifier(RenderableObject* focalElement)
 {
-    m_objectIsFocused = true;
-    m_focusSignifier.setPosition(sf::Vector2f(floor(focalElement->getGlobalBounds().left + focalElement->getGlobalBounds().width / 2 - getIndicatorSize()),
+
+    m_childPositions.push_back(sf::Vector2f(floor(focalElement->getGlobalBounds().left + focalElement->getGlobalBounds().width / 2 - getIndicatorSize()),
         floor(focalElement->getGlobalBounds().top + focalElement->getGlobalBounds().height / 2 - getIndicatorSize())));
 }
 
-void SelectionManager::removeSelectionSignifier()
-{
-    m_objectIsFocused = false;
-}
 
-void SelectionManager::renderFocusSignifier(sf::RenderTarget* target)
+
+void SelectionManager::renderFocusSignifiers(sf::RenderTarget* target)
 {
     target->draw(m_focusSignifier);
+    if (im_showChildSelection) {
+        for (sf::Vector2f v : m_childPositions) {
+            m_childFocusSignifier.setPosition(v);
+            target->draw(m_childFocusSignifier);
+        }
+    }
 }
 
 void SelectionManager::changeFocus(RenderableObject* newFocus, ParamWindowWrapper* newIm_selectedElement)
 {
+    loseFocus();
     m_focusedElement = newFocus;
     im_selectedElement = newIm_selectedElement;
-    addSelectionSignifier(m_focusedElement);
+
+    m_objectIsFocused = true;
+    m_focusSignifier.setPosition(sf::Vector2f(floor(newFocus->getGlobalBounds().left + newFocus->getGlobalBounds().width / 2 - getIndicatorSize()),
+        floor(newFocus->getGlobalBounds().top + newFocus->getGlobalBounds().height / 2 - getIndicatorSize())));
+
+    //addChildSelectionSignifier(m_focusedElement);
 }
 
 void SelectionManager::loseFocus()
 {
     m_focusedElement = nullptr;
     im_selectedElement = nullptr;
-    removeSelectionSignifier();
+    m_objectIsFocused = false;
+    im_showChildSelection = false;
 }
+

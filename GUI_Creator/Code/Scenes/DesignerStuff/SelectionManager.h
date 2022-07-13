@@ -19,7 +19,11 @@ public:
 	bool isObjectFocused();
 	RenderableObject* getFocusedElement();
 	ParamWindowWrapper* getSelectedElement();
+
 	sf::CircleShape* getFocusSignifier();
+
+
+
 
 	bool isShowingMainSelection();
 	bool isShowingChildSelection();
@@ -30,13 +34,13 @@ public:
 	void setShowChildSelection(bool val);
 
 	//Rendering 
-	void renderFocusSignifier(sf::RenderTarget* target);
+	void renderFocusSignifiers(sf::RenderTarget* target);
 
 	//Focus related 
 	void changeFocus(RenderableObject* newFocus, ParamWindowWrapper* newIm_selectedElement);
 	void loseFocus();
-	void addSelectionSignifier(RenderableObject* focalElement);
-	void removeSelectionSignifier();
+	void addChildSelectionSignifier(RenderableObject* focalElement);
+
 
 	SelectionManager(SelectionManager& selMan) = delete;
 	void operator=(const SelectionManager&) = delete;
@@ -46,7 +50,11 @@ private:
 	SelectionManager();
 	static SelectionManager* instance;
 
+
 	sf::CircleShape m_focusSignifier;
+	sf::CircleShape m_childFocusSignifier;
+	std::vector<sf::Vector2f> m_childPositions;
+
 	bool m_objectIsFocused;
 	
 	

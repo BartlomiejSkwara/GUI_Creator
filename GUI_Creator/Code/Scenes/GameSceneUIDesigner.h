@@ -35,15 +35,20 @@ private:
 
     static const DESIGN_STATE D_NONE = 1;
     static const DESIGN_STATE D_MOVE = 2;
-    static const DESIGN_STATE D_SCALE = 4;
+    static const DESIGN_STATE D_PICK = 4;
 
 
     
     //TODO::Usun¹æ design state albo zamieniæ na coœ innego obecnie musi tu byæ D_Move aby nie blokowaæ poruszania obiektami
     DESIGN_STATE m_currentDESIGN_STATE;
 
-    //Drag related
-    bool m_objectIsCurentlyDragged;
+    //Mode related
+    bool m_objectIsCurrentlyDragged;
+    bool m_objectIsCurrentlyPicked;
+
+    void modeMOVE();
+    void modePICK();
+
 
     //Toolbar related
     void toolbarAddButton();
@@ -73,7 +78,7 @@ public:
 
 
     // Inherited via GameScene
-    virtual void updateDragging() override;
+    virtual void updateMode() override;
 
 
     // ImGui related
