@@ -6,6 +6,9 @@
 class PWW_Div :
     public DivObject, public ParamWindowWrapper
 {
+private:
+    static int s_size[2];
+
 public:
     PWW_Div(std::string ID, sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = []() {});
 

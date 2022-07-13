@@ -55,7 +55,7 @@ public:
 	virtual void setPosition(const sf::Vector2i& position) override;
 	virtual void setPosition(int x, int y) override;
 	virtual void move(const sf::Vector2f& offset) override;
-
+	void setSize(int x, int y);
 
 	// Inherited via RenderableObject
 	virtual int getBorderThickness() override;
@@ -71,6 +71,10 @@ public:
 	virtual void setColorBorder(int r, int g, int b, int a) override;
 
 	virtual void setColorFill(int r, int g, int b, int a) override;
+
+	virtual void setScale(float s) override;
+
+	virtual float getScale() override;
 
 };
 

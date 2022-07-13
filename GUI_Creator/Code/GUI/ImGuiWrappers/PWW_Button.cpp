@@ -79,7 +79,11 @@ void PWW_Button::updateDearIMGUIParamWindow()
     ImGui::TextColored(sf::Color(100, 100, 100), (this->getID()).c_str());
     
 
-
+    if (ImGui::SliderFloat("Skala", &s_scale, 0.f, 2.f)) {
+        this->setScale(s_scale);
+       
+        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+    }
    
     ///
     ImGui::Separator();

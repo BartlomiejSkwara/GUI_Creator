@@ -22,12 +22,14 @@ public:
     virtual const sf::Color* getColorBorder() const = 0;
     virtual const sf::Color* getColorFill() const   = 0;
     virtual int  getBorderThickness() = 0;
+    virtual float getScale() = 0;
 
     virtual void setColorBorder(int r, int g, int b, int a) = 0;
     virtual void setColorFill(int r, int g, int b, int a)   = 0;
     virtual void setPosition(const sf::Vector2i& position)  = 0;
     virtual void setPosition(int x, int y) = 0;
     virtual void setBorderThickness(int v) = 0;
+    virtual void setScale(float s) = 0;
 
     virtual void move(const sf::Vector2f& offset) = 0;
 };

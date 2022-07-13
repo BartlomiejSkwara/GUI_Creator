@@ -66,4 +66,10 @@ public:
 
 	virtual void setBorderThickness(int v) override;
 
+
+	// Inherited via RenderableObject
+	virtual float getScale() override;
+
+	virtual void setScale(float s) override;
+
 };

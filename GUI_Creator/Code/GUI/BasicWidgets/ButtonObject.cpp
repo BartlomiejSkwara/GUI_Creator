@@ -97,6 +97,24 @@ void ButtonObject::setBorderThickness(int v)
 	m_frame.setOutlineThickness((float)v);
 }
 
+float ButtonObject::getScale()
+{
+	return m_frame.getScale().x;
+}
+
+
+//Todo:do naprawy
+/// <summary>
+/// Funkcja dzia³a tragicznie skalowanie nie wspó³gra z centrowaniem
+/// </summary>
+/// <param name="s"></param>
+void ButtonObject::setScale(float s)
+{
+	m_frame.setScale(s,s);
+	m_text.setScale(s,s);
+	centerText();
+}
+
 
 
 

@@ -15,6 +15,7 @@ protected:
 
     static int   s_outline_size;
     static float s_outlineColor[4];
+    static float s_scale;
 
 public:
 	virtual void initVariables() = 0;

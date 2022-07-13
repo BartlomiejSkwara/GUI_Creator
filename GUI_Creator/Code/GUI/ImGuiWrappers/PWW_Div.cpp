@@ -1,4 +1,5 @@
 #include "PWW_Div.h"
+int PWW_Div::s_size[] = { 0,0 };
 
 PWW_Div::PWW_Div(std::string ID, sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func)
 	:DivObject(ID,  color,  posX,  posY,  sizeX,  sizeY, func)
@@ -17,7 +18,10 @@ void PWW_Div::updateDearIMGUIParamWindow()
     ImGui::TextColored(sf::Color(100, 100, 100), (this->getID()).c_str());
 
 
-
+    if (ImGui::SliderFloat("Skala", &s_scale, 0.f, 5.f)) {
+        this->setScale(s_scale);
+        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+    }
 
     ///
     ImGui::Separator();
@@ -34,6 +38,26 @@ void PWW_Div::updateDearIMGUIParamWindow()
     {
         setColorFill((int)(s_fillColor[0] * 255), (int)(s_fillColor[1] * 255), (int)(s_fillColor[2] * 255), (int)(s_fillColor[3] * 255));
     }
+
+
+    ///
+    ImGui::Separator();
+    ///
+
+    ImGui::Text("Wymiary: ");
+
+    if (ImGui::InputInt("X", &s_size[0])) {
+        this->setSize(s_size[0], s_size[1]);
+        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+
+    }
+
+    if (ImGui::InputInt("Y", &s_size[1])) {
+        this->setSize(s_size[0], s_size[1]);
+        SelectionManager::getSelectionManager()->addSelectionSignifier(this);
+    }
+
+
 
 
     ///
@@ -72,6 +96,9 @@ void PWW_Div::updateDearIMGUIParamWindow()
 void PWW_Div::initVariables()
 {
  
+    s_size[0] = this->getGlobalBounds().width;
+    s_size[1] = this->getGlobalBounds().height;
+
     s_position[0] = this->getGlobalBounds().left;
     s_position[1] = this->getGlobalBounds().top;
 

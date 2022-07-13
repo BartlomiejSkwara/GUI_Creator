@@ -13,7 +13,6 @@ private:
     ///Imgui stuff
    
     static char *s_buttonLabel;
-  
     static float s_textColor[4];
 
 public:

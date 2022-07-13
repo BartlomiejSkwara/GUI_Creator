@@ -206,6 +206,11 @@ void DivObject::move(const sf::Vector2f& offset)
 	}
 }
 
+void DivObject::setSize(int x, int y)
+{
+	m_frame.setSize(sf::Vector2f((float)x,(float)y));
+}
+
 int DivObject::getBorderThickness()
 {
 	return m_frame.getOutlineThickness();
@@ -234,6 +239,16 @@ void DivObject::setColorBorder(int r, int g, int b, int a)
 void DivObject::setColorFill(int r, int g, int b, int a)
 {
 	m_frame.setFillColor(sf::Color(r, g, b, a));
+}
+
+void DivObject::setScale(float s)
+{
+	m_frame.setScale(s,s);
+}
+
+float DivObject::getScale()
+{
+	return m_frame.getScale().x;
 }
 
 /// <summary>
