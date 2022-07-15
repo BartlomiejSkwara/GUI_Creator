@@ -5,8 +5,8 @@
 #include "../GUI/ImGuiWrappers/PWW_Button.h"
 #include "../GUI/ImGuiWrappers/PWW_Div.h"
 #include "DesignerStuff/SelectionManager.h"
+#include "DesignerStuff/DesignerConst.h"
 
-typedef int DESIGN_STATE;
 class GameSceneUIDesigner : public GameScene
 {
 private:
@@ -33,9 +33,7 @@ private:
 
     DivObject* m_editableObjects;
 
-    static const DESIGN_STATE D_NONE = 1;
-    static const DESIGN_STATE D_MOVE = 2;
-    static const DESIGN_STATE D_PICK = 4;
+
 
 
     

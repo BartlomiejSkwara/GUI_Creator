@@ -31,6 +31,17 @@ void GameSceneUIDesigner::modeMOVE()
     }
 }
 
+void GameSceneUIDesigner::modePICK()
+{
+
+    m_currentDESIGN_STATE = D_MOVE;
+    if (m_mouseInfo->mouseClicked)
+    {
+        std::cout << "Doing some stuff\n";
+    }
+
+}
+
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
@@ -69,7 +80,7 @@ selectManager(SelectionManager::getSelectionManager())
 {
    
     m_editableObjects = new DivObject("main", sf::Color(), 0, 0, window->getSize().x, window->getSize().y);
-    m_currentDESIGN_STATE = this->D_MOVE;
+    m_currentDESIGN_STATE = D_MOVE;
     
 }
 
@@ -210,6 +221,9 @@ void GameSceneUIDesigner::updateMode()
     {
     case D_MOVE:
         modeMOVE();
+        break;
+    case D_PICK:
+        modePICK();
         break;
     default:
         break;

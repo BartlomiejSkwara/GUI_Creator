@@ -170,6 +170,9 @@
     <ClInclude Include="Code\MouseInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Code\Scenes\DesignerStuff\DesignerConst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

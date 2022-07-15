@@ -92,6 +92,16 @@ void PWW_Div::updateDearIMGUIParamWindow()
     if (ImGui::SliderFloat("Alfa", &s_signifierColor[3], 0.f, 1.f)) {
         s_selectManager->getFocusSignifier()->setFillColor(sf::Color((int)(s_signifierColor[0] * 255), (int)(s_signifierColor[1] * 255), (int)(s_signifierColor[2] * 255), (int)(s_signifierColor[3] * 255)));
     }
+
+    ///
+    ImGui::Separator();
+    ///
+    ImGui::Text("Podobiekty:");
+    if (ImGui::Button("Dodaj")) {
+
+    }
+
+
 }
 
 void PWW_Div::initVariables()

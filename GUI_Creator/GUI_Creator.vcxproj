@@ -195,6 +195,7 @@
     <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Div.h" />
     <ClInclude Include="Code\GUI\RenderableObject.h" />
     <ClInclude Include="Code\MouseInfo.h" />
+    <ClInclude Include="Code\Scenes\DesignerStuff\DesignerConst.h" />
     <ClInclude Include="Code\Scenes\DesignerStuff\Generator.h" />
     <ClInclude Include="Code\Scenes\DesignerStuff\SelectionManager.h" />
     <ClInclude Include="Code\Scenes\GameScene.h" />
