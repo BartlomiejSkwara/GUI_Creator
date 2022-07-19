@@ -32,11 +32,7 @@ private:
     void initManagers();
 
     DivObject* m_editableObjects;
-
-
-
-
-    
+ 
     //TODO::Usun¹æ design state albo zamieniæ na coœ innego obecnie musi tu byæ D_Move aby nie blokowaæ poruszania obiektami
     DESIGN_STATE m_currentDESIGN_STATE;
 

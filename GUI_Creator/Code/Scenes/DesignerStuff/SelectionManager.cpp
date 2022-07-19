@@ -23,7 +23,7 @@ bool SelectionManager::isObjectFocused()
     return m_objectIsFocused;
 }
 
-RenderableObject* SelectionManager::getFocusedElement()
+Object* SelectionManager::getFocusedElement()
 {
     return m_focusedElement;
 }
@@ -73,7 +73,7 @@ m_focusedElement(nullptr), m_objectIsFocused(false), m_focusSignifier(10), im_se
 
 
 //TODO: In future it has to support multiple signifiers
-void SelectionManager::addChildSelectionSignifier(RenderableObject* focalElement)
+void SelectionManager::addChildSelectionSignifier(Object* focalElement)
 {
 
     m_childPositions.push_back(sf::Vector2f(floor(focalElement->getGlobalBounds().left + focalElement->getGlobalBounds().width / 2 - getIndicatorSize()),
@@ -93,7 +93,7 @@ void SelectionManager::renderFocusSignifiers(sf::RenderTarget* target)
     }
 }
 
-void SelectionManager::changeFocus(RenderableObject* newFocus, ParamWindowWrapper* newIm_selectedElement)
+void SelectionManager::changeFocus(Object* newFocus, ParamWindowWrapper* newIm_selectedElement)
 {
     loseFocus();
     m_focusedElement = newFocus;

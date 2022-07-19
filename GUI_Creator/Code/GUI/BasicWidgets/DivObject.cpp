@@ -4,18 +4,9 @@ DivObject::DivObject()
 {
 }
 
-/// <summary>
-/// 
-/// </summary>
-/// <param name="ID"></param>
-/// <param name="func"></param>
-/// <param name="color"></param>
-/// <param name="sizeX"></param>
-/// <param name="sizeY"></param>
-/// <param name="posX"></param>
-/// <param name="posY"></param>
-DivObject::DivObject(std::string ID ,sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func)
-	:IdentifiableObject(ID), ClickableObject(func)
+
+DivObject::DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func)
+	:Object(func)
 {
 	m_frame.setFillColor(color);
 	m_frame.setSize(sf::Vector2f(sizeX, sizeY));
@@ -27,33 +18,14 @@ DivObject::DivObject(std::string ID ,sf::Color color, float posX, float posY, fl
 /// </summary>
 DivObject::~DivObject()
 {
-	for (auto object : m_renderableObjects)
+	for (auto object : m_Objects)
 	{
 		delete object;
 	}
 }
 
-/// <summary>
-/// Funkcja zwraca wymiary obiektu
-/// </summary>
-/// <returns></returns>
-const sf::FloatRect & DivObject::getGlobalBounds() const
-{
-	return  m_frame.getGlobalBounds();
-}
 
-/// <summary>
-/// Funkcja sprawdza czy punkt znajduje siê w tym obiekcie 
-/// </summary>
-/// <param name="point">-koordynaty punktu</param>
-/// <returns>-to czy warunek zosta³ spe³niony</returns>
-bool DivObject::checkIfObjectContainsPoint(sf::Vector2f& point)
-{
-	sf::FloatRect temp = getGlobalBounds();
-	bool temp2 = temp.contains(point.x,point.y);
-	return  temp2;
-		
-}
+
 
 /// <summary>
 /// Funkcja renderuje obiekt i jego dzieci
@@ -62,21 +34,24 @@ bool DivObject::checkIfObjectContainsPoint(sf::Vector2f& point)
 void DivObject::render(sf::RenderTarget* target)
 {
 	target->draw(m_frame);
-	for (auto object : m_renderableObjects) {
+	for (auto object : m_Objects) {
 		object->render(target);
 	}
 }
 
+
+
 /// <summary>
-/// Funkcja odpowiada za wszystkie czynnoœci zwi¹zane z wciskalnymi obiektami i powinna byæ u¿ywana wy³¹cznie w g³ównej klasie Game w funkcji updateClickables
+/// Funkcja odpowiada za wszystkie czynnoœci zwi¹zane z wciskalnymi obiektami i powinna 
+/// byæ u¿ywana wy³¹cznie w g³ównej klasie Game w funkcji updateClickables
 /// </summary>
 /// <param name="mousePosition"></param>
-///Zwraca glebie klikniecia
+/// <returns>Depth of the click (how many other div's it had to go through to reach the clicked element )</returns>
 int DivObject::updateClickables(sf::Vector2f& mousePosition)
 {
 	//Zmiana dokonana w celu poprawienie zaznaczania obiektów w klasie GameSceneUIDesigner  ( od teraz gdy dwa obiekty s¹ na sobie zaznacza siê ten najwy¿ej)
-	for (std::vector<ClickableObject*>::reverse_iterator it = m_clickableObjects.rbegin(); it != m_clickableObjects.rend(); ++it){
-	//for (auto object : m_clickableObjects) {
+	for (std::vector<Object*>::reverse_iterator it = m_Objects.rbegin(); it != m_Objects.rend(); ++it){
+	//for (auto object : m_Clickables) {
 		if ((* it)->checkIfObjectContainsPoint(mousePosition)) {
 			return 1 + (* it)->updateClickables(mousePosition);
 			
@@ -90,42 +65,30 @@ int DivObject::updateClickables(sf::Vector2f& mousePosition)
 /// Szuka obiektu po ID w danym kontenerze
 /// </summary>
 /// <param name="ID">-Id poszukiwanego obiektu</param>
-/// <param name="objectType">-okreœla który z bazowuch typów jest poszukiwany zobacz (ContainerObject::O_ ... )</param>
+/// <param name="objectType">-okreœla który z bazowuch typów jest poszukiwany zobacz (Container::O_ ... )</param>
 /// <returns>-1 gdy nie znajdê obiektu</returns>
-int DivObject::searchForObject(std::string & ID, OBJECT_TYPE objectType)
+int DivObject::searchForObject(std::string & ID)
 {
-	if (objectType & ContainerObject::O_RENDERABLE)
-	{
-		for (auto i = m_renderableObjects.begin(); i < m_renderableObjects.end(); i++)
-		{
-			std::string str = (*i)->getID();
-			if ((*i)->getID() == ID)
-			{
-				return i - m_renderableObjects.begin();
-			}
-		}
-	}
-	else if (objectType & ContainerObject::O_CLICKABLE)
-	{
-		for (auto i = m_clickableObjects.begin(); i < m_clickableObjects.end(); i++)
-		{
-			if ((*i)->getID() == ID)
-			{
-				return i - m_clickableObjects.begin();
-			}
-		}
-	}
-	else if (objectType & ContainerObject::O_CONTAINER)
-	{
-		for (auto i = m_containerObjects.begin(); i < m_containerObjects.end(); i++)
-		{
-			if ((*i)->getID() == ID)
-			{
-				return i - m_containerObjects.begin();
-			}
-		}
-	}
 	
+	for (auto i = m_Objects.begin(); i < m_Objects.end(); i++)
+	{
+		if ((*i)->getID() == ID)
+		{
+			return i - m_Objects.begin();
+		}
+	}
+	return -1;
+}
+
+int DivObject::searchForDiv(std::string& ID)
+{
+	for (auto i = m_DIVs.begin(); i < m_DIVs.end(); i++)
+	{
+		if ((*i)->getID() == ID)
+		{
+			return i - m_DIVs.begin();
+		}
+	}
 	return -1;
 }
 
@@ -134,7 +97,7 @@ int DivObject::searchForObject(std::string & ID, OBJECT_TYPE objectType)
 
 
 
-
+//TODO Niepokoi mnie dzia³anie depth mo¿e trzeba je zamieniæ na static ?
 /// <summary>
 /// /// Szukanie jest wolne i prioretyzuje górne poziomy diva , zalecane jest usuwanie tych w³asnie wy¿szych poziomów w celu zniwelowania ga³ganiarstwa
 /// W celu ograniczenia tegó¿ ga³ganiarstwa wprowadzam limit tego jak g³êboko mo¿e zajœæ rekurencja
@@ -149,10 +112,10 @@ bool DivObject::removeObject(std::string & ID,int depth)
 	if (depth >= 3) {
 		return false;
 	}
-	int objectPosition = searchForObject(ID, ContainerObject::O_RENDERABLE);
+	static int objectPosition = searchForObject(ID);
 	if (objectPosition == -1) {
-		for (auto* cont : m_containerObjects) {
-			bool found = removeObject(ID,depth+1);
+		for (auto* obj: m_DIVs) {
+			bool found = obj->removeObject(ID,depth+1);
 			if (found == true) {
 				return true;
 			}
@@ -160,21 +123,12 @@ bool DivObject::removeObject(std::string & ID,int depth)
 		return false;
 	}
 
-	RenderableObject* temp = m_renderableObjects.at(objectPosition);
+	Object* temp = m_Objects.at(objectPosition);
+	m_Objects.erase(m_Objects.begin() + objectPosition);
 
-	//Kasuj renderable
-	m_renderableObjects.erase(m_renderableObjects.begin() + objectPosition);
-
-	//Kasuj clickable
-	objectPosition = searchForObject(ID, ContainerObject::O_CLICKABLE);
-	if (objectPosition!=-1)
-		m_clickableObjects.erase(m_clickableObjects.begin() + objectPosition);
-
-	//Kasuj kontener
-	objectPosition = searchForObject(ID, ContainerObject::O_CONTAINER);
-	if (objectPosition != -1)
-		m_containerObjects.erase(m_containerObjects.begin() + objectPosition);
-
+	objectPosition = searchForDiv(ID);
+	m_DIVs.erase(m_DIVs.begin() + objectPosition);
+	
 	delete temp;
 
 	return true;
@@ -187,8 +141,8 @@ void DivObject::setPosition(const sf::Vector2i& position)
 
 void DivObject::setPosition(int x, int y)
 {
-	for (auto object : m_renderableObjects) {
-		object->move(sf::Vector2f(x - m_frame.getPosition().x, y - m_frame.getPosition().y));
+	for (auto object : m_Objects) {
+		object->move((int)(x - m_frame.getPosition().x), (int)(y - m_frame.getPosition().y));
 	}
 
 	float thick = m_frame.getOutlineThickness();
@@ -197,13 +151,10 @@ void DivObject::setPosition(int x, int y)
 }
 
 
-void DivObject::move(const sf::Vector2f& offset)
+void DivObject::move(const sf::Vector2i& offset)
 {
-	m_frame.move(offset);
-
-	for (auto object : m_renderableObjects) {
-		object->move(offset);
-	}
+	move(offset.x, offset.y);
+	
 }
 
 void DivObject::setSize(int x, int y)
@@ -211,75 +162,26 @@ void DivObject::setSize(int x, int y)
 	m_frame.setSize(sf::Vector2f((float)x,(float)y));
 }
 
-int DivObject::getBorderThickness()
+void DivObject::move(int x, int y)
 {
-	return m_frame.getOutlineThickness();
+	m_frame.move((float)x, (float)y);
+
+	for (auto object : m_DIVs) {
+		object->move(x,y);
+	}
 }
 
-void DivObject::setBorderThickness(int v)
+
+void DivObject::addObject(Object* object)
 {
-	m_frame.setOutlineThickness((float)v);
+	m_Objects.push_back(object);
 }
 
-const sf::Color* DivObject::getColorBorder() const
+void DivObject::addDiv(DivObject* div)
 {
-	return &(m_frame.getOutlineColor());;
+	m_Objects.push_back(div);
+	m_DIVs.push_back(div);
 }
 
-const sf::Color* DivObject::getColorFill() const
-{
-	return &(m_frame.getFillColor());;
-}
 
-void DivObject::setColorBorder(int r, int g, int b, int a)
-{
-	m_frame.setOutlineColor(sf::Color(r, g, b, a));
-}
-
-void DivObject::setColorFill(int r, int g, int b, int a)
-{
-	m_frame.setFillColor(sf::Color(r, g, b, a));
-}
-
-void DivObject::setScale(float s)
-{
-	m_frame.setScale(s,s);
-}
-
-float DivObject::getScale()
-{
-	return m_frame.getScale().x;
-}
-
-/// <summary>
-/// Funkcja pomaga w szybszysm dodaniu diva
-/// </summary>
-/// <param name="object"></param>
-void DivObject::addDivObject(DivObject * object)
-{
-	addRenderableObject(object);
-	addClickableObject(object);
-	addContainerObject(object);
-}
-
-void DivObject::addButtonObject(ButtonObject* object)
-{
-	addRenderableObject(object);
-	addClickableObject(object);
-}
-
-void DivObject::addRenderableObject(RenderableObject* object)
-{
-	m_renderableObjects.push_back(object);
-}
-
-void DivObject::addClickableObject(ClickableObject* object)
-{
-	m_clickableObjects.push_back(object);
-}
-
-void DivObject::addContainerObject(ContainerObject* object)
-{
-	m_containerObjects.push_back(object);
-}
 

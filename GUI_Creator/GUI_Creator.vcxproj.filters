@@ -60,19 +60,19 @@
     <ClCompile Include="Code\GUI\ImGuiWrappers\PWW_Div.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\BorderedObject.cpp">
+    <ClCompile Include="Code\GUI\Parents\Bordered.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\ClickableObject.cpp">
+    <ClCompile Include="Code\GUI\Parents\Clickable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\ContainerObject.cpp">
+    <ClCompile Include="Code\GUI\Parents\Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\IdentifiableObject.cpp">
+    <ClCompile Include="Code\GUI\Parents\Identifiable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\RenderableObject.cpp">
+    <ClCompile Include="Code\GUI\Parents\Renderable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Scenes\DesignerStuff\Generator.cpp">
@@ -140,19 +140,16 @@
     <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Div.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\BorderedObject.h">
+    <ClInclude Include="Code\GUI\Parents\Bordered.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\ClickableObject.h">
+    <ClInclude Include="Code\GUI\Parents\Clickable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\ContainerObject.h">
+    <ClInclude Include="Code\GUI\Parents\Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\IdentifiableObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\GUI\RenderableObject.h">
+    <ClInclude Include="Code\GUI\Parents\Identifiable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Scenes\DesignerStuff\Generator.h">
@@ -171,6 +168,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Scenes\DesignerStuff\DesignerConst.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\GUI\Parents\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

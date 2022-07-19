@@ -11,15 +11,15 @@ void GameSceneUIDesigner::modeMOVE()
             if (m_objectIsCurrentlyDragged)
             {
                 sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
-                selectManager->getFocusedElement()->move(moveDistance);
-                selectManager->getFocusSignifier()->move(moveDistance);
+                selectManager->getFocusedElement()->move(moveDistance.x, moveDistance.y);
+                selectManager->getFocusSignifier()->move(moveDistance.x, moveDistance.y);
 
             }
             else if (selectManager->getFocusedElement()->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
             {
                 sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
-                selectManager->getFocusedElement()->move(moveDistance);
-                selectManager->getFocusSignifier()->move(moveDistance);
+                selectManager->getFocusedElement()->move(moveDistance.x, moveDistance.y);
+                selectManager->getFocusSignifier()->move(moveDistance.x, moveDistance.y);
                 m_objectIsCurrentlyDragged = true;
             }
 
@@ -45,23 +45,23 @@ void GameSceneUIDesigner::modePICK()
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
-    PWW_Button* button = new PWW_Button(IdentifiableObject::generateID(), *m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
+    PWW_Button* button = new PWW_Button(*m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
     button->setEvent([&,button]() {
         button->initVariables();
         selectManager->changeFocus(button,button);
         });
 
-    m_editableObjects->addButtonObject(button);
+    m_editableObjects->addObject(button);
 }
 
 void GameSceneUIDesigner::toolbarAddDiv()
 {   
-    PWW_Div* div = new PWW_Div(IdentifiableObject::generateID(), sf::Color(150, 150, 150), floor(m_window->getSize().x / 2 + 100), floor(m_window->getSize().y / 2 - 50), 100, 100);
+    PWW_Div* div = new PWW_Div(sf::Color(150, 150, 150), floor(m_window->getSize().x / 2 + 100), floor(m_window->getSize().y / 2 - 50), 100, 100);
     div->setEvent([&, div]() {
         div->initVariables();
         selectManager->changeFocus(div,div);
         });
-    m_editableObjects->addDivObject(div);
+    m_editableObjects->addObject(div);
 }
 
 
@@ -79,7 +79,7 @@ GameScene(font,mouseInfo,window), m_objectIsCurrentlyDragged(false), m_objectIsC
 selectManager(SelectionManager::getSelectionManager())
 {
    
-    m_editableObjects = new DivObject("main", sf::Color(), 0, 0, window->getSize().x, window->getSize().y);
+    m_editableObjects = new DivObject(sf::Color(), 0, 0, window->getSize().x, window->getSize().y);
     m_currentDESIGN_STATE = D_MOVE;
     
 }
@@ -118,19 +118,7 @@ void GameSceneUIDesigner::pollEvents(sf::Event * ev)
         {
         case sf::Keyboard::F11:
             break;
-        case sf::Keyboard::Tab:
-            std::string id = "TBAR";
 
-            if (m_gameScene->searchForObject(id, ContainerObject::O_RENDERABLE)!=-1)
-            {
-                m_gameScene->removeObject(id);
-            
-            }
-            
-            
-            //std::string name = ""
-            //std::cout << "Thou shalt presht da button\n" << " and receive " << (m_gameScene->deepSearchByID("Bruh"));
-            break;
         }
         if (ev->key.code == sf::Keyboard::F11) {
 

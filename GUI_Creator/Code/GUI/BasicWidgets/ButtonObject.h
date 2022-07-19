@@ -1,75 +1,59 @@
 #pragma once
-#include "../RenderableObject.h"
-#include "../ClickableObject.h"
-#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/Graphics/Text.hpp>
-
-//TODO dodaj jakiœ konstruktorek bez argumentów :>
-class ButtonObject : public RenderableObject , public ClickableObject
+#include "../GUI_Creator/Code/GUI/Parents/Object.h"
+class ButtonObject : public Object
 {
 
 private:
-	//Ramka i napis w przycisku
-	sf::RectangleShape m_frame;
+
+	//Buttons Label 
 	sf::Text m_text;
+
 public:
 
-	ButtonObject(std::string ID, sf::Font& font,std::string label, float positionX, float positionY, const std::function<void()>& func = [](){}, float sizeX = 100, float sizeY = 30, int charSize = 20, float scale = 1.f);
+	ButtonObject(sf::Font& font,std::string label, float positionX, float positionY, const std::function<void()>& func = [](){}, float sizeX = 100, float sizeY = 30, int charSize = 20, float scale = 1.f);
 	virtual ~ButtonObject();
 
-	//Inicjalizacja
+	//Text initialization
 	void initText(sf::Font& font, const std::string& label);
+	//This one just changes the string (use it if u already initialized the font )
 	void initText(const std::string& label);
 	
 
 
-	//Inicjalizacja - pozycja
-
+	//Change the position
 	virtual void setPosition(const sf::Vector2i& position) override;
 	virtual void setPosition(int x, int y) override;
-	virtual void move(const sf::Vector2f& offset) override;
+	
+	//Change the offset from position
+	virtual void move(const sf::Vector2i& offset) override;
+	virtual void move(int x, int y) override;
+
+	//Use it to place the text in the middle of the rect
 	void centerText();
 
-
-	// Inherited via RenderableObject
-
-	virtual const sf::FloatRect& getGlobalBounds() const override;
-
-	virtual bool checkIfObjectContainsPoint(sf::Vector2f& point) override;
-
+	//Renders the text and the frame 
 	virtual void render(sf::RenderTarget* target) override;
 
 
-	// Inherited via ClickableObject
+	// Func responsible for the stuff button does in update loop
 	virtual int updateClickables(sf::Vector2f& mousePosition) override;
 
 
 	//Gettery
-	virtual const sf::Color* getColorBorder() const override;
-	virtual const sf::Color* getColorFill() const override;
-
+	
+	//Function returns color of the label's font 
 	const sf::Color* getColorText() const;
+	//Function returns the label's message in string format
 	std::string getLabel();
+	//Function returns the sfml text object used to render the text
 	sf::Text* getText();
 	
 	//Settery
-	virtual void setColorBorder(int r,int g, int b, int a) override;
-	virtual void setColorFill(int r, int g, int b, int a) override;
+	//Function changes the color of the font using rgba format 
 	void setColorText(int r, int g, int b, int a);
 
 
-
-
-
-	// Inherited via RenderableObject
-	virtual int getBorderThickness() override;
-
-	virtual void setBorderThickness(int v) override;
-
-
-	// Inherited via RenderableObject
-	virtual float getScale() override;
-
-	virtual void setScale(float s) override;
+	
 
 };

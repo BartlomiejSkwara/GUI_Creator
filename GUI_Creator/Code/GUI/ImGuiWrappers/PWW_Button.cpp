@@ -6,8 +6,8 @@ char* PWW_Button::s_buttonLabel = new char[15];
 
 
 
-PWW_Button::PWW_Button(std::string ID, sf::Font& font, std::string label, float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
-    :ButtonObject(ID, font, label, positionX, positionY, func, sizeX, sizeY, charSize, scale)
+PWW_Button::PWW_Button(sf::Font& font, std::string label, float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
+    :ButtonObject(font, label, positionX, positionY, func, sizeX, sizeY, charSize, scale)
     
 {
     s_buttonLabel = new char[15];
@@ -79,11 +79,6 @@ void PWW_Button::updateDearIMGUIParamWindow()
     ImGui::TextColored(sf::Color(100, 100, 100), (this->getID()).c_str());
     
 
-    if (ImGui::SliderFloat("Skala", &s_scale, 0.f, 2.f)) {
-        this->setScale(s_scale);
-       
-        SelectionManager::getSelectionManager()->changeFocus(this,this);
-    }
    
     ///
     ImGui::Separator();

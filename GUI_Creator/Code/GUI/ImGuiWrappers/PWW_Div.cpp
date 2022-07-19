@@ -2,8 +2,8 @@
 int PWW_Div::s_size[] = { 0,0 };
 SelectionManager* PWW_Div::s_selectManager = SelectionManager::getSelectionManager();
 
-PWW_Div::PWW_Div(std::string ID, sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func)
-	:DivObject(ID,  color,  posX,  posY,  sizeX,  sizeY, func)
+PWW_Div::PWW_Div(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func)
+	:DivObject(color,  posX,  posY,  sizeX,  sizeY, func)
 {
 }
 
@@ -19,10 +19,6 @@ void PWW_Div::updateDearIMGUIParamWindow()
     ImGui::TextColored(sf::Color(100, 100, 100), (this->getID()).c_str());
 
 
-    if (ImGui::SliderFloat("Skala", &s_scale, 0.f, 5.f)) {
-        this->setScale(s_scale);
-        s_selectManager->changeFocus(this,this);
-    }
 
     ///
     ImGui::Separator();
@@ -107,7 +103,7 @@ void PWW_Div::updateDearIMGUIParamWindow()
 void PWW_Div::initVariables()
 {
     s_selectManager->setShowChildSelection(true);
-    for (RenderableObject* child : m_renderableObjects) {
+    for (Object* child : m_DIVs) {
         s_selectManager->addChildSelectionSignifier(child);
     }
 

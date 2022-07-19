@@ -11,7 +11,7 @@ private:
     static SelectionManager* s_selectManager;
 
 public:
-    PWW_Div(std::string ID, sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = []() {});
+    PWW_Div(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = []() {});
 
     // Inherited via ParamWindowWrapper
     virtual void updateDearIMGUIParamWindow() override;

@@ -1,7 +1,7 @@
 #pragma once
 #include <iostream>
 #include "SFML/Graphics/CircleShape.hpp"
-#include "../GUI_Creator/Code/GUI/RenderableObject.h"
+#include "../GUI_Creator/Code/GUI/BasicWidgets/DivObject.h"
 #include "../GUI_Creator/Code/GUI/ImGuiWrappers/ParamWindowWrapper.h"
 /// <summary>
 /// Singleton used to manage which objects are selected 
@@ -17,7 +17,7 @@ public:
 	//Gettery
 	float getIndicatorSize();
 	bool isObjectFocused();
-	RenderableObject* getFocusedElement();
+	Object* getFocusedElement();
 	ParamWindowWrapper* getSelectedElement();
 
 	sf::CircleShape* getFocusSignifier();
@@ -37,9 +37,9 @@ public:
 	void renderFocusSignifiers(sf::RenderTarget* target);
 
 	//Focus related 
-	void changeFocus(RenderableObject* newFocus, ParamWindowWrapper* newIm_selectedElement);
+	void changeFocus(Object* newFocus, ParamWindowWrapper* newIm_selectedElement);
 	void loseFocus();
-	void addChildSelectionSignifier(RenderableObject* focalElement);
+	void addChildSelectionSignifier(Object* focalElement);
 
 
 	SelectionManager(SelectionManager& selMan) = delete;
@@ -60,7 +60,7 @@ private:
 	
 	//Focus related
 	//Used when taking data out of selected obj
-	RenderableObject* m_focusedElement;
+	Object* m_focusedElement;
 	//Used when displaying imGui param window
 	ParamWindowWrapper* im_selectedElement;
 	

@@ -1,10 +1,10 @@
 #include "ButtonObject.h"
 
 ///Przyda³aby siê tu jakaœ dokumentacja 
-ButtonObject::ButtonObject(std::string ID, sf::Font& font,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
-	:IdentifiableObject(ID), ClickableObject(func)
+ButtonObject::ButtonObject(sf::Font& font,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
+	:Object(func)
 {
-	
+		
 	m_frame.setSize(sf::Vector2f(sizeX * scale, sizeY * scale));
 	m_frame.setOutlineColor(sf::Color::White);
 	m_frame.setOutlineThickness(3.f);
@@ -21,15 +21,8 @@ ButtonObject::~ButtonObject()
 
 }
 
-const sf::FloatRect& ButtonObject::getGlobalBounds() const
-{
-	return m_frame.getGlobalBounds();
-}
 
-bool ButtonObject::checkIfObjectContainsPoint(sf::Vector2f& point)
-{
-	return  (getGlobalBounds().contains(point.x,point.y));
-}
+
 
 void ButtonObject::render(sf::RenderTarget* target)
 {
@@ -43,16 +36,7 @@ int ButtonObject::updateClickables(sf::Vector2f& mousePosition)
 	return 1;
 }
 
-const sf::Color* ButtonObject::getColorBorder() const
-{
 
-	return &(m_frame.getOutlineColor());
-}
-
-const sf::Color* ButtonObject::getColorFill() const
-{
-	return &(m_frame.getFillColor());
-}
 
 const sf::Color* ButtonObject::getColorText() const
 {
@@ -70,50 +54,23 @@ sf::Text* ButtonObject::getText()
 	return &m_text;
 }
 
-void ButtonObject::setColorBorder(int r, int g, int b, int a)
-{
-	m_frame.setOutlineColor(sf::Color(r,g,b,a));
-}
-
-void ButtonObject::setColorFill(int r, int g, int b, int a)
-{
-
-	m_frame.setFillColor(sf::Color(r, g, b, a));
-}
-
 void ButtonObject::setColorText(int r, int g, int b, int a)
 {
 
 	m_text.setFillColor(sf::Color(r, g, b, a));
 }
 
-int ButtonObject::getBorderThickness()
+void ButtonObject::move(int x, int y)
 {
-	return m_frame.getOutlineThickness();
-}
-
-void ButtonObject::setBorderThickness(int v)
-{
-	m_frame.setOutlineThickness((float)v);
-}
-
-float ButtonObject::getScale()
-{
-	return m_frame.getScale().x;
+	m_frame.move(x, y);
+	m_text.move(x, y);
 }
 
 
-//Todo:do naprawy
-/// <summary>
-/// Funkcja dzia³a tragicznie skalowanie nie wspó³gra z centrowaniem
-/// </summary>
-/// <param name="s"></param>
-void ButtonObject::setScale(float s)
-{
-	m_frame.setScale(s,s);
-	m_text.setScale(s,s);
-	centerText();
-}
+
+
+
+
 
 
 
@@ -138,10 +95,10 @@ void ButtonObject::setPosition(int x, int y)
 /// Funkcja przesuwa obiekt 
 /// </summary>
 /// <param name="offset"></param>
-void ButtonObject::move(const sf::Vector2f& offset)
+void ButtonObject::move(const sf::Vector2i& offset)
 {
-	m_frame.move(offset);
-	m_text.move(offset);
+	move(offset.x, offset.y);
+
 
 }
 

@@ -20,7 +20,7 @@ public:
     
     
 
-    PWW_Button(std::string ID, sf::Font& font, std::string label, float positionX, float positionY, const std::function<void()>& func = []() {}, float sizeX = 100, float sizeY = 30, int charSize = 20, float scale = 1.f);
+    PWW_Button(sf::Font& font, std::string label, float positionX, float positionY, const std::function<void()>& func = []() {}, float sizeX = 100, float sizeY = 30, int charSize = 20, float scale = 1.f);
     ~PWW_Button();
 
     virtual void initVariables() override;
