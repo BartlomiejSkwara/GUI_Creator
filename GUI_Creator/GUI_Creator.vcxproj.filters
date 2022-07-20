@@ -87,6 +87,18 @@
     <ClCompile Include="Code\Scenes\GameSceneUIDesigner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Scenes\ObserverStuff\SceneSubject.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverScene.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverUID.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Input\MouseInfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -164,13 +176,22 @@
     <ClInclude Include="Code\Scenes\GameSceneUIDesigner.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\MouseInfo.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Code\Scenes\DesignerStuff\DesignerConst.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GUI\Parents\Renderable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scenes\ObserverStuff\SceneSubject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverScene.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverUID.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Input\MouseInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

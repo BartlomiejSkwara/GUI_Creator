@@ -74,8 +74,8 @@ void GameSceneUIDesigner::toolbarAddDiv()
 
 
 
-GameSceneUIDesigner::GameSceneUIDesigner(sf::Font* font, MouseInfo* mouseInfo, sf::RenderWindow* window):
-GameScene(font,mouseInfo,window), m_objectIsCurrentlyDragged(false), m_objectIsCurrentlyPicked(false),
+GameSceneUIDesigner::GameSceneUIDesigner(sf::Font* font, sf::RenderWindow* window):
+GameScene(font,window), m_objectIsCurrentlyDragged(false), m_objectIsCurrentlyPicked(false),
 selectManager(SelectionManager::getSelectionManager())
 {
    
@@ -140,8 +140,8 @@ void GameSceneUIDesigner::pollEvents(sf::Event * ev)
 void GameSceneUIDesigner::updateClickables()
 {
     
-   
-  
+ 
+
     /// Sprawdza czy kliknieto i czy zrobiono to w scenie
     if (m_mouseInfo->mouseClicked && m_gameScene->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
     {

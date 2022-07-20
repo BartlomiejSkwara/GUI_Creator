@@ -1,6 +1,6 @@
 #pragma once
 #include "../GUI/BasicWidgets/DivObject.h"
-#include "../MouseInfo.h"
+#include "../Input/MouseInfo.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 
@@ -19,7 +19,7 @@ protected:
 	DivObject* m_gameScene;
 	
 public:
-	GameScene(sf::Font* font, MouseInfo * mouseInfo, sf::RenderWindow* window);
+	GameScene(sf::Font* font,sf::RenderWindow* window);
 	virtual ~GameScene();
 	virtual void updateDearIMGUI()=0;
 	virtual void pollEvents(sf::Event* ev) = 0;

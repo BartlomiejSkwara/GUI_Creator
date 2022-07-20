@@ -3,6 +3,7 @@
 #include "SFML/Graphics/CircleShape.hpp"
 #include "../GUI_Creator/Code/GUI/BasicWidgets/DivObject.h"
 #include "../GUI_Creator/Code/GUI/ImGuiWrappers/ParamWindowWrapper.h"
+
 /// <summary>
 /// Singleton used to manage which objects are selected 
 /// and selections style
@@ -11,10 +12,15 @@ class SelectionManager
 {
 public:
 
-	static SelectionManager* getSelectionManager();
+	
 
 
 	//Gettery
+	
+	// This one can create the singleton
+	static SelectionManager* getSelectionManager();
+
+	//
 	float getIndicatorSize();
 	bool isObjectFocused();
 	Object* getFocusedElement();

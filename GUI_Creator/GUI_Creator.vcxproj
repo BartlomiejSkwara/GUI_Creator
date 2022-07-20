@@ -179,6 +179,10 @@
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Code\Scenes\ObserverStuff\SceneSubject.cpp" />
+    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverScene.cpp" />
+    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverUID.cpp" />
+    <ClCompile Include="Code\Input\MouseInfo.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\GameLogic\Enemy.h" />
@@ -194,7 +198,6 @@
     <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Button.h" />
     <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Div.h" />
     <ClInclude Include="Code\GUI\Parents\Renderable.h" />
-    <ClInclude Include="Code\MouseInfo.h" />
     <ClInclude Include="Code\Scenes\DesignerStuff\DesignerConst.h" />
     <ClInclude Include="Code\Scenes\DesignerStuff\Generator.h" />
     <ClInclude Include="Code\Scenes\DesignerStuff\SelectionManager.h" />
@@ -209,6 +212,10 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="Code\Scenes\ObserverStuff\SceneSubject.h" />
+    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverScene.h" />
+    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverUID.h" />
+    <ClInclude Include="Code\Input\MouseInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

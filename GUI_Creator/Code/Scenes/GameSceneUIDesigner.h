@@ -6,10 +6,15 @@
 #include "../GUI/ImGuiWrappers/PWW_Div.h"
 #include "DesignerStuff/SelectionManager.h"
 #include "DesignerStuff/DesignerConst.h"
-
+#include "ObserverStuff/SceneSubject.h"
 class GameSceneUIDesigner : public GameScene
 {
 private:
+
+    //Events handling 
+    SceneSubject subj;
+
+
 
     ///Managers and other singletons
     SelectionManager * selectManager;
@@ -55,7 +60,7 @@ private:
 
 public:
       
-    GameSceneUIDesigner(sf::Font* font, MouseInfo* mouseinfo, sf::RenderWindow* window);
+    GameSceneUIDesigner(sf::Font* font, sf::RenderWindow* window);
     virtual ~GameSceneUIDesigner();
     virtual void pollEvents(sf::Event* ev) override;
 

@@ -20,10 +20,9 @@ private:
 	
 	
 	//All mouse info combined in one object
-	MouseInfo m_mouseInfo;
+	MouseInfo*m_mouseInfo;
 	
 	//Game Objects
-	Player player;
 	GameSceneUIDesigner * m_gameScene;
 
 	//Resources
@@ -58,8 +57,6 @@ public:
 	//Functions
 
 
-	//Player Related
-	void updatePlayer();
 
 
 	void pollEvents();
@@ -73,9 +70,6 @@ public:
 	//Renders everything from current scene
 	void render();
 
-	//Mouse Positions
-	void updateMouseStatus();
-	void updateMousePositions();
 	
 	//Gettery
 	const bool windowIsOpen() const;
