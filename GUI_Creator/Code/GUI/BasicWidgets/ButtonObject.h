@@ -37,7 +37,7 @@ public:
 
 
 	// Func responsible for the stuff button does in update loop
-	virtual int updateClickables(sf::Vector2f& mousePosition) override;
+	virtual Object* updateClickables(sf::Vector2f& mousePosition) override;
 
 
 	//Gettery

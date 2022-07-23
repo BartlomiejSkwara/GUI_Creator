@@ -3,7 +3,7 @@
 #include "../Input/MouseInfo.h"
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
-
+#include "ObserverStuff/SceneSubject.h"
 class GameScene
 {
 
@@ -15,9 +15,14 @@ private:
 protected:
 	MouseInfo* m_mouseInfo;
 	sf::Font* m_font;
+
+	//This thingie is the main render target 
 	sf::RenderWindow* m_window;
+	
 	DivObject* m_gameScene;
 	
+	//Observer base events handling 
+	SceneSubject m_subj;
 public:
 	GameScene(sf::Font* font,sf::RenderWindow* window);
 	virtual ~GameScene();

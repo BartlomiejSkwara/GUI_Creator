@@ -31,7 +31,7 @@ public:
 
 
 	// Inherited via Clickable
-	virtual int updateClickables(sf::Vector2f& mousePosition) override;
+	virtual Object* updateClickables(sf::Vector2f& mousePosition) override;
 
 	
 

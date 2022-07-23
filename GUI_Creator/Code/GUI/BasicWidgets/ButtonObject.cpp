@@ -14,6 +14,7 @@ ButtonObject::ButtonObject(sf::Font& font,std::string label ,float positionX, fl
 
 	initText(font, label);
 	setPosition(positionX,positionY);
+
 }
 
 ButtonObject::~ButtonObject()
@@ -30,10 +31,9 @@ void ButtonObject::render(sf::RenderTarget* target)
 	target->draw(this->m_text);
 }
 
-int ButtonObject::updateClickables(sf::Vector2f& mousePosition)
+Object* ButtonObject::updateClickables(sf::Vector2f& mousePosition)
 {
-	runEvent();
-	return 1;
+	return this;
 }
 
 

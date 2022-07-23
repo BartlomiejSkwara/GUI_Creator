@@ -13,6 +13,6 @@ public :
 	void addObserver(ObserverScene* obs);
 	void removeObserver(ObserverScene* obs);
 
-	void notify(EventType event);
+	void notify(EventType event, Object* caller);
 };
 

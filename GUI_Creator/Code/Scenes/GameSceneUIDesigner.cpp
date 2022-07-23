@@ -4,31 +4,7 @@
 
 void GameSceneUIDesigner::modeMOVE()
 {
-    if (m_mouseInfo->mouseHeld)
-    {
-        if (selectManager->isObjectFocused()&& !(ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow)))
-        {
-            if (m_objectIsCurrentlyDragged)
-            {
-                sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
-                selectManager->getFocusedElement()->move(moveDistance.x, moveDistance.y);
-                selectManager->getFocusSignifier()->move(moveDistance.x, moveDistance.y);
-
-            }
-            else if (selectManager->getFocusedElement()->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
-            {
-                sf::Vector2f moveDistance = m_mouseInfo->mousePositionView - m_mouseInfo->mousePositionViewLastKnown;
-                selectManager->getFocusedElement()->move(moveDistance.x, moveDistance.y);
-                selectManager->getFocusSignifier()->move(moveDistance.x, moveDistance.y);
-                m_objectIsCurrentlyDragged = true;
-            }
-
-        }
-    }
-    else
-    {
-        m_objectIsCurrentlyDragged = false;
-    }
+    
 }
 
 void GameSceneUIDesigner::modePICK()
@@ -78,9 +54,11 @@ GameSceneUIDesigner::GameSceneUIDesigner(sf::Font* font, sf::RenderWindow* windo
 GameScene(font,window), m_objectIsCurrentlyDragged(false), m_objectIsCurrentlyPicked(false),
 selectManager(SelectionManager::getSelectionManager())
 {
-   
+    
     m_editableObjects = new DivObject(sf::Color(), 0, 0, window->getSize().x, window->getSize().y);
     m_currentDESIGN_STATE = D_MOVE;
+    m_subj.addObserver(new ObserverUID());
+    m_gameScene->addDiv(m_editableObjects);
     
 }
 
@@ -139,55 +117,57 @@ void GameSceneUIDesigner::pollEvents(sf::Event * ev)
 
 void GameSceneUIDesigner::updateClickables()
 {
-    
- 
+    ///Clickable///
 
-    /// Sprawdza czy kliknieto i czy zrobiono to w scenie
     if (m_mouseInfo->mouseClicked && m_gameScene->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
     {
 
-        
-        //int temp = m_gameScene->updateClickables(m_mouseInfo->mousePositionView);
-        // std::cout << temp;
-        //int temp1 = m_editableObjects->updateClickables(m_mouseInfo->mousePositionView);
-
-        //Dzieje siê gdy klikniety obiekt jest podobiektem innego obiektu
-        /*if (temp>1)
+        Object* clickedObj = m_editableObjects->updateClickables(m_mouseInfo->mousePositionView);
+        if (clickedObj == static_cast<Clickable*>(m_editableObjects)) {
+            m_subj.notify(EventType::EVENT_CLICKED_BACKGROUND, clickedObj);
+        }
+        else
         {
-
-        }*/
-        
-        if(m_editableObjects->updateClickables(m_mouseInfo->mousePositionView) == 1) // Klik w t³o
-        { 
-
-                
-                if (selectManager->isObjectFocused()) //odznaczanie
-                {
-                    if (!(ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow)))
-                    {
-                        selectManager->loseFocus();
-                    }
-                    
-
-                }
-                else //nic
-                {
-         
-                }
-                    
-        }
-        else { //Obiekt zaznaczony 
-            ///Przetransportowane z draggable w celu nie przesuwania w z³ym momencie 
-            
+            m_subj.notify(EventType::EVENT_CLICKED_OBJECT, clickedObj);
         }
         
-        
+
     }
+    else if (m_mouseInfo->mouseClicked)
+    {
+
+    }
+
+    ///Movable///
+   
+    if (m_mouseInfo->mouseHeld)
+    {
+        if (selectManager->isObjectFocused() && !(ImGui::IsWindowHovered(ImGuiHoveredFlags_AnyWindow)))
+        {
+            if (m_objectIsCurrentlyDragged)
+            {
+                m_subj.notify(EventType::EVENT_MOVED_OBJECT, selectManager->getFocusedElement());
+
+            }
+            else if (selectManager->getFocusedElement()->checkIfObjectContainsPoint(m_mouseInfo->mousePositionView))
+            {
+                m_subj.notify(EventType::EVENT_MOVED_OBJECT,selectManager->getFocusedElement());
+                m_objectIsCurrentlyDragged = true;
+            }
+
+        }
+    }
+    else
+    {
+        m_objectIsCurrentlyDragged = false;
+    }
+
+
 }
 
 void GameSceneUIDesigner::render()
 {
-    m_editableObjects->render(m_window);
+
     m_gameScene->render(m_window);
     if (selectManager->isObjectFocused())
     {

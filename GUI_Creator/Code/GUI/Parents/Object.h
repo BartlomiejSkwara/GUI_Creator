@@ -17,5 +17,14 @@ public:
 	
 	Object(const std::function<void()>& func = [](){});
 	virtual ~Object();	
+
+	
+
+
+	// Inherited via Clickable //TODO make it more relatable to object then to clickable class
+	virtual Object* updateClickables(sf::Vector2f& mousePosition) = 0;
+
+
+
 };
 

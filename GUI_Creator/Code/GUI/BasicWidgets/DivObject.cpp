@@ -11,6 +11,8 @@ DivObject::DivObject(sf::Color color, float posX, float posY, float sizeX, float
 	m_frame.setFillColor(color);
 	m_frame.setSize(sf::Vector2f(sizeX, sizeY));
 	m_frame.setPosition(sf::Vector2f(posX, posY));
+	//setEvent(func);
+
 }
 
 /// <summary>
@@ -42,23 +44,23 @@ void DivObject::render(sf::RenderTarget* target)
 
 
 /// <summary>
-/// Funkcja odpowiada za wszystkie czynnoœci zwi¹zane z wciskalnymi obiektami i powinna 
-/// byæ u¿ywana wy³¹cznie w g³ównej klasie Game w funkcji updateClickables
+/// Function checks if cursor is inside of any of the objects div contains
+/// Be aware that the function won't check if the cursor is inside of the div 
 /// </summary>
 /// <param name="mousePosition"></param>
 /// <returns>Depth of the click (how many other div's it had to go through to reach the clicked element )</returns>
-int DivObject::updateClickables(sf::Vector2f& mousePosition)
+Object* DivObject::updateClickables(sf::Vector2f& mousePosition)
 {
 	//Zmiana dokonana w celu poprawienie zaznaczania obiektów w klasie GameSceneUIDesigner  ( od teraz gdy dwa obiekty s¹ na sobie zaznacza siê ten najwy¿ej)
 	for (std::vector<Object*>::reverse_iterator it = m_Objects.rbegin(); it != m_Objects.rend(); ++it){
 	//for (auto object : m_Clickables) {
 		if ((* it)->checkIfObjectContainsPoint(mousePosition)) {
-			return 1 + (* it)->updateClickables(mousePosition);
+			return (* it)->updateClickables(mousePosition);
 			
 		}
 	}
-	runEvent();
-	return 1;
+
+	return this;
 }
 
 /// <summary>

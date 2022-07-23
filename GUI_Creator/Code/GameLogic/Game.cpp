@@ -67,10 +67,6 @@ void Game::update()
     //Mouse Related
     m_mouseInfo->updateMouse();
 
-    if (m_mouseInfo->mouseClicked) {
-        std::cout << ":<";
-    }
-
     //Scenes Related
     pollEvents();
     if(this->m_pausedGame==false)

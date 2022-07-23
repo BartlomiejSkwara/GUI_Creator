@@ -5,7 +5,6 @@
 #include "../Scenes/GameSceneUIDesigner.h"
 #include "../../values.h"
 
-
 /**
 * Game wrapper
 */
@@ -20,10 +19,10 @@ private:
 	
 	
 	//All mouse info combined in one object
-	MouseInfo*m_mouseInfo;
+	MouseInfo* m_mouseInfo;
 	
 	//Game Objects
-	GameSceneUIDesigner * m_gameScene;
+	GameSceneUIDesigner* m_gameScene;
 
 	//Resources
 	sf::Font font;

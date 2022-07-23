@@ -5,19 +5,18 @@
 #include "../GUI/ImGuiWrappers/PWW_Button.h"
 #include "../GUI/ImGuiWrappers/PWW_Div.h"
 #include "DesignerStuff/SelectionManager.h"
+#include "ObserverStuff/ObserverUID.h"
 #include "DesignerStuff/DesignerConst.h"
-#include "ObserverStuff/SceneSubject.h"
+
 class GameSceneUIDesigner : public GameScene
 {
 private:
 
-    //Events handling 
-    SceneSubject subj;
 
 
 
     ///Managers and other singletons
-    SelectionManager * selectManager;
+    SelectionManager* selectManager;
 
 
     //Used to save and generate created UI's code
@@ -35,7 +34,7 @@ private:
 
     virtual void initGameObjects(sf::Font* font) override;
     void initManagers();
-
+    //TODO zmiany to ma byæ dodane do m_scene a inicjalizacja m_scene wraca do klasy GameScene czy jakoœ tak
     DivObject* m_editableObjects;
  
     //TODO::Usun¹æ design state albo zamieniæ na coœ innego obecnie musi tu byæ D_Move aby nie blokowaæ poruszania obiektami

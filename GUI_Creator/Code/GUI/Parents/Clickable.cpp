@@ -1,10 +1,9 @@
 #include "Clickable.h"
 
 
-
 Clickable::Clickable(const std::function<void()>& func)
-	:m_Event(func)
 {
+	setEvent(func);
 }
 
 Clickable::~Clickable()

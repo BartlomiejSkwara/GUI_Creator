@@ -35,10 +35,10 @@ void SceneSubject::removeObserver(ObserverScene* obs)
 	}
 }
 
-void SceneSubject::notify(EventType event)
+void SceneSubject::notify(EventType event, Object* caller)
 {
 	for (auto ptr : observers)
 	{
-		ptr->onNotify(event);
+		ptr->onNotify(event, caller);
 	}
 }
