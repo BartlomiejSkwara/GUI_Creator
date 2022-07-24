@@ -9,8 +9,6 @@ void GameSceneUIDesigner::modeMOVE()
 
 void GameSceneUIDesigner::modePICK()
 {
-
-    m_currentDESIGN_STATE = D_MOVE;
     if (m_mouseInfo->mouseClicked)
     {
         std::cout << "Doing some stuff\n";
@@ -21,10 +19,10 @@ void GameSceneUIDesigner::modePICK()
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
-    PWW_Button* button = new PWW_Button(*m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
+    ButtonObject* button = new ButtonObject(*m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
     button->setEvent([&,button]() {
-        button->initVariables();
-        selectManager->changeFocus(button,button);
+        pwwManager.initTextButton(button);
+        selectManager->changeFocus(button);
         });
 
     m_editableObjects->addObject(button);
@@ -32,10 +30,10 @@ void GameSceneUIDesigner::toolbarAddButton()
 
 void GameSceneUIDesigner::toolbarAddDiv()
 {   
-    PWW_Div* div = new PWW_Div(sf::Color(150, 150, 150), floor(m_window->getSize().x / 2 + 100), floor(m_window->getSize().y / 2 - 50), 100, 100);
+    DivObject* div = new DivObject(sf::Color(150, 150, 150), floor(m_window->getSize().x / 2 + 100), floor(m_window->getSize().y / 2 - 50), 100, 100);
     div->setEvent([&, div]() {
-        div->initVariables();
-        selectManager->changeFocus(div,div);
+        pwwManager.initDIV(div);
+        selectManager->changeFocus(div);
         });
     m_editableObjects->addObject(div);
 }
@@ -56,7 +54,6 @@ selectManager(SelectionManager::getSelectionManager())
 {
     
     m_editableObjects = new DivObject(sf::Color(), 0, 0, window->getSize().x, window->getSize().y);
-    m_currentDESIGN_STATE = D_MOVE;
     m_subj.addObserver(new ObserverUID());
     m_gameScene->addDiv(m_editableObjects);
     
@@ -65,7 +62,7 @@ selectManager(SelectionManager::getSelectionManager())
 
 GameSceneUIDesigner::~GameSceneUIDesigner()
 {
-    PWW_Button::deleteStaticPointers();
+
     delete selectManager;
     delete m_editableObjects;
     
@@ -179,30 +176,13 @@ void GameSceneUIDesigner::render()
 void GameSceneUIDesigner::updateMouseRelated()
 {
     updateClickables();
-    updateMode();
 }
 
-void GameSceneUIDesigner::updateMode()
-{
-  
-    switch (m_currentDESIGN_STATE)
-    {
-    case D_MOVE:
-        modeMOVE();
-        break;
-    case D_PICK:
-        modePICK();
-        break;
-    default:
-        break;
-    }
- 
-    
-}
+
 
 void GameSceneUIDesigner::updateDearIMGUI()
 {
-    if (im_showParamWindow) { updateDearIMGUIParamWindow(); };
+    if (im_showParamWindow) { pwwManager.updatePWW(); };
     updateDearIMGUIMainMenuBar();
     
       
@@ -258,23 +238,7 @@ void GameSceneUIDesigner::updateDearIMGUIMainMenuBar()
     }
 }
 
-void GameSceneUIDesigner::updateDearIMGUIParamWindow()
-{
-    ImGui::Begin("Parametry Obiektu: ");
-    ImGui::SetWindowSize(sf::Vector2f(200, 400));
 
-    if (selectManager->getSelectedElement() != nullptr) {
-        selectManager->getSelectedElement()->updateDearIMGUIParamWindow();
-    }
-    else {
-
-        ImGui::Text("Nie zaznaczono obiektu !!!");
-    }
-
-
-    ImGui::End();
-    
-}
 
 
 

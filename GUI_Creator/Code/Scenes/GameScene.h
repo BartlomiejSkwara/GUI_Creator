@@ -30,7 +30,6 @@ public:
 	virtual void pollEvents(sf::Event* ev) = 0;
 	virtual void updateClickables() = 0;
 	virtual void updateMouseRelated() = 0;
-	virtual void updateMode()=0;
 	virtual void update() = 0;
 	virtual void render() = 0;
 

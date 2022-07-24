@@ -2,8 +2,9 @@
 
 #include "Player.h"
 #include "Enemy.h"
-#include "../Scenes/GameSceneUIDesigner.h"
 #include "../../values.h"
+#include "../Input/MouseInfo.h"
+#include "../Scenes/UIDesigner/GameSceneUIDesigner.h"
 
 /**
 * Game wrapper

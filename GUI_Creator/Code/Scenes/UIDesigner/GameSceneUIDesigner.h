@@ -1,13 +1,11 @@
 #pragma once
-#include "GameScene.h"
-#include <SFML/Graphics/CircleShape.hpp>
-#include "DesignerStuff/Generator.h"
-#include "../GUI/ImGuiWrappers/PWW_Button.h"
-#include "../GUI/ImGuiWrappers/PWW_Div.h"
-#include "DesignerStuff/SelectionManager.h"
-#include "ObserverStuff/ObserverUID.h"
-#include "DesignerStuff/DesignerConst.h"
 
+#include <SFML/Graphics/CircleShape.hpp>
+#include "../GameScene.h"
+#include "Utility/SelectionManager.h"
+#include "Utility/PWW/PWWManager.h"
+#include "Utility/Generator.h"
+#include "../ObserverStuff/ObserverUID.h"
 class GameSceneUIDesigner : public GameScene
 {
 private:
@@ -15,9 +13,9 @@ private:
 
 
 
-    ///Managers and other singletons
+    ///Managers and/or singletons
     SelectionManager* selectManager;
-
+    PWWManager pwwManager;
 
     //Used to save and generate created UI's code
     Generator generator;
@@ -36,9 +34,7 @@ private:
     void initManagers();
     //TODO zmiany to ma byæ dodane do m_scene a inicjalizacja m_scene wraca do klasy GameScene czy jakoœ tak
     DivObject* m_editableObjects;
- 
-    //TODO::Usun¹æ design state albo zamieniæ na coœ innego obecnie musi tu byæ D_Move aby nie blokowaæ poruszania obiektami
-    DESIGN_STATE m_currentDESIGN_STATE;
+
 
     //Mode related
     bool m_objectIsCurrentlyDragged;
@@ -75,15 +71,13 @@ public:
     virtual void updateMouseRelated() override;
 
 
-    // Inherited via GameScene
-    virtual void updateMode() override;
 
 
     // ImGui related
     virtual void updateDearIMGUI() override;
 
     void updateDearIMGUIMainMenuBar();
-    void updateDearIMGUIParamWindow();
+
 
    
 };

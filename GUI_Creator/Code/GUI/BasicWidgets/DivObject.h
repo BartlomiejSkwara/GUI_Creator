@@ -54,7 +54,7 @@ public:
 
 
 	///Div specific
-
+	const std::vector<Object*>* getObjectVector()const;
 
 
 	//Functions responsible for assigning new objects to the DIV

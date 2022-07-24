@@ -28,12 +28,6 @@ Object* SelectionManager::getFocusedElement()
     return m_focusedElement;
 }
 
-ParamWindowWrapper* SelectionManager::getSelectedElement()
-{
-    return im_selectedElement;
-}
-
-
 
 sf::CircleShape* SelectionManager::getFocusSignifier()
 {
@@ -65,8 +59,13 @@ void SelectionManager::setShowChildSelection(bool val)
     im_showChildSelection = val;
 }
 
+void SelectionManager::clearChildren()
+{
+    m_childPositions.clear();
+}
+
 SelectionManager::SelectionManager():
-m_focusedElement(nullptr), m_objectIsFocused(false), m_focusSignifier(10), im_selectedElement (nullptr)
+m_focusedElement(nullptr), m_objectIsFocused(false), m_focusSignifier(10)
 {
     m_focusSignifier.setFillColor(sf::Color(255, 0, 0));
 }
@@ -93,11 +92,11 @@ void SelectionManager::renderFocusSignifiers(sf::RenderTarget* target)
     }
 }
 
-void SelectionManager::changeFocus(Object* newFocus, ParamWindowWrapper* newIm_selectedElement)
+void SelectionManager::changeFocus(Object* newFocus)
 {
     loseFocus();
     m_focusedElement = newFocus;
-    im_selectedElement = newIm_selectedElement;
+
 
     m_objectIsFocused = true;
     m_focusSignifier.setPosition(sf::Vector2f(floor(newFocus->getGlobalBounds().left + newFocus->getGlobalBounds().width / 2 - getIndicatorSize()),
@@ -109,7 +108,6 @@ void SelectionManager::changeFocus(Object* newFocus, ParamWindowWrapper* newIm_s
 void SelectionManager::loseFocus()
 {
     m_focusedElement = nullptr;
-    im_selectedElement = nullptr;
     m_objectIsFocused = false;
     im_showChildSelection = false;
 }

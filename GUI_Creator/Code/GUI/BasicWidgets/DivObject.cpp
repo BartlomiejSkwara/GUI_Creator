@@ -174,6 +174,11 @@ void DivObject::move(int x, int y)
 }
 
 
+const std::vector<Object*>* DivObject::getObjectVector() const
+{
+	return &m_Objects;
+}
+
 void DivObject::addObject(Object* object)
 {
 	m_Objects.push_back(object);

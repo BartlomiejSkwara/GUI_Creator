@@ -164,14 +164,14 @@
     <ClCompile Include="Code\GUI\Parents\Clickable.cpp" />
     <ClCompile Include="Code\GUI\Parents\Object.cpp" />
     <ClCompile Include="Code\GUI\Parents\Identifiable.cpp" />
-    <ClCompile Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper.cpp" />
-    <ClCompile Include="Code\GUI\ImGuiWrappers\PWW_Button.cpp" />
-    <ClCompile Include="Code\GUI\ImGuiWrappers\PWW_Div.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Object.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Button.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Div.cpp" />
     <ClCompile Include="Code\GUI\Parents\Renderable.cpp" />
-    <ClCompile Include="Code\Scenes\DesignerStuff\Generator.cpp" />
-    <ClCompile Include="Code\Scenes\DesignerStuff\SelectionManager.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\Generator.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\SelectionManager.cpp" />
     <ClCompile Include="Code\Scenes\GameScene.cpp" />
-    <ClCompile Include="Code\Scenes\GameSceneUIDesigner.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\GameSceneUIDesigner.cpp" />
     <ClCompile Include="GUI_Creator.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -183,6 +183,7 @@
     <ClCompile Include="Code\Scenes\ObserverStuff\ObserverScene.cpp" />
     <ClCompile Include="Code\Scenes\ObserverStuff\ObserverUID.cpp" />
     <ClCompile Include="Code\Input\MouseInfo.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\GameLogic\Enemy.h" />
@@ -194,15 +195,15 @@
     <ClInclude Include="Code\GUI\Parents\Clickable.h" />
     <ClInclude Include="Code\GUI\Parents\Object.h" />
     <ClInclude Include="Code\GUI\Parents\Identifiable.h" />
-    <ClInclude Include="Code\GUI\ImGuiWrappers\ParamWindowWrapper.h" />
-    <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Button.h" />
-    <ClInclude Include="Code\GUI\ImGuiWrappers\PWW_Div.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Object.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Button.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Div.h" />
     <ClInclude Include="Code\GUI\Parents\Renderable.h" />
-    <ClInclude Include="Code\Scenes\DesignerStuff\DesignerConst.h" />
-    <ClInclude Include="Code\Scenes\DesignerStuff\Generator.h" />
-    <ClInclude Include="Code\Scenes\DesignerStuff\SelectionManager.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\DesignerConst.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\Generator.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\SelectionManager.h" />
     <ClInclude Include="Code\Scenes\GameScene.h" />
-    <ClInclude Include="Code\Scenes\GameSceneUIDesigner.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\GameSceneUIDesigner.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />
@@ -216,6 +217,7 @@
     <ClInclude Include="Code\Scenes\ObserverStuff\ObserverScene.h" />
     <ClInclude Include="Code\Scenes\ObserverStuff\ObserverUID.h" />
     <ClInclude Include="Code\Input\MouseInfo.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
