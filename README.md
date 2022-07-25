@@ -1,8 +1,8 @@
 
 # GUI - Creator
 
-This project is created for the purpose of creating graphical interface that would help
-me in creating user interfaces for my programs quickly.
+This project is created for the purpose of creating an app that would help
+me in quickly designing user interfaces for my programs.
 
 I just find it very annoying that i have to recompile every few minutes just to check if i should move an object even  more to the right    
 or maybe  somewhere else :>
