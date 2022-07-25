@@ -27,6 +27,8 @@ https://www.sfml-dev.org/download.php
 
 - Redesigning some problematic classes :>  ✔
 
+- Observer based object interaction system ✔
+
 - Support for planned object types (imgbuttons, images, normal text) **(wip)**
 
 - Saving and exporting designed interface 
