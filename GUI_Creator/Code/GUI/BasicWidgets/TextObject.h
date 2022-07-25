@@ -1,7 +1,7 @@
 #pragma once
 #include <SFML/Graphics/Text.hpp>
 #include "../GUI_Creator/Code/GUI/Parents/Object.h"
-class ButtonObject : public Object
+class TextObject : public Object
 {
 
 private:
@@ -11,14 +11,14 @@ private:
 
 public:
 
-	ButtonObject(sf::Font& font,std::string label, float positionX, float positionY, const std::function<void()>& func = [](){}, float sizeX = 100, float sizeY = 30, int charSize = 20, float scale = 1.f);
-	virtual ~ButtonObject();
+	TextObject(sf::Font& font,std::string label, float positionX, float positionY, const std::function<void()>& func = [](){}, float sizeX = 100, float sizeY = 30, int charSize = 20, float scale = 1.f);
+	virtual ~TextObject();
 
 	//Text initialization
 	void initText(sf::Font& font, const std::string& label);
 	//This one just changes the string (use it if u already initialized the font )
 	void initText(const std::string& label);
-	
+	void fitBorderToText();
 
 
 	//Change the position

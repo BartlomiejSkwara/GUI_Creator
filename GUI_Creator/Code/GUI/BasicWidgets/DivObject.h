@@ -1,5 +1,5 @@
 #pragma once
-#include "ButtonObject.h"
+#include "TextObject.h"
 #include "../GUI_Creator/Code/GUI/Parents/Object.h"
 #include <vector>
 #include <iostream>
@@ -42,8 +42,7 @@ public:
 	virtual void move(const sf::Vector2i& offset) override;
 
 
-	//Function sets the dimensions of the container
-	void setSize(int x, int y);
+	
 
 	// Inherited via Object
 	virtual void move(int x, int y) override;

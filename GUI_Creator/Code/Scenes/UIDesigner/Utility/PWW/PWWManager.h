@@ -4,8 +4,8 @@
 #include "../../../../GUI/BasicWidgets/DivObject.h"
 #include "../SelectionManager.h"
 #include "PWW_Div.h"
-#include "PWW_Button.h"
-
+#include "PWW_TextButton.h"
+#include "PWW_Text.h"
 class PWWManager
 {
 private:
@@ -23,8 +23,8 @@ public:
 
 	void initDIV(DivObject* div);
 	void initImage();
-	void initText();
-	void initTextButton(ButtonObject* button);
+	void initText(TextObject* text);
+	void initTextButton(TextObject* button);
 	void initImageButton();
 	void initObject(Object*obj);
 };

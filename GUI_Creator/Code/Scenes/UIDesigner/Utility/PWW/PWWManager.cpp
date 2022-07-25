@@ -26,9 +26,7 @@ void PWWManager::updatePWW()
 
 void PWWManager::initDIV(DivObject* div)
 {
-    object = new PWW_Div(div,
-        div->getGlobalBounds().width,
-        div->getGlobalBounds().height);
+    object = new PWW_Div(div);
 
     
     selectManager->setShowChildSelection(true);
@@ -44,15 +42,25 @@ void PWWManager::initDIV(DivObject* div)
   
 }
 
-void PWWManager::initTextButton(ButtonObject* button)
+void PWWManager::initText(TextObject* text)
 {
-   object = new PWW_Button(button);
+    object = new PWW_Text(text);
+    selectManager->setShowChildSelection(false);
+    initObject(text);
+}
+
+void PWWManager::initTextButton(TextObject* button)
+{
+   object = new PWW_TextButton(button);
    selectManager->setShowChildSelection(false);
    initObject(button);
 }
 
 void PWWManager::initObject(Object* obj)
 {
+    object->m_size[0] = obj->getGlobalBounds().width;
+    object->m_size[1] = obj->getGlobalBounds().height;
+
     object->m_position[0] = obj->getGlobalBounds().left;
     object->m_position[1] = obj->getGlobalBounds().top;
 

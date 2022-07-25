@@ -36,6 +36,9 @@ public:
 
     ///Settery///
     
+    /// Function sets Border size
+    void setBorderSize(int x, int y);
+
     /// Funkcja ustawia kolor obramowania (korzystaj¹c ze standardu rgba - red green blue alpha)
     void setColorBorder(int r, int g, int b, int a);
     /// Funkcja ustawia kolor wype³nienia (korzystaj¹c ze standardu rgba - red green blue alpha)

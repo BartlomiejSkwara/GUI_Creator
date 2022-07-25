@@ -3,12 +3,12 @@
 #include "../GUI_Creator/values.h"
 
 
-class PWW_Button : public PWW_Object
+class PWW_TextButton : public PWW_Object
 {
 private:
 
 
-    ButtonObject* m_buttonObject;
+    TextObject* m_TextObject;
     ///Imgui stuff
    
     char* m_buttonLabel;
@@ -19,8 +19,8 @@ public:
     
     
 
-    PWW_Button(ButtonObject* button);
-    ~PWW_Button();
+    PWW_TextButton(TextObject* button);
+    ~PWW_TextButton();
 
     // Inherited via ParamWindowWrapper
     virtual void updateDearIMGUIParamWindow() override;

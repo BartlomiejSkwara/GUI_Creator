@@ -159,10 +159,7 @@ void DivObject::move(const sf::Vector2i& offset)
 	
 }
 
-void DivObject::setSize(int x, int y)
-{
-	m_frame.setSize(sf::Vector2f((float)x,(float)y));
-}
+
 
 void DivObject::move(int x, int y)
 {

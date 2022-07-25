@@ -10,11 +10,10 @@ class PWW_Div : public PWW_Object
 private:
     
     DivObject* m_divObject;
-    int m_size[2];
     //SelectionManager* s_selectManager;
 
 public:
-    PWW_Div(DivObject* div, int width, int height);
+    PWW_Div(DivObject* div);
 
     // Inherited via ParamWindowWrapper
     virtual void updateDearIMGUIParamWindow() override;

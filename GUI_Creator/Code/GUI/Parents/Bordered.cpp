@@ -31,6 +31,13 @@ int Bordered::getBorderThickness()
 
 
 
+void Bordered::setBorderSize(int x, int y)
+{
+	m_frame.setSize(sf::Vector2f((float)x, (float)y));
+}
+
+
+
 void Bordered::setColorBorder(int r, int g, int b, int a)
 {
 	m_frame.setOutlineColor(sf::Color(r, g, b, a));

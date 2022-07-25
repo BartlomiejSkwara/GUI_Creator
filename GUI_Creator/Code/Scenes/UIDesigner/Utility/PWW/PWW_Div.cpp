@@ -1,9 +1,8 @@
 #include "PWW_Div.h"
 
-PWW_Div::PWW_Div(DivObject* div, int width, int height): m_divObject(div)
+PWW_Div::PWW_Div(DivObject* div): m_divObject(div)
 {
-    m_size[0] = width;
-    m_size[1] = height;
+
 }
 
 void PWW_Div::updateDearIMGUIParamWindow()
@@ -44,13 +43,13 @@ void PWW_Div::updateDearIMGUIParamWindow()
     ImGui::Text("Wymiary: ");
 
     if (ImGui::InputInt("X", &m_size[0])) {
-        m_divObject->setSize(m_size[0], m_size[1]);
+        m_divObject->setBorderSize(m_size[0], m_size[1]);
         selectManager->changeFocus(m_divObject);
 
     }
 
     if (ImGui::InputInt("Y", &m_size[1])) {
-        m_divObject->setSize(m_size[0], m_size[1]);
+        m_divObject->setBorderSize(m_size[0], m_size[1]);
         selectManager->changeFocus(m_divObject);
     }
 

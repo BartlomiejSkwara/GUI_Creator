@@ -47,7 +47,7 @@ private:
     //Toolbar related
     void toolbarAddButton();
     void toolbarAddDiv();
-    
+    void toolbarAddText();
  
 
     

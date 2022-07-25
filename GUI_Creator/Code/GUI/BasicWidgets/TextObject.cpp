@@ -1,7 +1,7 @@
-#include "ButtonObject.h"
+#include "TextObject.h"
 
-///Przyda³aby siê tu jakaœ dokumentacja 
-ButtonObject::ButtonObject(sf::Font& font,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
+///Przyda³aby siê tu jakaœ dokumentacja :>
+TextObject::TextObject(sf::Font& font,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
 	:Object(func)
 {
 		
@@ -17,7 +17,7 @@ ButtonObject::ButtonObject(sf::Font& font,std::string label ,float positionX, fl
 
 }
 
-ButtonObject::~ButtonObject()
+TextObject::~TextObject()
 {
 
 }
@@ -25,42 +25,42 @@ ButtonObject::~ButtonObject()
 
 
 
-void ButtonObject::render(sf::RenderTarget* target)
+void TextObject::render(sf::RenderTarget* target)
 {
 	target->draw(this->m_frame);
 	target->draw(this->m_text);
 }
 
-Object* ButtonObject::updateClickables(sf::Vector2f& mousePosition)
+Object* TextObject::updateClickables(sf::Vector2f& mousePosition)
 {
 	return this;
 }
 
 
 
-const sf::Color* ButtonObject::getColorText() const
+const sf::Color* TextObject::getColorText() const
 {
 	return &(m_text.getFillColor());
 }
 
-std::string ButtonObject::getLabel()
+std::string TextObject::getLabel()
 {
 	
 	return m_text.getString().toAnsiString();
 }
 
-sf::Text* ButtonObject::getText()
+sf::Text* TextObject::getText()
 {
 	return &m_text;
 }
 
-void ButtonObject::setColorText(int r, int g, int b, int a)
+void TextObject::setColorText(int r, int g, int b, int a)
 {
 
 	m_text.setFillColor(sf::Color(r, g, b, a));
 }
 
-void ButtonObject::move(int x, int y)
+void TextObject::move(int x, int y)
 {
 	m_frame.move(x, y);
 	m_text.move(x, y);
@@ -79,30 +79,30 @@ void ButtonObject::move(int x, int y)
 /// Funkcja ustawia pozycjê obiektu na inn¹
 /// </summary>
 /// <param name="position"></param>
-void ButtonObject::setPosition(const sf::Vector2i& position)
+void TextObject::setPosition(const sf::Vector2i& position)
 {
 	setPosition(position.x, position.y);
 }
 
-void ButtonObject::setPosition(int x, int y)
+void TextObject::setPosition(int x, int y)
 {
 	float thick = m_frame.getOutlineThickness();
 	m_frame.setPosition(x+thick,y+thick);
-	centerText();
+	m_text.setPosition(x + thick, y + thick);
 }
 
 /// <summary>
 /// Funkcja przesuwa obiekt 
 /// </summary>
 /// <param name="offset"></param>
-void ButtonObject::move(const sf::Vector2i& offset)
+void TextObject::move(const sf::Vector2i& offset)
 {
 	move(offset.x, offset.y);
 
 
 }
 
-void ButtonObject::centerText()
+void TextObject::centerText()
 {
 	sf::Vector2f center(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f);
 	sf::Vector2f localBounds(trunc(center.x + m_text.getLocalBounds().left), trunc(center.y + m_text.getLocalBounds().top));
@@ -122,19 +122,22 @@ void ButtonObject::centerText()
 /// </summary>
 /// <param name="font"></param>
 /// <param name="label"></param>
-void ButtonObject::initText(sf::Font& font, const std::string& label)
+void TextObject::initText(sf::Font& font, const std::string& label)
 {
 	m_text.setFont(font);
 	initText(label);
 
 }
 
-void ButtonObject::initText(const std::string& label)
+void TextObject::initText(const std::string& label)
 {
-	
 	m_text.setString(label);
-	centerText();
+}
 
+void TextObject::fitBorderToText()
+{
+	m_frame.setSize(sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height));
+	
 }
 
 

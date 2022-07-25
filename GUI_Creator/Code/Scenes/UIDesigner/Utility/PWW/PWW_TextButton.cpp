@@ -1,6 +1,6 @@
-#include "PWW_Button.h"
+#include "PWW_TextButton.h"
 
-PWW_Button::PWW_Button(ButtonObject* button): m_buttonObject(button)
+PWW_TextButton::PWW_TextButton(TextObject* button): m_TextObject(button)
 
     
 {
@@ -31,24 +31,23 @@ PWW_Button::PWW_Button(ButtonObject* button): m_buttonObject(button)
    
 }
 
-PWW_Button::~PWW_Button()
+PWW_TextButton::~PWW_TextButton()
 {
     
 }
 
 
 
-void PWW_Button::updateDearIMGUIParamWindow()
+void PWW_TextButton::updateDearIMGUIParamWindow()
 {
 
     ImGui::SetWindowSize(sf::Vector2f(200, 400));
     ImGui::Text("Obiekt typu:");
     ImGui::SameLine();
-    ImGui::TextColored(sf::Color(100, 100, 100), "przycisk");
-
+    ImGui::TextColored(sf::Color(100, 100, 100), "tekst");
     ImGui::Text("Id obiektu: ");
     ImGui::SameLine();
-    ImGui::TextColored( sf::Color(100, 100, 100),  m_buttonObject->getID().c_str());
+    ImGui::TextColored( sf::Color(100, 100, 100),  m_TextObject->getID().c_str());
 
    
     ///
@@ -57,14 +56,16 @@ void PWW_Button::updateDearIMGUIParamWindow()
 
     ImGui::Text("Pozycja i Wypelnienie: ");
     if (ImGui::InputInt2("X/Y", m_position)) {
-        m_buttonObject->setPosition(m_position[0], m_position[1]);
-        SelectionManager::getSelectionManager()->changeFocus(m_buttonObject);
+        m_TextObject->setPosition(m_position[0], m_position[1]);
+        m_TextObject->centerText();
+        SelectionManager::getSelectionManager()->changeFocus(m_TextObject);
+        
     }
     
     ImGui::ColorEdit4("Kolor", m_fillColor);
     if (ImGui::IsItemEdited())
     {
-        m_buttonObject->setColorFill((int)(m_fillColor[0] * 255), (int)(m_fillColor[1] * 255), (int)(m_fillColor[2] * 255), (int)(m_fillColor[3] * 255));
+        m_TextObject->setColorFill((int)(m_fillColor[0] * 255), (int)(m_fillColor[1] * 255), (int)(m_fillColor[2] * 255), (int)(m_fillColor[3] * 255));
     }
     
 
@@ -80,12 +81,16 @@ void PWW_Button::updateDearIMGUIParamWindow()
 
     if (ImGui::InputText("Napis", m_buttonLabel, MAX_LABEL_LENGTH))
     {
-        m_buttonObject->initText(std::string(m_buttonLabel));
+        m_TextObject->initText(std::string(m_buttonLabel));
+
+        //m_TextObject->fitBorderToText();
+        m_TextObject->centerText();
+        //selectManager->changeFocus(m_TextObject);
     }
     ImGui::ColorEdit4("Tekst",m_textColor);
     if (ImGui::IsItemEdited())
     {
-        m_buttonObject->setColorText((int)(m_textColor[0] * 255), (int)(m_textColor[1] * 255), (int)(m_textColor[2] * 255), (int)(m_textColor[3] * 255));
+        m_TextObject->setColorText((int)(m_textColor[0] * 255), (int)(m_textColor[1] * 255), (int)(m_textColor[2] * 255), (int)(m_textColor[3] * 255));
     }
 
 
@@ -93,16 +98,18 @@ void PWW_Button::updateDearIMGUIParamWindow()
     ImGui::Separator();
     ///
 
+
+
     ImGui::Text("Ramka:");
  
     ImGui::ColorEdit4("Ramka", m_outlineColor);
     if (ImGui::IsItemEdited())
     {
-        m_buttonObject->setColorBorder((int)(m_outlineColor[0] * 255), (int)(m_outlineColor[1] * 255), (int)(m_outlineColor[2] * 255), (int)(m_outlineColor[3] * 255));
+        m_TextObject->setColorBorder((int)(m_outlineColor[0] * 255), (int)(m_outlineColor[1] * 255), (int)(m_outlineColor[2] * 255), (int)(m_outlineColor[3] * 255));
     }
 
     if (ImGui::InputInt("Grubosc", &m_outline_size)) {
-        m_buttonObject->setBorderThickness(m_outline_size);
+        m_TextObject->setBorderThickness(m_outline_size);
 
     }
 
@@ -113,7 +120,7 @@ void PWW_Button::updateDearIMGUIParamWindow()
     if (ImGui::SliderFloat("Promien", &m_selectionIndicatorSize, 0.f, 10.f)) {
         SelectionManager* selMan = SelectionManager::getSelectionManager();
         selMan->getFocusSignifier()->setRadius(5 * m_selectionIndicatorSize);
-        selMan->changeFocus(m_buttonObject);
+        selMan->changeFocus(m_TextObject);
 
     }
 

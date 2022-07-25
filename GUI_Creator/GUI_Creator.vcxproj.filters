@@ -45,7 +45,7 @@
     <ClCompile Include="Code\GameLogic\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\BasicWidgets\ButtonObject.cpp">
+    <ClCompile Include="Code\GUI\BasicWidgets\TextObject.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\GUI\BasicWidgets\DivObject.cpp">
@@ -54,7 +54,7 @@
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Object.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Button.cpp">
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_TextButton.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Div.cpp">
@@ -102,6 +102,9 @@
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Text.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -140,7 +143,7 @@
     <ClInclude Include="Code\GameLogic\Player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\BasicWidgets\ButtonObject.h">
+    <ClInclude Include="Code\GUI\BasicWidgets\TextObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GUI\BasicWidgets\DivObject.h">
@@ -149,7 +152,7 @@
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Object.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Button.h">
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_TextButton.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Div.h">
@@ -198,6 +201,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Text.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

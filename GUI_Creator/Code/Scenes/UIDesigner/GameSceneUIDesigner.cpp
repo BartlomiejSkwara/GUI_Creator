@@ -19,13 +19,14 @@ void GameSceneUIDesigner::modePICK()
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
-    ButtonObject* button = new ButtonObject(*m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
+    TextObject* button = new TextObject(*m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
     button->setEvent([&,button]() {
         pwwManager.initTextButton(button);
         selectManager->changeFocus(button);
         });
-
+    button->centerText();
     m_editableObjects->addObject(button);
+    
 }
 
 void GameSceneUIDesigner::toolbarAddDiv()
@@ -36,6 +37,22 @@ void GameSceneUIDesigner::toolbarAddDiv()
         selectManager->changeFocus(div);
         });
     m_editableObjects->addObject(div);
+}
+
+void GameSceneUIDesigner::toolbarAddText()
+{
+    TextObject* text = new TextObject(*m_font, "Tekst", floor(m_window->getSize().x / 2), floor(m_window->getSize().y / 2 ), [](){},100,100);
+    
+    text->setEvent([&, text]() {
+        pwwManager.initText(text);
+        selectManager->changeFocus(text);
+        });
+    text->fitBorderToText();
+    text->centerText();
+    text->setColorFill(0, 0, 0, 0);
+    text->setColorBorder(0, 0, 0, 0);
+
+    m_editableObjects->addObject(text);
 }
 
 
@@ -215,6 +232,10 @@ void GameSceneUIDesigner::updateDearIMGUIMainMenuBar()
             if (ImGui::MenuItem("Kontener"))
             {
                 toolbarAddDiv();
+            }
+            if (ImGui::MenuItem("Tekst"))
+            {
+                toolbarAddText();
             }
             ImGui::EndMenu();
         }
