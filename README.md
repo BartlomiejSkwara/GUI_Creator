@@ -28,7 +28,14 @@ https://www.sfml-dev.org/download.php
 
 - Observer based object interaction system ✔
 
-- Support for planned object types (imgbuttons, images, normal text) 🔧 **(wip)** 
+- Support for planned object types 🔧 **(wip)**
+  - TextButton ✔
+  - Text 🔧 **(wip)**
+  - Container 🔧 **(wip)**
+  - Image 
+  - ImageButton 
+  
+  
 
 - Saving and exporting designed interface 
 
