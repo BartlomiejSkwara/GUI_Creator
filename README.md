@@ -37,7 +37,7 @@ https://www.sfml-dev.org/download.php
   
   
 
-- Saving and exporting designed interface 
+- Saving and exporting designed UI 
 
 
 
