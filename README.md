@@ -9,7 +9,7 @@ or maybe  somewhere else :>
 ## Used libraries
 
 Dear ImGui:
-https://github.com/eliasdaler/imgui-sfml
+https://github.com/ocornut/imgui
 
 Dear ImGui backend for use with SFML:
 https://github.com/eliasdaler/imgui-sfml
