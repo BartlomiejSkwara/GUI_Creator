@@ -1,7 +1,7 @@
 #include "ObserverUID.h"
 
 ///TODO make staic vars in basic observer class for mouseinfo and selection manager singletons to reduce callin g those functions
-//TODO Sort this out and divid in different functions
+//TODO Sort this out and divide in different functions
 void ObserverUID::onNotify(EventType event, Object* caller)
 {
 	switch (event)

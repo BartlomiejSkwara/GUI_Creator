@@ -21,25 +21,23 @@ void Game::initWindow()
     this->m_window->setFramerateLimit(60);
 }
 
-void Game::initFonts()
-{
-    if (!(this->font.loadFromFile("Fonts/LiberationSans-Regular.ttf"))) {
-        std::cout << "ERROR::GAME::INITFONTS::Failed to load font" << std::endl;
-    }
-}
+
 
 void Game::initGameObjects()
 {
-    m_gameScene = new GameSceneUIDesigner(&font, m_window);
+    m_gameScene = new GameSceneUIDesigner(&m_resourceManager, m_window);
 }
 
 
 
-Game::Game()
+Game::Game(): m_resourceManager("../Resources/")
 {
     
+    
+  
+    m_resourceManager.loadAllFiles();
+
     initVariables();
-    initFonts();
     initWindow();
     ImGui::SFML::Init(*m_window);
     initGameObjects();

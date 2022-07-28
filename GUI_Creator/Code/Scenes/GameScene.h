@@ -4,6 +4,7 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/Event.hpp>
 #include "ObserverStuff/SceneSubject.h"
+#include "../ResourceManaging/ResourceManager.h"
 class GameScene
 {
 
@@ -14,17 +15,18 @@ private:
 
 protected:
 	MouseInfo* m_mouseInfo;
-	sf::Font* m_font;
-
+	
 	//This thingie is the main render target 
 	sf::RenderWindow* m_window;
 	
 	DivObject* m_gameScene;
 	
+	ResourceManager* m_resourceManager;
+
 	//Observer base events handling 
 	SceneSubject m_subj;
 public:
-	GameScene(sf::Font* font,sf::RenderWindow* window);
+	GameScene(ResourceManager* resourceManager,sf::RenderWindow* window);
 	virtual ~GameScene();
 	virtual void updateDearIMGUI()=0;
 	virtual void pollEvents(sf::Event* ev) = 0;

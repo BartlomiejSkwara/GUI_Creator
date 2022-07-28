@@ -19,7 +19,7 @@ void GameSceneUIDesigner::modePICK()
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
-    TextObject* button = new TextObject(*m_font, "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
+    TextObject* button = new TextObject(*m_resourceManager->getFont("LiberationSans-Regular.ttf"), "NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15));
     button->setEvent([&,button]() {
         pwwManager.initTextButton(button);
         selectManager->changeFocus(button);
@@ -41,7 +41,7 @@ void GameSceneUIDesigner::toolbarAddDiv()
 
 void GameSceneUIDesigner::toolbarAddText()
 {
-    TextObject* text = new TextObject(*m_font, "Tekst", floor(m_window->getSize().x / 2), floor(m_window->getSize().y / 2 ), [](){},100,100);
+    TextObject* text = new TextObject(*m_resourceManager->getFont("LiberationSans-Regular.ttf"), "Tekst", floor(m_window->getSize().x / 2), floor(m_window->getSize().y / 2 ), [](){},100,100);
     
     text->setEvent([&, text]() {
         pwwManager.initText(text);
@@ -65,8 +65,8 @@ void GameSceneUIDesigner::toolbarAddText()
 
 
 
-GameSceneUIDesigner::GameSceneUIDesigner(sf::Font* font, sf::RenderWindow* window):
-GameScene(font,window), m_objectIsCurrentlyDragged(false), m_objectIsCurrentlyPicked(false),
+GameSceneUIDesigner::GameSceneUIDesigner(ResourceManager* rm, sf::RenderWindow* window):
+GameScene(rm,window), m_objectIsCurrentlyDragged(false), m_objectIsCurrentlyPicked(false),
 selectManager(SelectionManager::getSelectionManager())
 {
     

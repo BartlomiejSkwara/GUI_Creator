@@ -6,6 +6,7 @@
 #include "Utility/PWW/PWWManager.h"
 #include "Utility/Generator.h"
 #include "../ObserverStuff/ObserverUID.h"
+#include "../../ResourceManaging/ResourceManager.h"
 class GameSceneUIDesigner : public GameScene
 {
 private:
@@ -55,7 +56,7 @@ private:
 
 public:
       
-    GameSceneUIDesigner(sf::Font* font, sf::RenderWindow* window);
+    GameSceneUIDesigner(ResourceManager* rm, sf::RenderWindow* window);
     virtual ~GameSceneUIDesigner();
     virtual void pollEvents(sf::Event* ev) override;
 

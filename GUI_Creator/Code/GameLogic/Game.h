@@ -5,6 +5,7 @@
 #include "../../values.h"
 #include "../Input/MouseInfo.h"
 #include "../Scenes/UIDesigner/GameSceneUIDesigner.h"
+#include "../ResourceManaging/ResourceManager.h"
 
 /**
 * Game wrapper
@@ -13,7 +14,10 @@ class Game
 {
 private:
 
-	
+	//Managers
+	ResourceManager m_resourceManager;
+
+
 	//Private variables
 	sf::RenderWindow* m_window;
 	sf::VideoMode videoMode;
@@ -26,7 +30,6 @@ private:
 	GameSceneUIDesigner* m_gameScene;
 
 	//Resources
-	sf::Font font;
 	sf::Text uiText;
 
 	//Event used for pooling
@@ -38,7 +41,7 @@ private:
 
 	//Private functions
 	void initVariables();
-	void initFonts();
+
 	void initWindow();
 	void initGameObjects();
 	

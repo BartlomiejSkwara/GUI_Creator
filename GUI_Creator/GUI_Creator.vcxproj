@@ -97,6 +97,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\imgui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -113,6 +114,7 @@
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\imgui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -129,6 +131,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\imgui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -145,6 +148,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)\imgui\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -164,6 +168,7 @@
     <ClCompile Include="Code\GUI\Parents\Clickable.cpp" />
     <ClCompile Include="Code\GUI\Parents\Object.cpp" />
     <ClCompile Include="Code\GUI\Parents\Identifiable.cpp" />
+    <ClCompile Include="Code\GUI\BasicWidgets\ImageObject.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Object.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_TextButton.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Div.cpp" />
@@ -185,6 +190,7 @@
     <ClCompile Include="Code\Scenes\ObserverStuff\ObserverUID.cpp" />
     <ClCompile Include="Code\Input\MouseInfo.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.cpp" />
+    <ClCompile Include="Code\ResourceManaging\ResourceManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\GameLogic\Enemy.h" />
@@ -196,6 +202,7 @@
     <ClInclude Include="Code\GUI\Parents\Clickable.h" />
     <ClInclude Include="Code\GUI\Parents\Object.h" />
     <ClInclude Include="Code\GUI\Parents\Identifiable.h" />
+    <ClInclude Include="Code\GUI\BasicWidgets\ImageObject.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Object.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_TextButton.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Div.h" />
@@ -220,6 +227,7 @@
     <ClInclude Include="Code\Scenes\ObserverStuff\ObserverUID.h" />
     <ClInclude Include="Code\Input\MouseInfo.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.h" />
+    <ClInclude Include="Code\ResourceManaging\ResourceManager.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />
