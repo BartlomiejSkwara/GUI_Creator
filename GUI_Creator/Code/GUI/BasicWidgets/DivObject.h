@@ -23,7 +23,7 @@ public:
 	DivObject();
 
 	//TODO rozdziel to na osobne funkcje
-	DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = [](){});
+	DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = [](){}, float scale=1.f);
 	virtual ~DivObject();
 
 	//Render the div and all of the objects inside of it 
@@ -62,6 +62,12 @@ public:
 
 	//Functions responsible for removing object from the DIV
 	bool removeObject(std::string& ID, int depth = 0);
+
+
+	// Inherited via Object
+	virtual void setScale(float x, float y) override;
+
+	virtual std::pair<float, float> getScale() override;
 
 };
 

@@ -5,7 +5,7 @@
 #include "../../values.h"
 #include "../Input/MouseInfo.h"
 #include "../Scenes/UIDesigner/GameSceneUIDesigner.h"
-#include "../ResourceManaging/ResourceManager.h"
+
 
 /**
 * Game wrapper
@@ -14,9 +14,7 @@ class Game
 {
 private:
 
-	//Managers
-	ResourceManager m_resourceManager;
-
+	
 
 	//Private variables
 	sf::RenderWindow* m_window;
@@ -29,8 +27,7 @@ private:
 	//Game Objects
 	GameSceneUIDesigner* m_gameScene;
 
-	//Resources
-	sf::Text uiText;
+	
 
 	//Event used for pooling
 	sf::Event ev;

@@ -5,12 +5,13 @@ DivObject::DivObject()
 }
 
 
-DivObject::DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func)
+DivObject::DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func, float scale)
 	:Object(func)
 {
 	m_frame.setFillColor(color);
 	m_frame.setSize(sf::Vector2f(sizeX, sizeY));
 	m_frame.setPosition(sf::Vector2f(posX, posY));
+	setScale(scale, scale);
 	//setEvent(func);
 
 }
@@ -134,6 +135,16 @@ bool DivObject::removeObject(std::string & ID,int depth)
 	delete temp;
 
 	return true;
+}
+
+void DivObject::setScale(float x, float y)
+{
+	m_frame.setScale(x,y);
+}
+
+std::pair<float,float> DivObject::getScale()
+{
+	return { m_frame.getScale().x,m_frame.getScale().y };
 }
 
 void DivObject::setPosition(const sf::Vector2i& position)

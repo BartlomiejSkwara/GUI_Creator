@@ -6,7 +6,7 @@
 #include "Utility/PWW/PWWManager.h"
 #include "Utility/Generator.h"
 #include "../ObserverStuff/ObserverUID.h"
-#include "../../ResourceManaging/ResourceManager.h"
+
 class GameSceneUIDesigner : public GameScene
 {
 private:
@@ -23,9 +23,15 @@ private:
 
 
     //Imgui menu
-    bool im_showParamWindow = false;
     
-
+    //PWW
+    bool im_showParamWindow = false;
+    //Indicator settings
+    bool im_showIndicatorParamWindow = false;
+    float m_selectionIndicatorSize;
+    float m_signifierColor[4];
+    void initIndicatorSettings();
+    void updateIndicatorSettings();
     
     
 
@@ -49,14 +55,14 @@ private:
     void toolbarAddButton();
     void toolbarAddDiv();
     void toolbarAddText();
- 
+    void toolbarAddImage();
 
     
 
 
 public:
       
-    GameSceneUIDesigner(ResourceManager* rm, sf::RenderWindow* window);
+    GameSceneUIDesigner(sf::RenderWindow* window);
     virtual ~GameSceneUIDesigner();
     virtual void pollEvents(sf::Event* ev) override;
 

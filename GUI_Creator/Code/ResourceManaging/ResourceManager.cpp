@@ -1,7 +1,20 @@
 #include "ResourceManager.h"
 
+ResourceManager* ResourceManager::resourceManager = nullptr;
+
 ResourceManager::ResourceManager(const std::string& dir):m_directory(dir)
 {
+    loadAllFiles();
+}
+
+ResourceManager* ResourceManager::getResourceManager()
+{
+    if (!resourceManager)
+    {
+        resourceManager = new ResourceManager("../Resources/");
+    }
+    
+    return resourceManager;
 }
 
 void ResourceManager::loadFile(const std::filesystem::path& dir)
@@ -13,8 +26,7 @@ void ResourceManager::loadFile(const std::filesystem::path& dir)
         sf::Texture* tempTexture = new sf::Texture();
         if (tempTexture->loadFromFile(dir.string())) 
         {
-            textures.insert_or_assign(dir.filename().string(), tempTexture);
-            //std::cout << dir.string() << std::endl;
+            m_textures.insert_or_assign(dir.filename().string(), tempTexture);
         }
         else
         {
@@ -26,8 +38,9 @@ void ResourceManager::loadFile(const std::filesystem::path& dir)
         sf::Font* tempFont = new sf::Font();
         if (tempFont->loadFromFile(dir.string()))
         {
-            fonts.insert_or_assign(dir.filename().string(), tempFont);
-            //std::cout << dir.string() << std::endl;
+            m_fonts[dir.filename().string()]=tempFont;
+            //std::cout << dir.string() <<" "<< fonts.size()<< std::endl;
+            
         }
         else
         {
@@ -35,6 +48,7 @@ void ResourceManager::loadFile(const std::filesystem::path& dir)
         }
               
     }
+
 
 }
 
@@ -58,7 +72,7 @@ sf::Texture* ResourceManager::getTexture(const std::string& filename)
 {
     try
     {
-        return textures.at(filename);
+        return m_textures.at(filename);
     }
     catch (const std::exception&)
     {
@@ -71,11 +85,31 @@ sf::Font* ResourceManager::getFont(const std::string& filename)
 {
     try
     {
-        return fonts.at(filename);
+        return m_fonts.at(filename);
     }
     catch (std::out_of_range)
     {
         std::cout << "ERROR::RESOURCEMANAGER::tried to use nonexistant font::" << filename << std::endl;
     }
     
+    
+    
+    
 }
+
+
+
+
+std::pair<std::unordered_map<std::string, sf::Font*>::const_iterator, std::unordered_map<std::string, sf::Font*>::const_iterator>
+ResourceManager::getFontsIterators() const
+{
+    
+    return { m_fonts.begin(), m_fonts.end()};
+}
+
+std::pair<std::unordered_map<std::string, sf::Texture*>::const_iterator, std::unordered_map<std::string, sf::Texture*>::const_iterator> ResourceManager::getTexturesIterators() const
+{
+    return { m_textures.begin(), m_textures.end() };
+}
+
+

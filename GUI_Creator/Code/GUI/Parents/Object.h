@@ -4,7 +4,7 @@
 #include "Clickable.h"
 #include "Identifiable.h"
 #include "Renderable.h"
-
+#include "../GUI_Creator/Code/ResourceManaging/ResourceManager.h"
 class Object :	
 	virtual public Clickable,
 	virtual public Identifiable,
@@ -23,7 +23,10 @@ public:
 
 	// Inherited via Clickable //TODO make it more relatable to object then to clickable class
 	virtual Object* updateClickables(sf::Vector2f& mousePosition) = 0;
+	
 
+	virtual void setScale(float x, float y) = 0;
+	virtual std::pair<float, float> getScale() = 0;
 
 
 };

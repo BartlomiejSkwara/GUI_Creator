@@ -191,6 +191,7 @@
     <ClCompile Include="Code\Input\MouseInfo.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.cpp" />
     <ClCompile Include="Code\ResourceManaging\ResourceManager.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Code\GameLogic\Enemy.h" />
@@ -228,6 +229,7 @@
     <ClInclude Include="Code\Input\MouseInfo.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.h" />
     <ClInclude Include="Code\ResourceManaging\ResourceManager.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

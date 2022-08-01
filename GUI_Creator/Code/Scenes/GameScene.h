@@ -21,12 +21,12 @@ protected:
 	
 	DivObject* m_gameScene;
 	
-	ResourceManager* m_resourceManager;
+
 
 	//Observer base events handling 
 	SceneSubject m_subj;
 public:
-	GameScene(ResourceManager* resourceManager,sf::RenderWindow* window);
+	GameScene(sf::RenderWindow* window);
 	virtual ~GameScene();
 	virtual void updateDearIMGUI()=0;
 	virtual void pollEvents(sf::Event* ev) = 0;

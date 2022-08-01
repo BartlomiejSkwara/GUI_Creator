@@ -111,6 +111,9 @@
     <ClCompile Include="Code\ResourceManaging\ResourceManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="imgui\imconfig.h">
@@ -216,6 +219,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\ResourceManaging\ResourceManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -25,17 +25,16 @@ void Game::initWindow()
 
 void Game::initGameObjects()
 {
-    m_gameScene = new GameSceneUIDesigner(&m_resourceManager, m_window);
+    m_gameScene = new GameSceneUIDesigner(m_window);
 }
 
 
 
-Game::Game(): m_resourceManager("../Resources/")
+Game::Game()
 {
     
     
   
-    m_resourceManager.loadAllFiles();
 
     initVariables();
     initWindow();

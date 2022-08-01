@@ -1,20 +1,20 @@
 #include "TextObject.h"
 
 ///Przyda³aby siê tu jakaœ dokumentacja :>
-TextObject::TextObject(sf::Font& font,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
-	:Object(func)
+TextObject::TextObject(const std::string& fontName ,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
+	:Object(func), m_fontName(fontName)
 {
 		
-	m_frame.setSize(sf::Vector2f(sizeX * scale, sizeY * scale));
+	m_frame.setSize(sf::Vector2f(sizeX, sizeY));
 	m_frame.setOutlineColor(sf::Color::White);
 	m_frame.setOutlineThickness(3.f);
 	m_frame.setFillColor(sf::Color(120, 120, 120, 255));
 
-	m_text.setCharacterSize((unsigned int)(charSize * scale));
-
-	initText(font, label);
+	setScale(scale, scale);
+	setCharacterSize(charSize);
+	initText(fontName, label);
 	setPosition(positionX,positionY);
-
+	
 }
 
 TextObject::~TextObject()
@@ -49,15 +49,31 @@ std::string TextObject::getLabel()
 	return m_text.getString().toAnsiString();
 }
 
-sf::Text* TextObject::getText()
+sf::Text* TextObject::getText() 
 {
 	return &m_text;
+}
+
+const std::string& TextObject::getFontName() const
+{
+	return m_fontName;
+}
+
+short int TextObject::getCharacterSize() const
+{
+	return m_characterSize;
 }
 
 void TextObject::setColorText(int r, int g, int b, int a)
 {
 
 	m_text.setFillColor(sf::Color(r, g, b, a));
+}
+
+void TextObject::setCharacterSize(short int size)
+{
+	m_characterSize = size;
+	m_text.setCharacterSize((unsigned int)(m_characterSize * getScale().first));
 }
 
 void TextObject::move(int x, int y)
@@ -107,6 +123,11 @@ void TextObject::centerText()
 	sf::Vector2f center(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f);
 	sf::Vector2f localBounds(trunc(center.x + m_text.getLocalBounds().left), trunc(center.y + m_text.getLocalBounds().top));
 
+	//std::cout << "center:" << center.x << " " << center.y << '\n';
+	//std::cout << "localBounds:" << localBounds.x << " " << localBounds.y << '\n';
+	//std::cout << std::endl;
+
+
 	m_text.setOrigin(localBounds);
 
 	m_text.setPosition(sf::Vector2f(m_frame.getSize().x / 2,
@@ -122,21 +143,39 @@ void TextObject::centerText()
 /// </summary>
 /// <param name="font"></param>
 /// <param name="label"></param>
-void TextObject::initText(sf::Font& font, const std::string& label)
+void TextObject::initText(const std::string& fontName, const std::string label)
 {
-	m_text.setFont(font);
+	
+	setFont(fontName);
 	initText(label);
-
+	
 }
 
-void TextObject::initText(const std::string& label)
+void TextObject::initText(const std::string label)
 {
 	m_text.setString(label);
 }
 
+void TextObject::setFont(const std::string& fontName)
+{
+	m_text.setFont(*ResourceManager::getResourceManager()->getFont(fontName));
+	m_fontName = fontName;
+}
+
+void TextObject::setScale(float x, float y)
+{
+	m_frame.setScale(x, y);
+	m_text.setCharacterSize((unsigned int)(m_characterSize * getScale().first));
+}
+
+std::pair<float, float> TextObject::getScale()
+{
+	return { m_frame.getScale().x,m_frame.getScale().y };
+}
+
 void TextObject::fitBorderToText()
 {
-	m_frame.setSize(sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height));
+	m_frame.setSize(sf::Vector2f(m_text.getGlobalBounds().width/m_frame.getScale().x, m_text.getGlobalBounds().height/m_frame.getScale().y));
 	
 }
 

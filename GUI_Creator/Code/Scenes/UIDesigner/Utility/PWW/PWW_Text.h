@@ -2,18 +2,19 @@
 #include "PWW_Object.h"
 #include "../GUI_Creator/values.h"
 
-
 class PWW_Text : public PWW_Object
 {
 private:
-
-
-    TextObject* m_TextObject;
+    static constexpr size_t MAX_TEXT_LENGTH = 30;
+protected:
+    TextObject* m_textObject;
     ///Imgui stuff
-   
-    char* m_Text;
+    char* m_text;
     float m_textColor[4];
+    int   m_selectedFont;
+    int   m_charSize;
 
+   
 public:
 
     

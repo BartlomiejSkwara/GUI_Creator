@@ -2,25 +2,30 @@
 
 ///Przyda³aby siê tu jakaœ dokumentacja :>
 
-ImageObject::ImageObject(sf::Font& font,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
-	:Object(func)
+ImageObject::ImageObject(const std::string& textureName, float positionX, float positionY, const std::function<void()>& func,float scale)
+	:Object(func),m_textureName(textureName)
 {
 	
-	m_frame.setSize(sf::Vector2f(sizeX * scale, sizeY * scale));
+	
 	m_frame.setOutlineColor(sf::Color::White);
 	m_frame.setOutlineThickness(3.f);
 	m_frame.setFillColor(sf::Color(120, 120, 120, 255));
 
-	m_text.setCharacterSize((unsigned int)(charSize * scale));
-
-	initText(font, label);
+	setTexture(textureName);
+	fitBorderToSprite();
 	setPosition(positionX,positionY);
-
+	setScale(scale,scale);
+	
 }
 
 ImageObject::~ImageObject()
 {
 
+}
+
+void ImageObject::fitBorderToSprite()
+{
+	m_frame.setSize(sf::Vector2f(m_sprite.getTextureRect().width, m_sprite.getTextureRect().height));
 }
 
 
@@ -29,7 +34,7 @@ ImageObject::~ImageObject()
 void ImageObject::render(sf::RenderTarget* target)
 {
 	target->draw(this->m_frame);
-	target->draw(this->m_text);
+	target->draw(this->m_sprite);
 }
 
 Object* ImageObject::updateClickables(sf::Vector2f& mousePosition)
@@ -38,33 +43,33 @@ Object* ImageObject::updateClickables(sf::Vector2f& mousePosition)
 }
 
 
-
-const sf::Color* ImageObject::getColorText() const
+const sf::Sprite* ImageObject::getSprite()
 {
-	return &(m_text.getFillColor());
+	return & m_sprite;
 }
 
-std::string ImageObject::getLabel()
+const std::string& ImageObject::getTextureName()
 {
-	
-	return m_text.getString().toAnsiString();
+	return m_textureName;
 }
 
-sf::Text* ImageObject::getText()
+void ImageObject::setScale(float x, float y)
 {
-	return &m_text;
+	m_frame.setScale(x, y);
+	m_sprite.setScale(x, y);
 }
 
-void ImageObject::setColorText(int r, int g, int b, int a)
+std::pair<float, float> ImageObject::getScale()
 {
-
-	m_text.setFillColor(sf::Color(r, g, b, a));
+	return { m_frame.getScale().x,m_frame.getScale().y };
 }
+
+
 
 void ImageObject::move(int x, int y)
 {
 	m_frame.move(x, y);
-	m_text.move(x, y);
+	m_sprite.move(x, y);
 }
 
 
@@ -89,7 +94,14 @@ void ImageObject::setPosition(int x, int y)
 {
 	float thick = m_frame.getOutlineThickness();
 	m_frame.setPosition(x+thick,y+thick);
-	m_text.setPosition(x + thick, y + thick);
+	m_sprite.setPosition(x + thick, y + thick);
+}
+
+void ImageObject::setTexture(const std::string& textureName)
+{
+	m_sprite.setTexture(*ResourceManager::getResourceManager()->getTexture(textureName),true);
+	m_textureName = textureName;
+	fitBorderToSprite();
 }
 
 /// <summary>
@@ -103,42 +115,7 @@ void ImageObject::move(const sf::Vector2i& offset)
 
 }
 
-void ImageObject::centerText()
-{
-	sf::Vector2f center(m_text.getGlobalBounds().width / 2.f, m_text.getGlobalBounds().height / 2.f);
-	sf::Vector2f localBounds(trunc(center.x + m_text.getLocalBounds().left), trunc(center.y + m_text.getLocalBounds().top));
 
-	m_text.setOrigin(localBounds);
 
-	m_text.setPosition(sf::Vector2f(m_frame.getSize().x / 2,
-		m_frame.getSize().y / 2));
-
-	m_text.setPosition(sf::Vector2f(
-		trunc(m_frame.getOrigin().x + m_frame.getGlobalBounds().left + m_frame.getGlobalBounds().width / 2),
-		trunc(m_frame.getOrigin().y + m_frame.getGlobalBounds().top + m_frame.getGlobalBounds().height / 2)));
-}
-
-/// <summary>
-/// Funkcja inicjalizuje tekst na przycisku tj. ustwia mu stringa i zmienia czcionkê . Dodatkowo Wyœrodkowuje napis wzglêdem przycisku
-/// </summary>
-/// <param name="font"></param>
-/// <param name="label"></param>
-void ImageObject::initText(sf::Font& font, const std::string& label)
-{
-	m_text.setFont(font);
-	initText(label);
-
-}
-
-void ImageObject::initText(const std::string& label)
-{
-	m_text.setString(label);
-}
-
-void ImageObject::fitBorderToText()
-{
-	m_frame.setSize(sf::Vector2f(m_text.getGlobalBounds().width, m_text.getGlobalBounds().height));
-	
-}
 
 
