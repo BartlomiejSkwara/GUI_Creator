@@ -19,7 +19,7 @@ void GameSceneUIDesigner::modePICK()
 void GameSceneUIDesigner::toolbarAddButton()
 {
 
-    TextObject* button = new TextObject("LiberationSans-Regular.ttf" ,"NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15),[](){},100,30,20,4);
+    TextObject* button = new TextObject("LiberationSans-Regular.ttf" ,"NULL", floor(m_window->getSize().x / 2 - 50), floor(m_window->getSize().y / 2 - 15),[](){},100,30,20,1);
     button->setEvent([&,button]() {
         selectManager->changeFocus(button);
         pwwManager.initTextButton(button);
@@ -55,7 +55,7 @@ void GameSceneUIDesigner::toolbarAddText()
     text->fitBorderToText();
     text->centerText();
     text->setColorFill(0, 0, 0, 0);
-    text->setColorBorder(255, 0, 0, 255);
+    text->setColorBorder(255, 0, 0, 100);
 
     m_editableObjects->addObject(text);
 }
@@ -148,20 +148,38 @@ void GameSceneUIDesigner::initManagers()
 
 void GameSceneUIDesigner::pollEvents(sf::Event * ev)
 {
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::LShift))
+    {
+        if (ev->type == sf::Event::KeyPressed) {
+
+            switch (ev->key.code)
+            {
+            case sf::Keyboard::Num1:
+                toolbarAddDiv();
+                break;
+            case sf::Keyboard::Num2:
+                toolbarAddButton();
+                break;
+            case sf::Keyboard::Num3:
+                toolbarAddImage();
+                break;
+            case sf::Keyboard::Num4:
+                toolbarAddText();
+                break;
+
+            }
+        }
+
+    }
+
+
     switch (ev->type)
     {
-
+    
     case sf::Event::KeyPressed:
-        switch (ev->key.code)
-        {
-        case sf::Keyboard::F11:
-            break;
-
-        }
-        if (ev->key.code == sf::Keyboard::F11) {
-
-        }
         break;
+        
+        
 
 
 
@@ -272,22 +290,22 @@ void GameSceneUIDesigner::updateDearIMGUIMainMenuBar()
 
         if (ImGui::BeginMenu("Dodaj"))
         {
-            if (ImGui::MenuItem("Przycisk"))
-            {
-                toolbarAddButton();
-            }
-            if (ImGui::MenuItem("Kontener"))
+            if (ImGui::MenuItem("Kontener", "shift+1"))
             {
                 toolbarAddDiv();
             }
-            if (ImGui::MenuItem("Tekst"))
+            if (ImGui::MenuItem("Przycisk", "shift+2"))
             {
-                toolbarAddText();
+                toolbarAddButton();
             }
-            if (ImGui::MenuItem("Obraz"))
+            if (ImGui::MenuItem("Obraz", "shift+3"))
             {
                 toolbarAddImage();
             }
+            if (ImGui::MenuItem("Tekst",    "shift+4"))
+            {
+                toolbarAddText();
+            }     
             ImGui::EndMenu();
         }
 
