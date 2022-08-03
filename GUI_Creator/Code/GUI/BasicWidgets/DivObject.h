@@ -1,80 +1,73 @@
 #pragma once
-#include "ButtonObject.h"
-#include "../ContainerObject.h"
+#include "TextObject.h"
+#include "../GUI_Creator/Code/GUI/Parents/Object.h"
 #include <vector>
-#include <SFML/Graphics/RectangleShape.hpp>
 #include <iostream>
-class DivObject : public RenderableObject, public ClickableObject, public ContainerObject
+class DivObject : public Object
 {
 protected:
-	//Obiekty które zostan¹ renderowane na ekranie 
-	std::vector<RenderableObject*> m_renderableObjects;
-	//Obiekty które uczestnicz¹ w teœcie na bycie klikniêtym
-	std::vector<ClickableObject*> m_clickableObjects;
-	//Obiekty które przechowuj¹ inne obiekty
-	std::vector<ContainerObject*> m_containerObjects;
-	//Wymiary i pozycja diva (konteneru)
-	sf::RectangleShape m_frame;
+	
+
+
+	//object finders
+	int searchForObject(std::string& ID);
+	int searchForDiv(std::string& ID);
+
+	//Stored objects
+	std::vector<Object*> m_Objects;
+	//Stored DIVs
+	std::vector<DivObject*> m_DIVs;
+
+
 public:
 	DivObject();
+
 	//TODO rozdziel to na osobne funkcje
-	DivObject(std::string ID, sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = [](){}); ///TODO  ten string i referencja 
+	DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = [](){}, float scale=1.f);
 	virtual ~DivObject();
 
-
-	// Inherited via RenderableObject
-	virtual const sf::FloatRect & getGlobalBounds() const override;
-
-	virtual bool checkIfObjectContainsPoint(sf::Vector2f& point) override;
-
+	//Render the div and all of the objects inside of it 
 	virtual void render(sf::RenderTarget* target) override;
 
 
-	// Inherited via ClickableObject
-	virtual int updateClickables(sf::Vector2f& mousePosition) override;
+	// Inherited via Clickable
+	virtual Object* updateClickables(sf::Vector2f& mousePosition) override;
+
+	
 
 
-	// Inherited via ContainerObject
-	//Poszukiwaczki
-
-	virtual int searchForObject(std::string & ID, OBJECT_TYPE objectType) override;
-
-	//Dodawaczki :>
-
-	void addDivObject(DivObject* object);
-	void addButtonObject(ButtonObject* object);
-	virtual void addRenderableObject(RenderableObject* object) override;
-	virtual void addClickableObject(ClickableObject* object) override;
-	virtual void addContainerObject(ContainerObject* object) override;
-	//Usuwaczka
-
-	virtual bool removeObject(std::string & ID,int depth=0) override;
-
-
-	//Przesuwaczki 	
+	//Functions responsible for changing postion of the div and objects inside of it	
 	virtual void setPosition(const sf::Vector2i& position) override;
 	virtual void setPosition(int x, int y) override;
-	virtual void move(const sf::Vector2f& offset) override;
-	void setSize(int x, int y);
-
-	// Inherited via RenderableObject
-	virtual int getBorderThickness() override;
-
-	virtual void setBorderThickness(int v) override;
+	virtual void move(const sf::Vector2i& offset) override;
 
 
-	// Inherited via RenderableObject
-	virtual const sf::Color* getColorBorder() const override;
+	
 
-	virtual const sf::Color* getColorFill() const override;
+	// Inherited via Object
+	virtual void move(int x, int y) override;
 
-	virtual void setColorBorder(int r, int g, int b, int a) override;
 
-	virtual void setColorFill(int r, int g, int b, int a) override;
 
-	virtual void setScale(float s) override;
 
-	virtual float getScale() override;
+
+
+	///Div specific
+	const std::vector<Object*>* getObjectVector()const;
+
+
+	//Functions responsible for assigning new objects to the DIV
+	void addObject(Object* object);
+	void addDiv(DivObject* div);
+
+	//Functions responsible for removing object from the DIV
+	bool removeObject(std::string& ID, int depth = 0);
+
+
+	// Inherited via Object
+	virtual void setScale(float x, float y) override;
+
+	virtual std::pair<float, float> getScale() override;
 
 };
 

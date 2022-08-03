@@ -2,8 +2,9 @@
 
 #include "Player.h"
 #include "Enemy.h"
-#include "../Scenes/GameSceneUIDesigner.h"
 #include "../../values.h"
+#include "../Input/MouseInfo.h"
+#include "../Scenes/UIDesigner/GameSceneUIDesigner.h"
 
 
 /**
@@ -14,21 +15,19 @@ class Game
 private:
 
 	
+
 	//Private variables
 	sf::RenderWindow* m_window;
 	sf::VideoMode videoMode;
 	
 	
 	//All mouse info combined in one object
-	MouseInfo m_mouseInfo;
+	MouseInfo* m_mouseInfo;
 	
 	//Game Objects
-	Player player;
-	GameSceneUIDesigner * m_gameScene;
+	GameSceneUIDesigner* m_gameScene;
 
-	//Resources
-	sf::Font font;
-	sf::Text uiText;
+	
 
 	//Event used for pooling
 	sf::Event ev;
@@ -39,7 +38,7 @@ private:
 
 	//Private functions
 	void initVariables();
-	void initFonts();
+
 	void initWindow();
 	void initGameObjects();
 	
@@ -58,8 +57,6 @@ public:
 	//Functions
 
 
-	//Player Related
-	void updatePlayer();
 
 
 	void pollEvents();
@@ -73,9 +70,6 @@ public:
 	//Renders everything from current scene
 	void render();
 
-	//Mouse Positions
-	void updateMouseStatus();
-	void updateMousePositions();
 	
 	//Gettery
 	const bool windowIsOpen() const;

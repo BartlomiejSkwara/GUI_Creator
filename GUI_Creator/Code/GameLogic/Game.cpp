@@ -6,7 +6,7 @@
 void Game::initVariables()
 {   
 	m_window = nullptr;
-    m_mouseInfo.mouseHeld = sf::Mouse::isButtonPressed(sf::Mouse::Button::Left);
+    
     m_pausedGame = false;
     m_hp = 3;
 
@@ -21,16 +21,11 @@ void Game::initWindow()
     this->m_window->setFramerateLimit(60);
 }
 
-void Game::initFonts()
-{
-    if (!(this->font.loadFromFile("Fonts/LiberationSans-Regular.ttf"))) {
-        std::cout << "ERROR::GAME::INITFONTS::Failed to load font" << std::endl;
-    }
-}
+
 
 void Game::initGameObjects()
 {
-    m_gameScene = new GameSceneUIDesigner(&font, &m_mouseInfo, m_window);
+    m_gameScene = new GameSceneUIDesigner(m_window);
 }
 
 
@@ -38,11 +33,16 @@ void Game::initGameObjects()
 Game::Game()
 {
     
-    this->initVariables();
-    this->initFonts();
-    this->initWindow();
+    
+  
+
+    initVariables();
+    initWindow();
     ImGui::SFML::Init(*m_window);
-    this->initGameObjects();
+    initGameObjects();
+
+    m_mouseInfo = MouseInfo::getMouseInf();
+    m_mouseInfo->setContext(m_window);
     
 }
 
@@ -50,43 +50,19 @@ Game::~Game()
 {
     delete m_gameScene;
 	delete this->m_window;
+    delete m_mouseInfo;
     ImGui::SFML::Shutdown();
 }
 
 
 
-// Update Functions
-void Game::updateMouseStatus()
-{
- 
-    if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-    {
-        if (m_mouseInfo.mouseHeld == false)
-        {
-            //std::cout<<"Sone pressed the mouse\n";
-            m_mouseInfo.mouseClicked = true;
-            m_mouseInfo.mouseHeld = true;
-        }
-        else 
-        {
-            //std::cout << "Mouse is being held\n";
-            m_mouseInfo.mouseClicked = false;
-        }
-        
-    }
-    else
-    {
-        //std::cout << "Sone released the mouse\n";
-        m_mouseInfo.mouseHeld = false;
-    }
-}
+
 
 void Game::update()
 {
 
     //Mouse Related
-    updateMousePositions();
-    updateMouseStatus();
+    m_mouseInfo->updateMouse();
 
     //Scenes Related
     pollEvents();
@@ -146,13 +122,7 @@ void Game::pollEvents()
 
 
 
-void Game::updateMousePositions() {
-    
-    m_mouseInfo.mousePositionWindow= sf::Mouse::getPosition(*this->m_window);
-    m_mouseInfo.mousePositionViewLastKnown = m_mouseInfo.mousePositionView;
-    m_mouseInfo.mousePositionView  = this->m_window->mapPixelToCoords(this->m_mouseInfo.mousePositionWindow);
-    
-}
+
 
 void Game::updateClickables()
 {
