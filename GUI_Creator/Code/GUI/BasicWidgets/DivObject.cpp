@@ -1,18 +1,53 @@
 #include "DivObject.h"
 
-DivObject::DivObject()
+
+
+/// <summary>
+/// Function finds and returns  the object you are looking for
+/// </summary>
+/// <param name="soughtObj">adress in memory of sought obj</param>
+/// <param name="retrieve">if set to true sought element will be removed from the object containing it (but it will still exist in memory)</param>
+/// <returns></returns>
+Object* DivObject::find(Object* soughtObj, FindMode fm)
 {
+	static Object* objHolder = nullptr;
+	for (auto i = m_Objects.begin(); i != m_Objects.end(); i++) {
+		objHolder = (*i)->find(soughtObj, fm);
+		if (objHolder) {
+			switch(fm) {
+			
+			case FindMode::FIND_AND_MOVE_DOWN:
+				*i = *(i - 1);
+				*(i - 1) = objHolder;
+				break;
+			case FindMode::FIND_AND_MOVE_UP:
+				*i = *(i + 1);
+				*(i + 1) = objHolder;
+				break;
+			case FindMode::FIND_AND_REMOVE:
+				*i = *(m_Objects.end() - 1);
+				m_Objects.pop_back();
+					break;
+			
+			default:
+				break;
+			}
+			
+			
+			return nullptr;
+		}
+	}
+	
+	return Object::find(soughtObj);
 }
 
-
 DivObject::DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func, float scale)
-	:Object(func)
+	:Object()
 {
 	m_frame.setFillColor(color);
 	m_frame.setSize(sf::Vector2f(sizeX, sizeY));
 	m_frame.setPosition(sf::Vector2f(posX, posY));
 	setScale(scale, scale);
-	//setEvent(func);
 
 }
 
@@ -64,78 +99,16 @@ Object* DivObject::updateClickables(sf::Vector2f& mousePosition)
 	return this;
 }
 
-/// <summary>
-/// Szuka obiektu po ID w danym kontenerze
-/// </summary>
-/// <param name="ID">-Id poszukiwanego obiektu</param>
-/// <param name="objectType">-okreœla który z bazowuch typów jest poszukiwany zobacz (Container::O_ ... )</param>
-/// <returns>-1 gdy nie znajdê obiektu</returns>
-int DivObject::searchForObject(std::string & ID)
-{
-	
-	for (auto i = m_Objects.begin(); i < m_Objects.end(); i++)
-	{
-		if ((*i)->getID() == ID)
-		{
-			return i - m_Objects.begin();
-		}
-	}
-	return -1;
-}
-
-int DivObject::searchForDiv(std::string& ID)
-{
-	for (auto i = m_DIVs.begin(); i < m_DIVs.end(); i++)
-	{
-		if ((*i)->getID() == ID)
-		{
-			return i - m_DIVs.begin();
-		}
-	}
-	return -1;
-}
 
 
 
 
 
 
-//TODO Niepokoi mnie dzia³anie depth mo¿e trzeba je zamieniæ na static ?
-/// <summary>
-/// /// Szukanie jest wolne i prioretyzuje górne poziomy diva , zalecane jest usuwanie tych w³asnie wy¿szych poziomów w celu zniwelowania ga³ganiarstwa
-/// W celu ograniczenia tegó¿ ga³ganiarstwa wprowadzam limit tego jak g³êboko mo¿e zajœæ rekurencja
-/// Funkcja zaprzestanie rekurencyjnych dzia³añ gdy depth osi¹gnie wartoœæ 3
-/// </summary>
-/// <param name="ID">-id poszukiwanego obiektu</param>
-/// <param name="depth">-pocz¹tkowa g³ebia rekurencji , bazowo pojawia siê tam 0 , podajac mniejsze wartoœci mo¿na zwiêkszyæ lub zmniejszyæ g³ebiê poszukiwañ</param>
-/// <returns>-zwracana wartoœæ stanowi wyznacznik tego czy usuniêto poszukiwany obiekt</returns>
-bool DivObject::removeObject(std::string & ID,int depth)
-{	
 
-	if (depth >= 3) {
-		return false;
-	}
-	static int objectPosition = searchForObject(ID);
-	if (objectPosition == -1) {
-		for (auto* obj: m_DIVs) {
-			bool found = obj->removeObject(ID,depth+1);
-			if (found == true) {
-				return true;
-			}
-		}
-		return false;
-	}
 
-	Object* temp = m_Objects.at(objectPosition);
-	m_Objects.erase(m_Objects.begin() + objectPosition);
 
-	objectPosition = searchForDiv(ID);
-	m_DIVs.erase(m_DIVs.begin() + objectPosition);
-	
-	delete temp;
 
-	return true;
-}
 
 void DivObject::setScale(float x, float y)
 {
@@ -145,6 +118,102 @@ void DivObject::setScale(float x, float y)
 std::pair<float,float> DivObject::getScale()
 {
 	return { m_frame.getScale().x,m_frame.getScale().y };
+}
+
+//TODO  don't  call mouse position view so much
+bool DivObject::handleEvent(Event& event)
+{
+	
+	
+	switch (event.getType())
+	{
+		
+
+	case EventType::MouseLPMClickObject:
+		if (checkIfObjectContainsPoint(MouseInput::getMouseInf()->mousePositionView)) {
+			if (m_Objects.size() == 0)
+			{
+				runEvent(event);
+				return true;
+			}
+			for (std::vector<Object*>::reverse_iterator it = m_Objects.rbegin(); it != m_Objects.rend(); ++it) {
+				//for (auto object : m_Clickables) {
+
+				if ((*it)->handleEvent(event))
+				{
+					return true;
+				}
+
+
+			}
+			runEvent(event);
+			return true;
+		}
+		break;
+
+	case EventType::MouseLPMClickImage: case EventType::MouseLPMClickText:
+		if (checkIfObjectContainsPoint(MouseInput::getMouseInf()->mousePositionView)) {
+			//Zmiana dokonana w celu poprawienie zaznaczania obiektów w klasie GameSceneUIDesigner  ( od teraz gdy dwa obiekty s¹ na sobie zaznacza siê ten najwy¿ej)
+
+			for (std::vector<Object*>::reverse_iterator it = m_Objects.rbegin(); it != m_Objects.rend(); ++it) {
+				//for (auto object : m_Clickables) {
+
+				if ((*it)->handleEvent(event))
+				{
+					return true;
+				}
+
+
+
+			}
+			//runEvent(event);
+			return false;
+		}
+		break;
+		
+	case EventType::MouseLPMClickDiv:
+		if (checkIfObjectContainsPoint(MouseInput::getMouseInf()->mousePositionView)) {
+			for (std::vector<Object*>::reverse_iterator it = m_Objects.rbegin(); it != m_Objects.rend(); ++it) {
+				//for (auto object : m_Clickables) {
+				if ((*it)->handleEvent(event)) {
+					return true;
+				}
+
+			}
+			runEvent(event);
+			return (m_Objects.size()>0)?true:false;
+		}
+		break;
+
+		
+	default:
+		break;
+	}
+	
+
+
+	
+	return false;
+	
+	
+
+}
+
+bool DivObject::handleEventChildrenOnly(Event& event)
+{
+	for (std::vector<Object*>::reverse_iterator it = m_Objects.rbegin(); it != m_Objects.rend(); ++it) {
+
+		if ((*it)->handleEvent(event))
+		{
+			return true;
+		}
+	
+
+
+	}
+	return false;
+
+	
 }
 
 void DivObject::setPosition(const sf::Vector2i& position)
@@ -176,7 +245,7 @@ void DivObject::move(int x, int y)
 {
 	m_frame.move((float)x, (float)y);
 
-	for (auto object : m_DIVs) {
+	for (auto object : m_Objects) {
 		object->move(x,y);
 	}
 }
@@ -192,11 +261,6 @@ void DivObject::addObject(Object* object)
 	m_Objects.push_back(object);
 }
 
-void DivObject::addDiv(DivObject* div)
-{
-	m_Objects.push_back(div);
-	m_DIVs.push_back(div);
-}
 
 
 

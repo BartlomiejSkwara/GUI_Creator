@@ -9,6 +9,17 @@ Bordered::~Bordered()
 }
 
 
+/// <summary>
+/// Funkcaj sprawdza czy dany punkt znajduje siê w 
+/// </summary>
+/// <param name="point"></param>
+/// <returns></returns>
+bool Bordered::checkIfObjectContainsPoint(sf::Vector2f& point)
+{
+	return  (getGlobalBounds().contains(point.x, point.y));
+}
+
+
 const sf::FloatRect& Bordered::getGlobalBounds() const
 {
 	return m_frame.getGlobalBounds();

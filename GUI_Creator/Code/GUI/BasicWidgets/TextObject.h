@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics/Text.hpp>
 #include "../GUI_Creator/Code/GUI/Parents/Object.h"
+#include "../GUI_Creator/Code/Events and stuff/Input/MouseInput.h"
 class TextObject : public Object
 {
 
@@ -70,5 +71,9 @@ public:
 	virtual void setScale(float x, float y) override;
 
 	virtual std::pair<float, float> getScale() override;
+
+
+	// Inherited via MouseEventHandler
+	virtual bool handleEvent(Event& event) override;
 
 };

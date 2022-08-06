@@ -2,7 +2,7 @@
 
 
 
-GameScene::GameScene(sf::RenderWindow* window) : m_mouseInfo(MouseInfo::getMouseInf()), m_window(window)
+GameScene::GameScene(sf::RenderWindow* window) : m_MouseInput(MouseInput::getMouseInf()), m_window(window)
 {
 	m_gameScene = new DivObject(sf::Color(0, 0, 0, 0), 0, 0, window->getSize().x, window->getSize().y);
 

@@ -34,7 +34,6 @@ void PWW_Image::updateDearIMGUIParamWindow()
     ImGui::Text("Skala:");
     if (ImGui::DragFloat("##pwwImageSca", &m_scale[0], DRAG_SPEED,0)) {
         m_imageObject->setScale(m_scale[0], m_scale[0]);
-        SelectionManager::getSelectionManager()->changeFocus(m_imageObject);
         m_size[0] = m_imageObject->getGlobalBounds().width;
         m_size[1] = m_imageObject->getGlobalBounds().height;
     }
@@ -42,7 +41,6 @@ void PWW_Image::updateDearIMGUIParamWindow()
     ImGui::Text("Ramka:");
     if (ImGui::InputInt2("##pwwImagePos", m_position)) {
         m_imageObject->setPosition(m_position[0], m_position[1]);
-        SelectionManager::getSelectionManager()->changeFocus(m_imageObject);
     }
     ImGui::SameLine();
     ImGui::Text("Pozycja");
@@ -56,8 +54,8 @@ void PWW_Image::updateDearIMGUIParamWindow()
 
     if (ImGui::InputInt("##pwwImageBorderThick", &m_outline_size)) {
         m_imageObject->setBorderThickness(m_outline_size);
-        m_size[0] = m_imageObject->getGlobalBounds().width;
-        m_size[1] = m_imageObject->getGlobalBounds().height;
+        m_size[0] = (int)(m_imageObject->getGlobalBounds().width);
+        m_size[1] = (int)(m_imageObject->getGlobalBounds().height);
 
     }
     ///
@@ -95,11 +93,7 @@ void PWW_Image::updateDearIMGUIParamWindow()
             {
                 m_selectedTexture = std::distance(it.first, i);
                 m_imageObject->setTexture(i->first);
-                m_imageObject->fitBorderToSprite();
-                SelectionManager::getSelectionManager()->changeFocus(m_imageObject);
-               
-                
-                selectManager->changeFocus(m_imageObject);
+                m_imageObject->fitBorderToSprite();                
             }
         }
 

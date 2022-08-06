@@ -63,7 +63,7 @@
     <ClCompile Include="Code\GUI\Parents\Bordered.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\GUI\Parents\Clickable.cpp">
+    <ClCompile Include="Code\Events and stuff\EventsHandling\MouseEventHandler.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\GUI\Parents\Object.cpp">
@@ -78,7 +78,7 @@
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\Generator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Scenes\UIDesigner\Utility\SelectionManager.cpp">
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\FocusManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Scenes\GameScene.cpp">
@@ -87,16 +87,10 @@
     <ClCompile Include="Code\Scenes\UIDesigner\GameSceneUIDesigner.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Scenes\ObserverStuff\SceneSubject.cpp">
+    <ClCompile Include="Code\Events and stuff\ObserverStuff\Observer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverScene.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverUID.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Code\Input\MouseInfo.cpp">
+    <ClCompile Include="Code\Events and stuff\Input\MouseInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.cpp">
@@ -112,6 +106,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Events and stuff\EventsHandling\EventHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Events and stuff\EventsHandling\Event.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Code\Events and stuff\Input\KeyboardInput.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -170,7 +173,7 @@
     <ClInclude Include="Code\GUI\Parents\Bordered.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\GUI\Parents\Clickable.h">
+    <ClInclude Include="Code\Events and stuff\EventsHandling\MouseEventHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\GUI\Parents\Object.h">
@@ -182,7 +185,7 @@
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\Generator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Scenes\UIDesigner\Utility\SelectionManager.h">
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\FocusManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Scenes\GameScene.h">
@@ -197,16 +200,10 @@
     <ClInclude Include="Code\GUI\Parents\Renderable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Scenes\ObserverStuff\SceneSubject.h">
+    <ClInclude Include="Code\Events and stuff\ObserverStuff\Observer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverScene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverUID.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Code\Input\MouseInfo.h">
+    <ClInclude Include="Code\Events and stuff\Input\MouseInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.h">
@@ -222,6 +219,18 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Events and stuff\EventsHandling\EventHandler.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Events and stuff\EventsHandling\HandlerFlags.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Events and stuff\EventsHandling\Event.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Code\Events and stuff\Input\KeyboardInput.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

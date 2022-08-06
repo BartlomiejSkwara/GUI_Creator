@@ -3,7 +3,7 @@
 ///Przyda³aby siê tu jakaœ dokumentacja :>
 
 ImageObject::ImageObject(const std::string& textureName, float positionX, float positionY, const std::function<void()>& func,float scale)
-	:Object(func),m_textureName(textureName)
+	:Object(),m_textureName(textureName)
 {
 	
 	
@@ -62,6 +62,29 @@ void ImageObject::setScale(float x, float y)
 std::pair<float, float> ImageObject::getScale()
 {
 	return { m_frame.getScale().x,m_frame.getScale().y };
+}
+
+bool ImageObject::handleEvent(Event& event)
+{
+	if (checkIfObjectContainsPoint(MouseInput::getMouseInf()->mousePositionView)) {
+		switch (event.getType())
+		{
+
+		case EventType::MouseLPMClickImage: case EventType::MouseLPMClickObject:
+			runEvent(event);
+			return true;
+			break;
+		
+		default:
+			return false;
+			break;
+		}
+		
+	}
+
+
+
+	return false;
 }
 
 

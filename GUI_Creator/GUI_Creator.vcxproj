@@ -165,7 +165,7 @@
     <ClCompile Include="Code\GUI\BasicWidgets\TextObject.cpp" />
     <ClCompile Include="Code\GUI\BasicWidgets\DivObject.cpp" />
     <ClCompile Include="Code\GUI\Parents\Bordered.cpp" />
-    <ClCompile Include="Code\GUI\Parents\Clickable.cpp" />
+    <ClCompile Include="Code\Events and stuff\EventsHandling\MouseEventHandler.cpp" />
     <ClCompile Include="Code\GUI\Parents\Object.cpp" />
     <ClCompile Include="Code\GUI\Parents\Identifiable.cpp" />
     <ClCompile Include="Code\GUI\BasicWidgets\ImageObject.cpp" />
@@ -175,9 +175,11 @@
     <ClCompile Include="Code\GUI\Parents\Renderable.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\Generator.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Text.cpp" />
-    <ClCompile Include="Code\Scenes\UIDesigner\Utility\SelectionManager.cpp" />
+    <ClCompile Include="Code\Scenes\UIDesigner\Utility\FocusManager.cpp" />
     <ClCompile Include="Code\Scenes\GameScene.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\GameSceneUIDesigner.cpp" />
+    <ClCompile Include="Code\Events and stuff\EventsHandling\EventHandler.cpp" />
+    <ClCompile Include="Code\Events and stuff\EventsHandling\Event.cpp" />
     <ClCompile Include="GUI_Creator.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
@@ -185,22 +187,22 @@
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Code\Scenes\ObserverStuff\SceneSubject.cpp" />
-    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverScene.cpp" />
-    <ClCompile Include="Code\Scenes\ObserverStuff\ObserverUID.cpp" />
-    <ClCompile Include="Code\Input\MouseInfo.cpp" />
+    <ClCompile Include="Code\Events and stuff\ObserverStuff\Observer.cpp" />
+    <ClCompile Include="Code\Events and stuff\Input\MouseInput.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.cpp" />
     <ClCompile Include="Code\ResourceManaging\ResourceManager.cpp" />
     <ClCompile Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.cpp" />
+    <ClCompile Include="Code\Events and stuff\Input\KeyboardInput.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Code\Events and stuff\EventsHandling\HandlerFlags.h" />
     <ClInclude Include="Code\GameLogic\Enemy.h" />
     <ClInclude Include="Code\GameLogic\Game.h" />
     <ClInclude Include="Code\GameLogic\Player.h" />
     <ClInclude Include="Code\GUI\BasicWidgets\TextObject.h" />
     <ClInclude Include="Code\GUI\BasicWidgets\DivObject.h" />
     <ClInclude Include="Code\GUI\Parents\Bordered.h" />
-    <ClInclude Include="Code\GUI\Parents\Clickable.h" />
+    <ClInclude Include="Code\Events and stuff\EventsHandling\MouseEventHandler.h" />
     <ClInclude Include="Code\GUI\Parents\Object.h" />
     <ClInclude Include="Code\GUI\Parents\Identifiable.h" />
     <ClInclude Include="Code\GUI\BasicWidgets\ImageObject.h" />
@@ -211,9 +213,11 @@
     <ClInclude Include="Code\Scenes\UIDesigner\DesignerConst.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\Generator.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Text.h" />
-    <ClInclude Include="Code\Scenes\UIDesigner\Utility\SelectionManager.h" />
+    <ClInclude Include="Code\Scenes\UIDesigner\Utility\FocusManager.h" />
     <ClInclude Include="Code\Scenes\GameScene.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\GameSceneUIDesigner.h" />
+    <ClInclude Include="Code\Events and stuff\EventsHandling\EventHandler.h" />
+    <ClInclude Include="Code\Events and stuff\EventsHandling\Event.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />
@@ -223,13 +227,12 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
-    <ClInclude Include="Code\Scenes\ObserverStuff\SceneSubject.h" />
-    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverScene.h" />
-    <ClInclude Include="Code\Scenes\ObserverStuff\ObserverUID.h" />
-    <ClInclude Include="Code\Input\MouseInfo.h" />
+    <ClInclude Include="Code\Events and stuff\ObserverStuff\Observer.h" />
+    <ClInclude Include="Code\Events and stuff\Input\MouseInput.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWWManager.h" />
     <ClInclude Include="Code\ResourceManaging\ResourceManager.h" />
     <ClInclude Include="Code\Scenes\UIDesigner\Utility\PWW\PWW_Image.h" />
+    <ClInclude Include="Code\Events and stuff\Input\KeyboardInput.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="imgui.ini" />

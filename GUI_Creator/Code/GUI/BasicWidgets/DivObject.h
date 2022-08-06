@@ -3,24 +3,26 @@
 #include "../GUI_Creator/Code/GUI/Parents/Object.h"
 #include <vector>
 #include <iostream>
+#include "../GUI_Creator/Code/Scenes/UIDesigner/Utility/FocusManager.h"
+#include "../GUI_Creator/Code/Events and stuff/Input/MouseInput.h"
+
 class DivObject : public Object
 {
 protected:
 	
 
 
-	//object finders
-	int searchForObject(std::string& ID);
-	int searchForDiv(std::string& ID);
 
 	//Stored objects
 	std::vector<Object*> m_Objects;
-	//Stored DIVs
-	std::vector<DivObject*> m_DIVs;
+
 
 
 public:
-	DivObject();
+
+
+	virtual Object* find(Object* soughtObj,FindMode fm);
+
 
 	//TODO rozdziel to na osobne funkcje
 	DivObject(sf::Color color, float posX, float posY, float sizeX, float sizeY, const std::function<void()>& func = [](){}, float scale=1.f);
@@ -58,16 +60,19 @@ public:
 
 	//Functions responsible for assigning new objects to the DIV
 	void addObject(Object* object);
-	void addDiv(DivObject* div);
 
-	//Functions responsible for removing object from the DIV
-	bool removeObject(std::string& ID, int depth = 0);
 
 
 	// Inherited via Object
 	virtual void setScale(float x, float y) override;
 
 	virtual std::pair<float, float> getScale() override;
+
+
+
+	// Inherited via MouseEventHandler
+	virtual bool handleEvent(Event& event) override;
+	bool handleEventChildrenOnly(Event& event);
 
 };
 

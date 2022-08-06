@@ -3,7 +3,7 @@
 #include "Player.h"
 #include "Enemy.h"
 #include "../../values.h"
-#include "../Input/MouseInfo.h"
+#include "../Events and stuff/Input/MouseInput.h"
 #include "../Scenes/UIDesigner/GameSceneUIDesigner.h"
 
 
@@ -22,7 +22,7 @@ private:
 	
 	
 	//All mouse info combined in one object
-	MouseInfo* m_mouseInfo;
+	MouseInput* m_MouseInput;
 	
 	//Game Objects
 	GameSceneUIDesigner* m_gameScene;
@@ -63,8 +63,7 @@ public:
 	
 	
 
-	//Uses update clickables from current scene
-	void updateClickables();
+
 	//Calls all of the update functions
 	void update();
 	//Renders everything from current scene

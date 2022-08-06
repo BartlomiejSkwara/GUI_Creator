@@ -3,14 +3,14 @@
 #include "PWW_Object.h"
 
 
-//#include "../GUI_Creator/Code/Scenes/DesignerStuff/SelectionManager.h"
+//#include "../GUI_Creator/Code/Scenes/DesignerStuff/FocusManager.h"
 
 class PWW_Div : public PWW_Object
 {
 private:
     
     DivObject* m_divObject;
-    //SelectionManager* s_selectManager;
+    //FocusManager* s_selectManager;
 
 public:
     PWW_Div(DivObject* div);

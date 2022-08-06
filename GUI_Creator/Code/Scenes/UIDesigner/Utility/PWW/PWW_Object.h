@@ -1,7 +1,7 @@
 #pragma once
 #include "../GUI_Creator/imgui/imgui.h"
 #include "../GUI_Creator/imgui/imgui-SFML.h"
-#include "../SelectionManager.h"
+#include "../FocusManager.h"
 #include "../GUI_Creator/Code/ResourceManaging/ResourceManager.h"
 
 #define MAX_OBJ_TYPE_LENGTH 15
@@ -10,7 +10,6 @@
 class PWW_Object
 {
 protected:
-    SelectionManager* selectManager;
     ResourceManager* resourceManager;
 
 public:

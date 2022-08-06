@@ -71,7 +71,6 @@ void PWW_TextButton::updateDearIMGUIParamWindow()
     if (ImGui::DragFloat("##pwwTextButtonSca", &m_scale[0], DRAG_SPEED,0)) {
         m_textObject->setScale(m_scale[0], m_scale[0]);
         m_textObject->centerText();
-        SelectionManager::getSelectionManager()->changeFocus(m_textObject);
         m_size[0] = m_textObject->getGlobalBounds().width;
         m_size[1] = m_textObject->getGlobalBounds().height;
     }
@@ -81,7 +80,7 @@ void PWW_TextButton::updateDearIMGUIParamWindow()
     if (ImGui::InputInt2("##pwwTextButtonPos", m_position)) {
         m_textObject->setPosition(m_position[0], m_position[1]);
         m_textObject->centerText();
-        SelectionManager::getSelectionManager()->changeFocus(m_textObject);
+        
     }
     ImGui::SameLine();
     ImGui::Text("Pozycja");
@@ -130,7 +129,6 @@ void PWW_TextButton::updateDearIMGUIParamWindow()
     {
         m_textObject->initText(std::string(m_text));
         m_textObject->centerText();
-        selectManager->changeFocus(m_textObject);
         m_size[0] = m_textObject->getGlobalBounds().width;
         m_size[1] = m_textObject->getGlobalBounds().height;
     }
@@ -150,9 +148,7 @@ void PWW_TextButton::updateDearIMGUIParamWindow()
             {
                 m_selectedFont = std::distance(it.first, i);
                 m_textObject->setFont(i->first);
-                SelectionManager::getSelectionManager()->changeFocus(m_textObject);
                 m_textObject->centerText();
-                selectManager->changeFocus(m_textObject);
             }
         }
 
@@ -164,7 +160,6 @@ void PWW_TextButton::updateDearIMGUIParamWindow()
     {
         m_textObject->setCharacterSize(m_charSize);
         m_textObject->centerText();
-        selectManager->changeFocus(m_textObject);
     }
     ImGui::SameLine();
     ImGui::Text("Rozmiar");

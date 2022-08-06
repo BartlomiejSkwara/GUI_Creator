@@ -2,7 +2,7 @@
 
 ///Przyda³aby siê tu jakaœ dokumentacja :>
 TextObject::TextObject(const std::string& fontName ,std::string label ,float positionX, float positionY, const std::function<void()>& func, float sizeX, float sizeY, int charSize, float scale)
-	:Object(func), m_fontName(fontName)
+	:Object(), m_fontName(fontName)
 {
 		
 	m_frame.setSize(sf::Vector2f(sizeX, sizeY));
@@ -172,6 +172,31 @@ std::pair<float, float> TextObject::getScale()
 {
 	return { m_frame.getScale().x,m_frame.getScale().y };
 }
+
+bool TextObject::handleEvent(Event& event)
+{
+	if (checkIfObjectContainsPoint(MouseInput::getMouseInf()->mousePositionView)) {
+		switch (event.getType())
+		{
+
+		case EventType::MouseLPMClickText: case EventType::MouseLPMClickObject:
+			runEvent(event);
+			return true;
+			break;
+		
+		default:
+			return false;
+			break;
+		}
+
+	}
+
+
+
+	return false;
+}
+
+
 
 void TextObject::fitBorderToText()
 {

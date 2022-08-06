@@ -2,7 +2,7 @@
 #include "../GUI_Creator/imgui/imgui.h"
 #include "../GUI_Creator/imgui/imgui-SFML.h"
 #include "../../../../GUI/BasicWidgets/DivObject.h"
-#include "../SelectionManager.h"
+#include "../FocusManager.h"
 #include "../GUI_Creator/Code/ResourceManaging/ResourceManager.h"
 #include "PWW_Div.h"
 #include "PWW_TextButton.h"
@@ -16,11 +16,11 @@ private:
 
 	std::string temp;
 
-	SelectionManager* m_selectManager;
+	FocusManager* m_focusManager;
 	ResourceManager* m_resourceManager;
 
 public:
-	PWWManager();
+	PWWManager(FocusManager* focusManager);
 
 	void updatePWW();
 

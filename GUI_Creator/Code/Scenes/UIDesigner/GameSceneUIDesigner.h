@@ -2,10 +2,10 @@
 
 #include <SFML/Graphics/CircleShape.hpp>
 #include "../GameScene.h"
-#include "Utility/SelectionManager.h"
+#include "Utility/FocusManager.h"
 #include "Utility/PWW/PWWManager.h"
 #include "Utility/Generator.h"
-#include "../ObserverStuff/ObserverUID.h"
+#include <iostream>
 
 class GameSceneUIDesigner : public GameScene
 {
@@ -15,7 +15,7 @@ private:
 
 
     ///Managers and/or singletons
-    SelectionManager* selectManager;
+    FocusManager focusManager;
     PWWManager pwwManager;
 
     //Used to save and generate created UI's code
@@ -43,9 +43,8 @@ private:
     DivObject* m_editableObjects;
 
 
-    //Mode related
+    //Editor stuff
     bool m_objectIsCurrentlyDragged;
-    bool m_objectIsCurrentlyPicked;
 
     void modeMOVE();
     void modePICK();
@@ -69,16 +68,11 @@ public:
     // Inherited via GameScene
     //main update
     virtual void update() override;
-    //minor updates :>
-    virtual void updateClickables() override;
-    
+
     virtual void render() override;
 
    
-    virtual void updateMouseRelated() override;
-
-
-
+  
 
     // ImGui related
     virtual void updateDearIMGUI() override;
@@ -87,5 +81,9 @@ public:
 
 
    
+
+    // Inherited via Observer
+    virtual void onNotify(Event ev) override;
+
 };
 

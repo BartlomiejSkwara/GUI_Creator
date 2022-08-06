@@ -17,6 +17,10 @@ public:
     virtual ~Bordered();
 
     
+    //Funkcja sprawdza czy kursor lub punkt jest wewn¹trz obiektu;
+    bool checkIfObjectContainsPoint(sf::Vector2f& point);
+
+
     ///Gettery///
 
     /// Funkcja od pozyskiwania SFMLowego obiektu reprezentuj¹cego obramowanie wokó³ obiektu 

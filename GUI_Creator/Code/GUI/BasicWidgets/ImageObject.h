@@ -2,6 +2,7 @@
 #include <SFML/Graphics/Text.hpp>
 #include "../GUI_Creator/Code/GUI/Parents/Object.h"
 #include <SFML/Graphics/Sprite.hpp>
+#include "../GUI_Creator/Code/Events and stuff/Input/MouseInput.h"
 class ImageObject : public Object
 {
 
@@ -53,4 +54,7 @@ public:
 
 	virtual std::pair<float, float> getScale() override;
 
+
+	// Inherited via MouseEventHandler
+	virtual bool handleEvent(Event& event) override;
 };

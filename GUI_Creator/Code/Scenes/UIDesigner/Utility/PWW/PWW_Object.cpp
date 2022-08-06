@@ -1,7 +1,7 @@
 #include "PWW_Object.h"
 
 PWW_Object::PWW_Object(Object* editedObject)
-	:selectManager(SelectionManager::getSelectionManager()), resourceManager(ResourceManager::getResourceManager())
+	:resourceManager(ResourceManager::getResourceManager())
 {
     m_size[0] = editedObject->getGlobalBounds().width;
     m_size[1] = editedObject->getGlobalBounds().height;

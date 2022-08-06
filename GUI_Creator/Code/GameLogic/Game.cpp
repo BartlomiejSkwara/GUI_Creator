@@ -41,8 +41,9 @@ Game::Game()
     ImGui::SFML::Init(*m_window);
     initGameObjects();
 
-    m_mouseInfo = MouseInfo::getMouseInf();
-    m_mouseInfo->setContext(m_window);
+    m_MouseInput = MouseInput::getMouseInf();
+    m_MouseInput->setContext(m_window);
+    m_MouseInput->addObserver(m_gameScene);
     
 }
 
@@ -50,7 +51,7 @@ Game::~Game()
 {
     delete m_gameScene;
 	delete this->m_window;
-    delete m_mouseInfo;
+    delete m_MouseInput;
     ImGui::SFML::Shutdown();
 }
 
@@ -62,7 +63,7 @@ void Game::update()
 {
 
     //Mouse Related
-    m_mouseInfo->updateMouse();
+    m_MouseInput->updateMouse();
 
     //Scenes Related
     pollEvents();
@@ -78,6 +79,8 @@ void Game::update()
 
 
 }
+
+
 
 
 
@@ -123,10 +126,4 @@ void Game::pollEvents()
 
 
 
-
-void Game::updateClickables()
-{
-    ImGui::SFML::Update(*m_window, deltaClock.restart());
-    m_gameScene->update();
-}
 
